@@ -1,0 +1,74 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>RDS Super Profile</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="~/Home">Home</a></li>
+                    <li class="breadcrumb-item active">RDS Super Profile</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">RDS Super Profile List</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <button type="button" id="btnNew" class="btn btn-secondary">Add New</button>
+                    </div>
+
+                    <div class="col-xl-12" id="createContainer">
+
+
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script>
+
+    $("#btnNew").click(function () {
+
+        $.ajax({
+            type: "GET",
+            url: '/RDSuperProfile/Create',
+        })
+            .done(function (response) {
+                $("#createContainer").html(response);
+            })
+            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("fail");
+            });
+
+    });
+
+</script>

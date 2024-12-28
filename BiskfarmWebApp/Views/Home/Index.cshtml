@@ -1,0 +1,90 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+ *@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" id="btnSubmit" value="Submit" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+               
+                var customers = [
+                   {
+                       "distributorForCompany": "XXX",
+                       "dateOfAppointment": "12/11/1990",
+                       "currentAvgMonthlyBusiness": "United States",
+                       "paymentTerm": "1",
+                       "nofRoutes": "John Hammond",
+                       "nofOutlets": "United States"
+                   },
+                   {
+                       "distributorForCompany": "XXX",
+                       "dateOfAppointment": "12/11/1990",
+                       "currentAvgMonthlyBusiness": "United States",
+                       "paymentTerm": "1",
+                       "nofRoutes": "John Hammond",
+                       "nofOutlets": "United States"
+                   },
+                   {
+                       "distributorForCompany": "XXX",
+                       "dateOfAppointment": "12/11/1990",
+                       "currentAvgMonthlyBusiness": "United States",
+                       "paymentTerm": "1",
+                       "nofRoutes": "John Hammond",
+                       "nofOutlets": "United States"
+                   },
+                   {
+                       "distributorForCompany": "XXX",
+                       "dateOfAppointment": "12/11/1990",
+                       "currentAvgMonthlyBusiness": "United States",
+                       "paymentTerm": "1",
+                       "nofRoutes": "John Hammond",
+                       "nofOutlets": "United States"
+                   }
+                ];
+
+              
+
+                //Send the JSON array to Controller using AJAX.
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/GetCustomers",
+                    data: JSON.stringify(customers),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (r) {
+
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

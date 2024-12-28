@@ -1,0 +1,296 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutForms.cshtml";
+    //Layout = null;
+}
+
+
+@using Biskfarm.DAL.Model
+@model List<OutletWiseSalesDatabase>
+
+<section class="content">
+    <div class="container-fluid">
+        <!-- SELECT2 EXAMPLE -->
+        <div class="card card-default">
+            <div class="card-header">
+                <h3 class="card-title">Route Wise Sales Database</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Select RSM</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                @foreach (var rsm in Model)
+                                {
+                                    <option value="@rsm.RSM_ID">@rsm.RSM_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label>Select Region</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                @foreach (var region in Model)
+                                {
+                                    <option value="@region.Region">@region.Region</option>
+                                }
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                Select State
+                            </label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                                @foreach (var st in Model)
+                                {
+                                    <option value="@st.ZONE_STATE">@st.ZONE_STATE</option>
+                                }
+
+                            </select>
+                        </div>
+                        <!-- /.form-group -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>
+                                Select BM
+                            </label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
+                                @foreach (var bm in Model)
+                                {
+                                    <option value="@bm.BM_ID">@bm.BM_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label>Select ASM</label>
+                            <select class="form-control select2" multiple="multiple" style="width: 100%;">
+                                @foreach (var asm in Model)
+                                {
+                                    <option value="@asm.ASM_ID">@asm.ASM_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <!-- /.form-group -->
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label>Select SO</label>
+                            <select class="form-control select2" multiple="multiple" style="width: 100%;">
+                                @foreach (var so in Model)
+                                {
+                                    <option value="@so.SO_ID">@so.SO_NAME</option>
+                                }
+                            </select>
+                        </div>
+                        <!-- /.form-group -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Select RDS</label>
+                            <select class="select2" multiple="multiple" data-placeholder="Select RDS" style="width: 100%;">
+                                @foreach (var rds in Model)
+                                {
+                                    <option value="@rds.RDS_ID">@rds.RDS_NAME</option>
+                                }
+
+                            </select>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label>Select Period</label>
+                            <select class="form-control select2" multiple="multiple" style="width: 100%;">
+                                <option selected="selected" value="0">Select Date</option>
+                                <option value="1">Last One Month</option>
+                                <option value="2">Last Three Months</option>
+                                <option value="3">Last Six Months</option>
+                                <option value="4">Custom Date Range</option>
+                                -+                         <!-- /.form-group -->
+                                <!-- /.form-group -->
+                                <div class="form-group">
+                                    <label>Select Filter</label>
+                                    <select class="form-control select2" style="width: 100%;">
+                                        <option value="1">Billed</option>
+                                        <option value="2">Unbilled</option>
+                                    </select>
+                                </div>
+                                <!-- /.form-group -->
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Source Data</label>
+                                <select class="select2" data-placeholder="Select a Source Data" style="width: 100%;">
+                                    <option value="0" selected>Select Source Data</option>
+                                    <option value="1">DMS(CDMS/PURNAM DATA)</option>
+                                    <option value="2">SFA(Mobile Application)</option>
+                                </select>
+                            </div>
+                            <!-- /.form-group -->
+                            <!-- /.form-group -->
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Outlet Wise Sales Database</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="outSales" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Region</th>
+                                    <th>RSM_NAME</th>
+                                    <th>RSM_ID</th>
+                                    <th>BM_NAME</th>
+                                    <th>BM_ID</th>
+                                    <th>ASM_NAME</th>
+                                    <th>ASM_ID</th>
+                                    <th>SO_NAME</th>
+                                    <th>SO_ID</th>
+                                    <th>RDS_NAME</th>
+                                    <th>RDS_ID</th>
+                                    <th>ZONE_STATE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var mdl in Model)
+                                {
+                                    <tr>
+                                        <td width="5%">@mdl.Region</td>
+                                        <td width="10%">@mdl.RSM_NAME</td>
+                                        <td width="5%">@mdl.RSM_ID</td>
+                                        <td width="10%">@mdl.BM_NAME</td>
+                                        <td width="5%">@mdl.BM_ID</td>
+                                        <td width="10%">@mdl.ASM_NAME</td>
+                                        <td width="5%">@mdl.ASM_ID</td>
+                                        <td width="10%">@mdl.SO_NAME</td>
+                                        <td width="5%">@mdl.SO_ID</td>
+                                        <td width="10%">@mdl.RDS_NAME</td>
+                                        <td width="5%">@mdl.RDS_ID</td>
+                                        <td width="10%">@mdl.ZONE_STATE</td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Region</th>
+                                    <th>RSM_NAME</th>
+                                    <th>RSM_ID</th>
+                                    <th>BM_NAME</th>
+                                    <th>BM_ID</th>
+                                    <th>ASM_NAME</th>
+                                    <th>ASM_ID</th>
+                                    <th>SO_NAME</th>
+                                    <th>SO_ID</th>
+                                    <th>RDS_NAME</th>
+                                    <th>RDS_ID</th>
+                                    <th>ZONE_STATE</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Route Wise Sales Database</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="routeSales" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Region</th>
+                                <th>RSM_NAME</th>
+                                <th>RSM_ID</th>
+                                <th>BM_NAME</th>
+                                <th>BM_ID</th>
+                                <th>ASM_NAME</th>
+                                <th>ASM_ID</th>
+                                <th>SO_NAME</th>
+                                <th>SO_ID</th>
+                                <th>RDS_NAME</th>
+                                <th>RDS_ID</th>
+                                <th>ZONE_STATE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var mdl in Model)
+                            {
+                                <tr>
+                                    <td width="5%">@mdl.Region</td>
+                                    <td width="10%">@mdl.RSM_NAME</td>
+                                    <td width="5%">@mdl.RSM_ID</td>
+                                    <td width="10%">@mdl.BM_NAME</td>
+                                    <td width="5%">@mdl.BM_ID</td>
+                                    <td width="10%">@mdl.ASM_NAME</td>
+                                    <td width="5%">@mdl.ASM_ID</td>
+                                    <td width="10%">@mdl.SO_NAME</td>
+                                    <td width="5%">@mdl.SO_ID</td>
+                                    <td width="10%">@mdl.RDS_NAME</td>
+                                    <td width="5%">@mdl.RDS_ID</td>
+                                    <td width="10%">@mdl.ZONE_STATE</td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Region</th>
+                                <th>RSM_NAME</th>
+                                <th>RSM_ID</th>
+                                <th>BM_NAME</th>
+                                <th>BM_ID</th>
+                                <th>ASM_NAME</th>
+                                <th>ASM_ID</th>
+                                <th>SO_NAME</th>
+                                <th>SO_ID</th>
+                                <th>RDS_NAME</th>
+                                <th>RDS_ID</th>
+                                <th>ZONE_STATE</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+</section>
+
+
+@section Scripts {
+    <script>
+
+
+
+
+        $(function () {
+            $("#routeSales").DataTable({
+                "responsive": true, "lengthChange": true, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#routeSales_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}

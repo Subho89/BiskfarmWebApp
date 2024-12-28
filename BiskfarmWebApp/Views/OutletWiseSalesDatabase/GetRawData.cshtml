@@ -1,0 +1,67 @@
+﻿@using Biskfarm.DAL.Model
+@model List<OutletWiseSalesDatabase>
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Outlet Wise Sales Database</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="outSales" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>RSM_NAME</th>
+                    <th>RSM_ID</th>
+                    <th>BM_NAME</th>
+                    <th>BM_ID</th>
+                    <th>ASM_NAME</th>
+                    <th>ASM_ID</th>
+                    <th>SO_NAME</th>
+                    <th>SO_ID</th>
+                    <th>RDS_NAME</th>
+                    <th>RDS_ID</th>
+                    <th>ZONE_STATE</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mdl in Model)
+                {
+                    <tr>
+                        <td width="5%">@mdl.Region</td>
+                        <td width="10%">@mdl.RSM_NAME</td>
+                        <td width="5%">@mdl.RSM_ID</td>
+                        <td width="10%">@mdl.BM_NAME</td>
+                        <td width="5%">@mdl.BM_ID</td>
+                        <td width="10%">@mdl.ASM_NAME</td>
+                        <td width="5%">@mdl.ASM_ID</td>
+                        <td width="10%">@mdl.SO_NAME</td>
+                        <td width="5%">@mdl.SO_ID</td>
+                        <td width="10%">@mdl.RDS_NAME</td>
+                        <td width="5%">@mdl.RDS_ID</td>
+                        <td width="10%">@mdl.ZONE_STATE</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Region</th>
+                    <th>RSM_NAME</th>
+                    <th>RSM_ID</th>
+                    <th>BM_NAME</th>
+                    <th>BM_ID</th>
+                    <th>ASM_NAME</th>
+                    <th>ASM_ID</th>
+                    <th>SO_NAME</th>
+                    <th>SO_ID</th>
+                    <th>RDS_NAME</th>
+                    <th>RDS_ID</th>
+                    <th>ZONE_STATE</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

@@ -1,0 +1,97 @@
+﻿@* <div>
+    <div id="tableContainer">
+        @await Component.InvokeAsync("HeirarchyList");
+    </div>
+</div> *@
+
+@{
+    Layout = "~/Views/Shared/_LayoutForms.cshtml";
+    //Layout = null;
+}
+
+@using Biskfarm.DAL.Model
+@model List<RDS_Hierarchy>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card-body">
+                <button class="btn btn-secondary" onclick="location.href='@Url.Action("Create", "Hierarchy")'">Create</button>
+            </div>
+            <div class="col-12">
+                <div class="card card-warning col-md-6" id="createContainer">
+
+                    <!-- /.card-body -->
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Hierarchy List</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Hierarchy Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.Count != 0)
+                                {
+                                    foreach (var m in Model)
+                                    {
+                                        <tr>
+                                            <td>@m.hierarchyName</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Hierarchy Level</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+
+
+@section Scripts {
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+
+        // $(document).ready(function () {
+        //     $("#btnNew").click(function () {
+        //         $.ajax({
+        //             type: "GET",
+        //             url: '/Hierarchy/Create',
+        //         })
+        //             .done(function (response) {
+        //                 $("#createContainer").html(response);
+        //             })
+        //             .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        //                 alert("fail");
+        //             });
+
+        //     });
+        // });
+
+        
+
+    </script>
+}

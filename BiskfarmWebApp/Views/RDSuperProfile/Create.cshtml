@@ -1,0 +1,1251 @@
+﻿@{
+     Layout = "~/Views/Shared/_LayoutForms.cshtml";
+    //Layout = null;
+}
+
+@using Biskfarm.Services
+@model RDSSuperProfileInputVM
+
+
+<section class="content">
+
+
+    <div class="col-md-12" style="margin-bottom:10px;margin-top:10px">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Enter New RDS Super Profile</h3>
+
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <form role="form" class="parsley-examples" id="materialForm">
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Principal Co. </label>
+                                <input type="text" required class="form-control" name="principalCo" placeholder="Principal Company" id="principalCo">
+                                <input type="hidden" id="distributorsList" name="distributorsList" />
+                                <input type="hidden" id="SubStockist" name="SubStockist" />
+                            </div>
+                        </div>
+                         <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Date:</label>
+                               <input type="text" class="form-control" name="dateOfEntry" id="dateOfEntry" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                            </div>
+                        </div>
+
+                    </div>
+                     
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Name of Propreiter/Partner/Director 1:</label>
+                                <input type="text" required class="form-control" name="nameOfProp1" placeholder="Name of Propreiter/Partner/Director 1" id="nameOfProp1">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Name of Propreiter/Partner/Director 2:</label>
+                                <input type="text" required class="form-control" name="nameOfProp2" placeholder="Name of Propreiter/Partner/Director 1" id="nameOfProp2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="hori-pass1" class="col-6 col-form-label">Residence Address 1 </label>
+                            <div class="col-6">
+                                <textarea class="form-control" rows="3" placeholder="Enter Residence Address" id="residenceAddress1" name="residenceAddress1"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="hori-pass1" class="col-6 col-form-label">Residence Address 2 </label>
+                            <div class="col-10">
+                                <textarea class="form-control" rows="3" placeholder="Enter Residence Address" id="residenceAddress2" name="residenceAddress2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Contact Number 1:</label>
+                                <input type="text" required class="form-control" name="contactNo1" placeholder="Contact Number 1" id="contactNo1">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Contact Number 2:</label>
+                                <input type="text" required class="form-control" name="contactNo2" placeholder="Contact Number 2" id="contactNo2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Email Address:</label>
+                                <input type="email" required class="form-control" name="emailAddress" placeholder="Email Address" id="emailAddress">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="hori-pass1" class="col-4 col-form-label">Closing Day </label>
+                            <!-- text input -->
+                            <div class="form-group">
+                                <select name="closingDayId" id="closingDayId" class="form-control" placeholder="Select">
+                                    <option value="1" selected>Sunday</option>
+                                    <option value="2">Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesay</option>
+                                    <option value="5">Thursdayday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <label for="hori-pass1" class="col-4 col-form-label">Office Address </label>
+                            <div class="col-10">
+                                <textarea class="form-control" rows="3" placeholder="Enter Office Address" id="officeAddress" name="officeAddress"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>Pincode:</label>
+                                <input type="text" class="form-control" name="pinCode" placeholder="Pincode" id="pinCode">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="hori-pass1" class="col-4 col-form-label">Town </label>
+                            <div class="col-10">
+                                @*<input type="text" placeholder="Material Unit" id="MaterialUnit" class="form-control" name="Unit">*@
+                                <select name="town" id="town" class="form-control select2" placeholder="Select">
+                                    <option value="0" selected disabled>Select the Town</option>
+                                    @*  @foreach (var uts in Model.Towns)
+                                    {
+                                    <option value=@uts.TOWN_CODE>@uts.TOWN_NAME</option>
+                                    } *@
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>District:</label>
+                                <input type="text" class="form-control" name="district" placeholder="District" id="district">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label>State:</label>
+                                <input type="text" class="form-control" name="state" placeholder="State" id="state">
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-4">
+                            <label for="hori-pass1" class="col-4 col-form-label">Town Code</label>
+                            <div class="col-10">
+                                <input type="text" placeholder="Town Code" id="townCode" class="form-control" name="townCode">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6">
+                            <label for="hori-pass1" class="col-4 col-form-label">SO Head Quarter </label>
+                            <div class="col-7">
+                                @*<input type="text" placeholder="Material Unit" id="MaterialUnit" class="form-control" name="Unit">*@
+                                <select name="soHeadQuarterId" id="soHeadQuarterId" class="form-control select2" placeholder="Select">
+                                    <option value="0" selected>Select SO Headquarter</option>
+                                    @foreach (var uts in Model.SOMasts)
+                                    {
+                                        <option value=@uts.SO_ID>@uts.SO_NAME</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>@*
+                        <div class="col-sm-6">
+                        <div class="form-group">
+                        <label>Area of Godown Space Provided (1 sqft for every 3 Cases of Stock Stored):</label>
+                        <input type="text"  class="form-control" name="areaGodownSpace" placeholder="Area of Godown Space" id="areaGodownSpace">
+                        </div>
+                        </div> *@
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <!-- /.card -->
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Application for RDS / Super Stockist</h3>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="hori-pass1" class="col-4 col-form-label">Reason For Appointment </label>
+                                        <div class="col-7">
+                                            <select name="reasonForAppointment" id="reasonForAppointment" class="form-control" placeholder="Select">
+                                                <option value="1">Replacement</option>
+                                                <option value="2">New town - route planning</option>
+                                                <option value="3">GST Change</option>
+                                                <option value="4">Firm Name Change</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Town Population Checking Link</th>
+                                                <th>No. of Markets / Town / Villege to Service</th>
+                                                <th>No. of Routes / Sub Stockists to Service</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td width="30%">
+                                                    <table class="table table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 10px">Population of Town</th>
+                                                                <th>Expected Monthly Business</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="50%"><input type="text" class="form-control" name="populationOfTown" placeholder="Population of Town" id="populationOfTown"></td>
+                                                                <td width="50%"><input type="text" class="form-control" name="expectedMonthlyBusiness" placeholder="Expected Monthly Business" id="expectedMonthlyBusiness"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td width="30%">
+                                                    <table class="table table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Local Town</th>
+                                                                <th>Ex- Town (upcountry / rural)</th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofMarketsLocalTown" placeholder="No. of Markets in Local Town" id="nofMarketsLocalTown"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofExTown" placeholder="No. of ExTown" id="nofExTown"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" placeholder="Total" readonly id="totNofMarkets" name="totNofMarkets"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td width="30%">
+                                                    <table class="table table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Local Town</th>
+                                                                <th>Ex- Town (upcountry / rural)</th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofRoutesLocalTown" placeholder="No. of Routes in Local Town" id="nofRoutesLocalTown"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofRoutesExTown" placeholder="No. of Routes ExTown" id="nofRoutesExTown"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" placeholder="Total" readonly id="totNofRoutes" name="totNofRoutes"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <!-- /.card -->
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Current Infrastructure Details</h3>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Godown Address </label>
+                                            <div class="col-12">
+                                                <textarea class="form-control" rows="3" placeholder="Enter Godown Address" id="godownAddress" name="godownAddress"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Area of Godown Space Provided (1 sqft for every 3 Cases of Stock Stored):</label>
+                                            <input type="text" class="form-control" name="areaOfGodown" placeholder="Area of Godown Space" id="areaOfGodown">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>No. of Delivery Units : </label>
+                                            <input type="text" class="form-control" name="nofDeliveryUnit" placeholder="No. of Delivery Units" id="nofDeliveryUnit">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Unit Detail :</label>
+                                            <input type="text" class="form-control" name="unitDetails" placeholder="Area of Godown Space" id="unitDetails">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Secondary Order Billing System (Computerised / Manual): </label>
+                                            <input type="text" class="form-control" name="secondaryOrderBillingSytem" placeholder="Secondary Order Billing System" id="secondaryOrderBillingSytem">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Distributor Management System (DMS) :</label>
+                                            <input type="text" class="form-control" name="dms" placeholder="Distributor Management System" id="dms">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <!-- /.card -->
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">CURRENT BUSINESS DETAILS</h3>
+                                </div>
+
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table class="table table-bordered table-striped" id="tblDistributors">
+                                        <thead>
+                                            <tr>
+                                                <th>Distributor for Companies</th>
+                                                <th>Date of Appoint.</th>
+                                                <th>Current Avg. Monthly Business</th>
+                                                <th>Payment Term</th>
+                                                <th>No. of Routes / Subs</th>
+                                                <th>No. of Outlets</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-sm btn-success" onclick="BtnDistributorAdd()">+</button>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyDistributor">
+                                            <tr id="trowDistributor" class="d-none clsDistributor"> 
+                                                <td> <input type="text" class="form-control distributorForCompany" name="distributorForCompany" placeholder="Distributor for Company" id="distributorForCompany"></td>
+                                                <td> <input type="date" class="form-control dateOfAppointment" name="dateOfAppointment" placeholder="Date of Appointment" id="dateOfAppointment"></td>
+                                                <td> <input type="number" step="0.1" min="0" class="form-control currentAvgMonthlyBusiness" name="currentAvgMonthlyBusiness" placeholder="Current Avg Business" id="currentAvgMonthlyBusiness"></td>
+                                                <td> <input type="text" class="form-control paymentTerm" name="paymentTerm" placeholder="Payment Terms" id="paymentTerm"></td>
+                                                <td> <input type="text" class="form-control nofRoutes" name="nofRoutes" placeholder="Nof Routes" id="nofRoutes"></td>
+                                                <td> <input type="text" class="form-control nofOutlets" name="nofOutlets" placeholder="Nof Outlets" id="nofOutlets"></td>
+                                                <td class="NoPrint"><button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button></td> 
+
+
+                                               @*  <td> <input type="text" class="form-control clsdistributorForCompany"  placeholder="Distributor for Company" id="distributorForCompany"></td>
+                                                <td> <input type="date" class="form-control clsdateOfAppointment"  placeholder="Date of Appointment" id="dateOfAppointment"></td>
+                                                <td> <input type="number" step="0.1" min="0" class="form-control clscurrentAvgMonthlyBusiness" placeholder="Current Avg Business" id="currentAvgMonthlyBusiness"></td>
+                                                <td> <input type="text" class="form-control clspaymentTerm"  placeholder="Payment Terms" id="paymentTerm"></td>
+                                                <td> <input type="text" class="form-control clsnofRoutes"  placeholder="Nof Routes" id="nofRoutes"></td>
+                                                <td> <input type="text" class="form-control clsnofOutlets" placeholder="Nof Outlets" id="nofOutlets"></td>
+                                                <td class="NoPrint"><button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button></td> *@
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <!-- /.card -->
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">BUSINESS PROPOSAL</h3>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Schedule day of Primary invoicing (PDP) : </label>
+                                            <div class="col-12">
+                                                <select name="scheduleDayOfPrimaryInvoicing" id="scheduleDayOfPrimaryInvoicing" class="form-control" placeholder="Select">
+                                                    <option value="1" selected>Sunday</option>
+                                                    <option value="2" selected>Monday</option>
+                                                    <option value="3" selected>Tuesday</option>
+                                                    <option value="4" selected>Wednesay</option>
+                                                    <option value="5" selected>Thursdayday</option>
+                                                    <option value="6" selected>Friday</option>
+                                                    <option value="7" selected>Saturday</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Expected No. of Primary Invoices / Monthly:</label>
+                                            <input type="number" required class="form-control" name="expectedNofInvoices" placeholder="Expected No. of Primary Invoices / Monthly" id="expectedNofInvoices">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-12">
+                                            <label>Value Per Order: </label>
+                                            <input type="text" required class="form-control" name="valuePerOrder" placeholder="Value Per Order" id="valuePerOrder">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-12">
+                                            <label>CBB Per Order:</label>
+                                            <input type="text" required class="form-control" name="cbbPerOrder" placeholder="CBB Per Order" id="cbbPerOrder">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-12">
+                                            <label>Area of Operation:</label>
+                                            <input type="text" required class="form-control" name="areaOfOp" placeholder="Area Of Operation" id="areaOfOp">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Inventory Norm Plan (No. Of Days) : </label>
+                                            <select name="inventoryNormPlan" id="inventoryNormPlan" class="form-control" placeholder="Select">
+                                                <option value="1" selected>Sunday</option>
+                                                <option value="2" selected>Monday</option>
+                                                <option value="3" selected>Tuesday</option>
+                                                <option value="4" selected>Wednesay</option>
+                                                <option value="5" selected>Thursdayday</option>
+                                                <option value="6" selected>Friday</option>
+                                                <option value="7" selected>Saturday</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Market Credit Plan (No. of Days): </label>
+                                            <!-- text input -->
+                                            <select name="marketCreditPlan" id="marketCreditPlan" class="form-control" placeholder="Select">
+                                                <option value="1" selected>Sunday</option>
+                                                <option value="2" selected>Monday</option>
+                                                <option value="3" selected>Tuesday</option>
+                                                <option value="4" selected>Wednesay</option>
+                                                <option value="5" selected>Thursdayday</option>
+                                                <option value="6" selected>Friday</option>
+                                                <option value="7" selected>Saturday</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                            <!-- radio -->
+                                            <div class="form-group clearfix">
+                                                <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdIvst" checked id="rdIvstYes" value="1">
+                                                <label for="radioSuccess1">Yes
+                                                </label>
+                                                </div>
+                                                <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdIvst" id="rdIvstNo" value="0">
+                                                <label for="radioSuccess2">No
+                                                </label>
+                                                </div>
+                                                <div class="icheck-success d-inline">
+                                                @* <input type="radio" name="r3" disabled id="radioSuccess3"> *@
+                                                <label for="radioSuccess3">
+                                                    Investment proposed and agreed
+                                                </label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                            <!-- radio -->
+                                            <div class="form-group clearfix">
+                                                <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdRds" checked id="rdRdsYes" value="1">
+                                                <label for="radioSuccess1">Yes
+                                                </label>
+                                                </div>
+                                                <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdRds" id="rdRdsNo" value="0">
+                                                <label for="radioSuccess2">No
+                                                </label>
+                                                </div>
+                                                <div class="icheck-success d-inline">
+                                                @* <input type="radio" name="r3" disabled id="radioSuccess3"> *@
+                                                <label for="radioSuccess3">
+                                                    RDS Subsidy required
+                                                </label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>No. of DS / ISR Planned: </label>
+                                            <input type="text" required class="form-control" name="nofDSIRSPlanned" placeholder="No. of DS/IRS Planned" id="nofDSIRSPlanned">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>No. of Mandays / month by SO: </label>
+                                            <input type="text" required class="form-control" name="nofMandays" placeholder="No. of Mandays" id="nofMandays">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <label for="hori-pass1" class="col-6 col-form-label">ASM Comment on (Replacement / new RDS): </label>
+                                        <div class="col-8">
+                                            <textarea class="form-control" rows="3" placeholder="ASM Comment on (Replacement / new RDS)" id="asmComment" name="asmComment"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="hori-pass1" class="col-6 col-form-label">BM Feedback on (Replacement / new RDS) : </label>
+                                        <div class="col-8">
+                                            <textarea class="form-control" rows="3" placeholder="BM Feedback on (Replacement / new RDS)" id="bmFeedback" name="bmFeedback"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*  <div class="form-group row"> *@
+                                <div class="card-body">
+                                    <table class="table table-bordered table-striped" id="tblSubStockist" name="tblSubStockist">
+                                        <thead>
+                                            <tr>
+                                                <th>Name of Route / Name of Sub Stockist</th>
+                                                <th>Frequency of visit</th>
+                                                <th>Distance from RDS / Super</th>
+                                                <th>Expected Business</th>
+                                                <th># Outlets</th>
+                                                <th>
+                                                    <button type="button" class="btn btn-sm btn-success" onclick="BtnRoutesAdd()">+</button>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="tbodyRoutes">
+                                            <tr id="trowRoutes" class="d-none">
+                                                <td> <input type="text" class="form-control" name="nameOfRouteSubStockist" placeholder="Name of Routes" id="nameOfRouteSubStockist"></td>
+                                                <td> <input type="text" class="form-control" name="freqOfVisit" placeholder="Frequency of Visit" id="freqOfVisit"></td>
+                                                <td> <input type="text" class="form-control" name="distanceFromRDS" placeholder="Distance from RDS" id="distanceFromRDS"></td>
+                                                <td> <input type="text" class="form-control" name="expectedBusiness" placeholder="Expected Business" id="expectedBusiness"></td>
+                                                <td> <input type="text" class="form-control" name="outlets" placeholder="Outlets" id="outlets"></td>
+                                                <td class="NoPrint"><button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                @* </div> *@
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <!-- /.card -->
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">STATUTORY AND COMMERCIAL REQUIREMENT</h3>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Years of Establishment : </label>
+                                            <input type="number" required class="form-control" name="yearOfEstablishment" placeholder="Year of Establishment" id="yearOfEstablishment">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Type (Proprietorship/Partnership) :</label>
+                                            <div class="col-12">
+                                                <select name="typeOfOwnership" id="typeOfOwnership" class="form-control" placeholder="Select">
+                                                    <option value="1" selected>Propreitorship</option>
+                                                    <option value="2" selected>Partnership</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>GST Reg. No.: </label>
+                                            <input type="text" required class="form-control" name="gst" placeholder="GST Reg No." id="gst">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Person Incharge:</label>
+                                            <input type="text" required class="form-control" name="personIncharge" placeholder="Person Incharge" id="personIncharge">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>PAN CARD NO:</label>
+                                            <input type="text" required class="form-control" name="panCard" placeholder="PAN CARD NO" id="panCard">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Mobile No. of Person Incharge:</label>
+                                            <input type="text" required class="form-control" name="mobileNofPersonIncharge" placeholder="Mobile No. of Person Incharge" id="mobileNofPersonIncharge">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>FSSAI  Reg.  No: </label>
+                                            <input type="text" required class="form-control" name="fssai" placeholder="FSSAI  Reg.  No" id="fssai">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Source of Finance to be invested in business:</label>
+                                            <input type="text" required class="form-control" name="sourceOfFund" placeholder="Source of Finance to be invested in business" id="sourceOfFund">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Bank Name: </label>
+                                            <input type="text" required class="form-control" name="bankName" placeholder="Bank Name" id="bankName">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Account No:</label>
+                                            <input type="text" required class="form-control" name="accNo" placeholder="Banch Name" id="accNo">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Branch Name: </label>
+                                            <input type="text" required class="form-control" name="branchName" placeholder="Branch Name" id="branchName">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>IFSC:</label>
+                                            <input type="text" required class="form-control" name="ifsc" placeholder="IFSC" id="ifsc">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Branch Address: </label>
+                                            <input type="text" required class="form-control" name="branchAddress" placeholder="Branch Address" id="branchAddress">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Type of A/C (Current/Cash Credit) :</label>
+                                            <div class="col-12">
+                                                <select name="typeOfAC" id="typeOfAC" class="form-control" placeholder="Select">
+                                                    <option value="1" selected>Cash</option>
+                                                    <option value="2" selected>Current</option>
+                                                    <option value="3" selected>Credit</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Payment Mode :</label>
+                                            <div class="col-12">
+                                                <select name="paymentMode" id="paymentMode" class="form-control" placeholder="Select">
+                                                    <option value="1" selected>Cash</option>
+                                                    <option value="2" selected>Internet Banking</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="col-sm-12">
+                                            <label>Transit Day :</label>
+                                            <div class="col-12">
+                                                <select name="transitDay" id="transitDay" class="form-control" placeholder="Select">
+                                                    <option value="1" selected>Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <!-- /.card -->
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">Authorization Check</h3>
+                                </div>
+
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table class="table table-bordered table-striped" id="tblAuthorization">
+                                        <thead>
+                                            <tr>
+                                                <th>Recommended By</th>
+                                                <th>Approved By</th>
+                                                <th>Accepted By</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            <tr>
+                                                <td>
+                                                    <select name="recommendedBy" id="recommendedBy" class="form-control select2" placeholder="Select">
+                                                        <option value="0" selected disabled>Recommended By</option>
+                                                        @foreach (var uts in Model.Hierarchy)
+                                                        {
+                                                            <option value=@uts.hierarchyId>@uts.hierarchyName</option>
+                                                        }
+                                                    </select>
+
+                                                </td>
+                                                <td>
+                                                    <select name="approvedBy" id="approvedBy" class="form-control select2" placeholder="Select">
+                                                        <option value="0" selected disabled>Approved By</option>
+                                                        @foreach (var uts in Model.Hierarchy)
+                                                        {
+                                                            <option value=@uts.hierarchyId>@uts.hierarchyName</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="acceptedBy" id="acceptedBy" class="form-control select2" placeholder="Select">
+                                                        <option value="0" selected disabled>Accepted By</option>
+                                                        @foreach (var uts in Model.Hierarchy)
+                                                        {
+                                                            <option value=@uts.hierarchyId>@uts.hierarchyName</option>
+                                                        }
+                                                    </select>
+                                                </td>
+                                               
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-8 offset-4">
+                            <button type="button" id="btnSave" class="btn btn-primary waves-effect waves-light mr-1">
+                                Submit
+                            </button>
+                            <button type="reset" id="btnCancel"
+                                    class="btn btn-secondary waves-effect">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            BtnDistributorAdd();
+            BtnRoutesAdd();
+
+              $('#dateOfEntry').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        });
+
+        function BtnDistributorAdd() {
+            var v = $('#trowDistributor').clone().appendTo('#tbodyDistributor');
+            /*Add Button*/
+            $(v).find("input").val('');
+            $(v).removeClass("d-none");
+            $(v).find("th").first().html($('#tbodyDistributor tr').length - 1);
+        }
+
+        function BtnRoutesAdd() {
+            var v = $('#trowRoutes').clone().appendTo('#tbodyRoutes');
+            /*Add Button*/
+            $(v).find("input").val('');
+            $(v).removeClass("d-none");
+            $(v).find("th").first().html($('#tbodyDistributor tr').length - 1);
+        }
+
+        function BtnDel(v) {
+            /*Delete Button*/
+            $(v).parent().parent().remove();
+            GetTotal();
+
+            $("#TBody").find("tr").each(
+                function (index) {
+                    $(this).find("th").first().html(index);
+                }
+
+            );
+        }
+
+
+        
+
+
+        $("#btnSave").click(function () {
+            var distributorData = [];
+
+            $('#tblDistributors > tbody  > tr').each(function (ind, val) {
+                
+                if (ind > 0) {
+
+                    var distributors = 
+                        {
+                            
+                        "distributorForCompany": $(val).find("input[name='distributorForCompany']").val(),
+                        "dateOfAppointment": $(val).find("input[name='dateOfAppointment']").val(),
+                        "currentAvgMonthlyBusiness": $(val).find("input[name='currentAvgMonthlyBusiness']").val(),
+                        "paymentTerm": $(val).find("input[name='paymentTerm']").val(),
+                        "nofRoutes": $(val).find("input[name='nofRoutes']").val(),
+                        "nofOutlets": $(val).find("input[name='nofOutlets']").val()
+                            };
+                    distributorData.push(distributors);
+                }
+                
+                
+            });
+            
+
+            var subStockistData = [];
+            $('#tblSubStockist > tbody  > tr').each(function (ind, val) {
+
+                if (ind > 0) {
+
+                    var subStockist =
+                    {
+
+                        "nameOfRouteSubStockist": $(val).find("input[name='nameOfRouteSubStockist']").val(),
+                        "freqOfVisit": $(val).find("input[name='freqOfVisit']").val(),
+                        "distanceFromRDS": $(val).find("input[name='distanceFromRDS']").val(),
+                        "expectedBusiness": $(val).find("input[name='expectedBusiness']").val(),
+                        "outlets": $(val).find("input[name='outlets']").val(),
+                    };
+                    subStockistData.push(subStockist);
+                }
+
+
+            });
+
+
+            
+
+            
+
+            var principalCo = $("#principalCo").val();
+            var nameOfProp1 = $("#nameOfProp1").val();
+            var nameOfProp2 = $("#nameOfProp2").val();
+            var residenceAddress1 = $("#residenceAddress1").val();
+            var residenceAddress2 = $("#residenceAddress2").val();
+            var contactNo1 = $("#contactNo1").val();
+            var contactNo2 = $("#contactNo2").val();
+            var emailAddress = $("#emailAddress").val();
+            var closingDayId = $("#closingDayId").val();
+            var officeAddress = $("#officeAddress").val();
+            var pinCode = $("#pinCode").val();
+            var town = $("#town").val();
+            var district = $("#district").val();
+            var state = $("#state").val();
+            var townCode = $("#townCode").val();
+            var soHeadQuarterId = $("#soHeadQuarterId").val();
+            var soName = $("#soName").val();
+            var reasonForAppointment = $("#reasonForAppointment").val();
+            var expectedMonthlyBusiness = $("#expectedMonthlyBusiness").val();
+            var nofMarketsLocalTown = $("#nofMarketsLocalTown").val();
+            var nofExTown = $("#nofExTown").val();
+            var nofRoutesLocalTown = $("#nofRoutesLocalTown").val();
+            var nofRoutesExTown = $("#nofRoutesExTown").val();
+            var godownAddress = $("#godownAddress").val();
+            var nofDeliveryUnit = $("#nofDeliveryUnit").val();
+            var secondaryOrderBillingSytem = $("#secondaryOrderBillingSytem").val();
+            var areaOfGodown = $("#areaOfGodown").val();
+            var unitDetailsMechanical = $("#unitDetailsMechanical").val();
+            var unitDetailsManual = $("#unitDetailsManual").val();
+            var dms = $("#dms").val();
+            var nonDms = $("#nonDms").val();
+            var scheduleDayOfPrimaryInvoicing = $("#scheduleDayOfPrimaryInvoicing").val();
+            var expectedNofInvoices = $("#expectedNofInvoices").val();
+            var valuePerOrder = $("#valuePerOrder").val();
+            var cbbPerOrder = $("#cbbPerOrder").val();
+            var areaOfOp = $("#areaOfOp").val();
+            var inventoryNormPlan = $("#inventoryNormPlan").val();
+            var marketCreditPlan = $("#marketCreditPlan").val();
+            var investmentProposedAndAgreed = false;
+            if ($('input[name="rdIvst"]:checked').val()=="1"){
+                investmentProposedAndAgreed = true;
+            }
+            
+            var rdsSubsidyReq =false;
+
+            if ($('input[name="rdRds"]:checked').val() == "1") {
+                rdsSubsidyReq = true;
+            }
+
+
+            var nofDSIRSPlanned = $("#nofDSIRSPlanned").val();
+            var nofMandays = $("#nofMandays").val();
+            var asmComment = $("#asmComment").val();
+            var bmFeedback = $("#bmFeedback").val();
+            var yearOfEstablishment = $("#yearOfEstablishment").val();
+            var gst = $("#gst").val();
+            var panCard = $("#panCard").val();
+            var fssai = $("#fssai").val();
+            var bankName = $("#bankName").val();
+            var branchName = $("#branchName").val();
+            var accNo = $("#accNo").val();
+            var ifsc = $("#ifsc").val();
+            var branchAddress = $("#branchAddress").val();
+            var typeOfAC = $("#typeOfAC").val();
+            var paymentMode = $("#paymentMode").val();
+            var transitDay = $("#transitDay").val();
+            var typeOfOwnership = $("#typeOfOwnership").val();
+            var personIncharge = $("#personIncharge").val();
+            var mobileNofPersonIncharge = $("#mobileNofPersonIncharge").val();
+            var sourceOfFund = $("#sourceOfFund").val();
+            var recommendedBy = $("#recommendedBy").val();
+            var approvedBy = $("#approvedBy").val();
+            var acceptedBy = $("#acceptedBy").val();
+            var dateOfEntry = $("#dateOfEntry").val();
+
+
+            var obj = {
+                principalCo: principalCo,
+                nameOfProp1: nameOfProp1,
+                nameOfProp2: nameOfProp2,
+                residenceAddress1: residenceAddress1,
+                residenceAddress2: residenceAddress2,
+                contactNo1: contactNo1,
+                contactNo2: contactNo2,
+                emailAddress: emailAddress,
+                closingDayId: closingDayId,
+                officeAddress: officeAddress,
+                pinCode: pinCode,
+                town: town,
+                district: district,
+                state: state,
+                townCode: townCode,
+                soHeadQuarterId: soHeadQuarterId,
+                soName: soName,
+                reasonForAppointment: reasonForAppointment,
+                expectedMonthlyBusiness: expectedMonthlyBusiness,
+                nofMarketsLocalTown: nofMarketsLocalTown,
+                nofExTown: nofExTown,
+                nofRoutesLocalTown: nofRoutesLocalTown,
+                nofRoutesExTown: nofRoutesExTown,
+                godownAddress: godownAddress,
+                nofDeliveryUnit: nofDeliveryUnit,
+                secondaryOrderBillingSytem: secondaryOrderBillingSytem,
+                areaOfGodown: areaOfGodown,
+                unitDetailsMechanical: unitDetailsMechanical,
+                unitDetailsManual: unitDetailsManual,
+                dms: dms,
+                nonDms: nonDms,
+                scheduleDayOfPrimaryInvoicing: scheduleDayOfPrimaryInvoicing,
+                expectedNofInvoices: expectedNofInvoices,
+                valuePerOrder: valuePerOrder,
+                cbbPerOrder: cbbPerOrder,
+                areaOfOp: areaOfOp,
+                inventoryNormPlan: inventoryNormPlan,
+                marketCreditPlan: marketCreditPlan,
+                investmentProposedAndAgreed: investmentProposedAndAgreed,
+                rdsSubsidyReq: rdsSubsidyReq,
+                nofDSIRSPlanned: nofDSIRSPlanned,
+                nofMandays: nofMandays,
+                asmComment: asmComment,
+                bmFeedback: bmFeedback,
+                yearOfEstablishment: yearOfEstablishment,
+                gst: gst,
+                panCard: panCard,
+                fssai: fssai,
+                bankName: bankName,
+                branchName: branchName,
+                accNo: accNo,
+                ifsc: ifsc,
+                branchAddress: branchAddress,
+                typeOfAC: typeOfAC,
+                paymentMode: paymentMode,
+                transitDay: transitDay,
+                typeOfOwnership: typeOfOwnership,
+                personIncharge: personIncharge,
+                mobileNofPersonIncharge: mobileNofPersonIncharge,
+                sourceOfFund: sourceOfFund,
+                recommendedBy: recommendedBy,
+                approvedBy: approvedBy,
+                acceptedBy: acceptedBy,
+                dateOfEntry: dateOfEntry,
+                distributorsList: distributorData,
+                SubStockist: subStockistData
+            };
+
+            if (!principalCo )
+            {
+                alert("Please fill Principal Co");
+                $('#principalCo').focus();
+            }
+            else if (!nameOfProp1){
+                alert("Please fill Proprietor Name");
+                $('#nameOfProp1').focus();
+            }
+            else if (!dateOfEntry) {
+                alert("Please fill Date of Entry");
+                $('#dateOfEntry').focus();
+            }
+            else if (!contactNo1) {
+                alert("Please fill Contact Number");
+                $('#contactNo1').focus();
+            }
+            else
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "/RDSuperProfile/GetData",
+                    data: obj,
+                    success: function (r) {
+                        alert(r);
+                        $('#materialForm')[0].reset();
+
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            }
+
+            
+
+
+        })
+
+
+        
+
+        $('#nofMarketsLocalTown').on('input', function (e) {
+            var txtFirstNumberValue = document.getElementById('nofMarketsLocalTown').value;
+            var txtSecondNumberValue = document.getElementById('nofExTown').value;
+            if (txtFirstNumberValue == "")
+                txtFirstNumberValue = 0;
+            if (txtSecondNumberValue == "")
+                txtSecondNumberValue = 0;
+
+            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('totNofMarkets').value = result;
+            }
+        });
+
+        $('#nofExTown').on('input', function (e) {
+            var txtFirstNumberValue = document.getElementById('nofMarketsLocalTown').value;
+            var txtSecondNumberValue = document.getElementById('nofExTown').value;
+            if (txtFirstNumberValue == "")
+                txtFirstNumberValue = 0;
+            if (txtSecondNumberValue == "")
+                txtSecondNumberValue = 0;
+
+            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('totNofMarkets').value = result;
+            }
+        });
+
+        $('#nofRoutesLocalTown').on('input', function (e) {
+            var txtFirstNumberValue = document.getElementById('nofRoutesLocalTown').value;
+            var txtSecondNumberValue = document.getElementById('nofRoutesExTown').value;
+            if (txtFirstNumberValue == "")
+                txtFirstNumberValue = 0;
+            if (txtSecondNumberValue == "")
+                txtSecondNumberValue = 0;
+
+            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('totNofRoutes').value = result;
+            }
+        });
+
+        $('#nofRoutesExTown').on('input', function (e) {
+            var txtFirstNumberValue = document.getElementById('nofRoutesLocalTown').value;
+            var txtSecondNumberValue = document.getElementById('nofRoutesExTown').value;
+            if (txtFirstNumberValue == "")
+                txtFirstNumberValue = 0;
+            if (txtSecondNumberValue == "")
+                txtSecondNumberValue = 0;
+
+            var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+            if (!isNaN(result)) {
+                document.getElementById('totNofRoutes').value = result;
+            }
+        });
+
+
+        jQuery('#pinCode').on('input', function () {
+            // alert($("#pincode").val())
+
+            (function () {
+                var myAPI = "https://api.postalpincode.in/pincode/" + $("#pinCode").val();
+                $.getJSON(myAPI, {
+                    format: "json"
+                })
+                    .done(function (data) {
+                        doSomething(data);
+                        //alert("Load was performed.");
+                    });
+            })();
+
+            function doSomething(data) {
+                $('#town').empty();
+
+                var town = $('#town');
+                town.append($('<option></option>').val(0).html("Select the Town"));
+                for (var i = 0; i < data.length; i++) {
+                    var r = (data[i].PostOffice);
+                    for (var j = 0; j < r.length; j++) {
+                        town.append($('<option></option>').val(r[j].Name).html(r[j].Name));
+                    }
+                    //alert(r);
+
+                }
+
+                $("#district").val((r[0].District));
+                $("#state").val((r[0].State));
+
+            }
+        });
+
+
+
+
+        // $("#town").change(function () {
+        //     alert($('option:selected', this).text());
+        // });
+
+        $('#add_Routes').click(function () {
+
+            try {
+                var div = $('#SubStockist tr:last').clone().insertAfter('#SubStockist tbody>tr:last');
+                rowCount++;
+                $(div).find("td").each(function () {
+
+                    $(this).find("input:text").each(function () {
+                        var name = $(this).attr("id");
+                        if (name.lastIndexOf("_") > 0) {
+                            name = name.substr(0, name.indexOf("_"));
+                        }
+                        name += "_" + rowCount;
+                        $(this).attr("id", name);
+                        $(this).val("");
+                    });
+
+                    $(this).find("select").each(function () {
+                        var name = $(this).attr("id");
+                        if (name.lastIndexOf("_") > 0) {
+                            name = name.substr(0, name.indexOf("_"));
+                        }
+                        name += "_" + rowCount;
+                        $(this).attr("id", name);
+                    });
+                });
+
+            }
+            catch (err) {
+                $.alert(err.message)
+            }
+        });
+
+
+    </script>
+}
