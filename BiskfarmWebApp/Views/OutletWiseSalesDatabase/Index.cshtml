@@ -222,56 +222,424 @@
 
 @section Scripts {
 <script>
+
         $("#rsmId").change(function () {
 
-            States=[]
+            $('#regionId').empty();
+            $.ajax({
+                url: '@Url.Action("GetRSMData", "OutletWiseSalesDatabase")',
+                type: "POST",
+                data: {
+                    RSM_ID: $("#rsmId option:selected").val(),
+                },
+                success: function (region) {
 
+
+                    $.each(region, function (i, reg) {
+                        $('#regionId').append('<option value=' + reg + '>' + reg + '</option>')
+                    });
+
+                }
+            })
+        });
+
+        $("#regionId").change(function () {
+
+            var obj = {
+                RSM_NAME:$("#rsmId option:selected").text(),
+                RSM_ID:$("#rsmId option:selected").val(),
+                Region:$("#regionId option:selected").text(),
+            }
+
+
+
+            $('#stateId').empty();
+            $.ajax({
+                url: '@Url.Action("GetRegionData", "OutletWiseSalesDatabase")',
+                type: "POST",
+                data: {
+                    vm: obj,
+                },
+                success: function (state) {
+
+                    
+                    $.each(state, function (i, st) {
+                        $('#stateId').append('<option value=' + st + '>' + st + '</option>')
+                    });
+                    $('#stateId').append('<option value="0" disabled>Select Region</option>');
+                }
+            })
+        });
+
+        $("#stateId").change(function () {
+
+                States=[]
             var $selectedStates = $("#stateId").find('option:selected');
             $selectedStates.each(function () {
-                        States.push($(this).text());
+
+                var objState =
+                {
+                    "ZONE_STATE": $(this).text(),
+                };
+                States.push(objState);
+            });
+               
+
+            var obj = {
+                RSM_NAME: $("#rsmId option:selected").text(),
+                RSM_ID: $("#rsmId option:selected").val(),
+                Region: $("#regionId option:selected").text(),
+                Zone_States: States,
+            }
+
+            
+
+
+            $('#bmId').empty();
+            $.ajax({
+                url: '@Url.Action("GetStatesData", "OutletWiseSalesDatabase")',
+                type: "POST",
+                data: {
+                    vm: obj,
+                },
+                success: function (bmLst) {
+                    $.each(bmLst, function (i, bm) {
+                        //alert(bm.BM_NAME)
+
+                        $('#bmId').append('<option value=' + bm.bM_ID + '>' + bm.bM_NAME + '</option>')
+                    });
+
+                }
+            })
+        });
+
+        $("#bmId").change(function () {
+
+            States = []
+            var $selectedStates = $("#stateId").find('option:selected');
+            $selectedStates.each(function () {
+
+                var objState =
+                {
+                    "ZONE_STATE": $(this).text(),
+                };
+                States.push(objState);
             });
 
-            BM=[]
+
+                BM=[]
+
+                var $selectedBM = $("#bmId").find('option:selected');
+                $selectedBM.each(function () {
+
+                    var objBM =
+                    {
+
+                        "BM_ID": $(this).val(),
+                        "BM_NAME": $(this).text(),
+                    };
+
+
+                    BM.push(objBM);
+                });
+
+            var obj = {
+                RSM_NAME: $("#rsmId option:selected").text(),
+                RSM_ID: $("#rsmId option:selected").val(),
+                Region: $("#regionId option:selected").text(),
+                Zone_States: States,
+                BMs:BM,
+            }
+
+
+
+
+            $('#asmId').empty();
+            $.ajax({
+                url: '@Url.Action("GetBMData", "OutletWiseSalesDatabase")',
+                type: "POST",
+                data: {
+                    vm: obj,
+                },
+                success: function (asmLst) {
+
+                    $.each(asmLst, function (i, asm) {
+                        //alert(bm.BM_NAME)
+
+                        $('#asmId').append('<option value=' + asm.asM_ID + '>' + asm.asM_NAME + '</option>')
+                    });
+
+                }
+            })
+        });
+
+        $("#asmId").change(function () {
+
+            States = []
+            var $selectedStates = $("#stateId").find('option:selected');
+            $selectedStates.each(function () {
+
+                var objState =
+                {
+                    "ZONE_STATE": $(this).text(),
+                };
+                States.push(objState);
+            });
+
+
+            BM = []
 
             var $selectedBM = $("#bmId").find('option:selected');
             $selectedBM.each(function () {
-                BM.push($(this).text());
+
+                var objBM =
+                {
+
+                    "BM_ID": $(this).val(),
+                    "BM_NAME": $(this).text(),
+                };
+
+
+                BM.push(objBM);
+            });
+
+                ASM = []
+
+                var $selectedASM = $("#asmId").find('option:selected');
+                $selectedASM.each(function () {
+                    var objASM =
+                    {
+
+                        "ASM_ID": $(this).val(),
+                        "ASM_NAME": $(this).text(),
+                    };
+
+                    ASM.push(objASM);
+                });
+
+            var obj = {
+                RSM_NAME: $("#rsmId option:selected").text(),
+                RSM_ID: $("#rsmId option:selected").val(),
+                Region: $("#regionId option:selected").text(),
+                Zone_States: States,
+                BMs: BM,
+                ASMs:ASM,
+            }
+
+
+
+
+            $('#soId').empty();
+            $.ajax({
+                url: '@Url.Action("GetASMData", "OutletWiseSalesDatabase")',
+                type: "POST",
+                data: {
+                    vm: obj,
+                },
+                success: function (soLst) {
+                    $.each(soLst, function (i, so) {
+                        //alert(bm.BM_NAME)
+
+                        $('#soId').append('<option value=' + so.sO_ID + '>' + so.sO_NAME + '</option>')
+                    });
+
+                }
+            })
+        });
+
+
+        $("#soId").change(function () {
+
+            States = []
+            var $selectedStates = $("#stateId").find('option:selected');
+            $selectedStates.each(function () {
+
+                var objState =
+                {
+                    "ZONE_STATE": $(this).text(),
+                };
+                States.push(objState);
+            });
+
+
+            BM = []
+
+            var $selectedBM = $("#bmId").find('option:selected');
+            $selectedBM.each(function () {
+
+                var objBM =
+                {
+
+                    "BM_ID": $(this).val(),
+                    "BM_NAME": $(this).text(),
+                };
+
+
+                BM.push(objBM);
             });
 
             ASM = []
 
             var $selectedASM = $("#asmId").find('option:selected');
             $selectedASM.each(function () {
-                ASM.push($(this).text());
+                var objASM =
+                {
+
+                    "ASM_ID": $(this).val(),
+                    "ASM_NAME": $(this).text(),
+                };
+
+                ASM.push(objASM);
+            });
+
+                SOVM = []
+
+                var $selectedSO = $("#soId").find('option:selected');
+                $selectedSO.each(function () {
+                    var objSO =
+                    {
+
+                        "SO_ID": $(this).val(),
+                        "SO_NAME": $(this).text(),
+                    };
+
+                    SOVM.push(objSO);
+                });
+
+            var obj = {
+                RSM_NAME: $("#rsmId option:selected").text(),
+                RSM_ID: $("#rsmId option:selected").val(),
+                Region: $("#regionId option:selected").text(),
+                Zone_States: States,
+                BMs: BM,
+                ASMs: ASM,
+                SOVMs:SOVM,
+            }
+
+
+
+
+            $('#rdsId').empty();
+            $.ajax({
+                url: '@Url.Action("GetSOData", "OutletWiseSalesDatabase")',
+                type: "POST",
+                data: {
+                    vm: obj,
+                },
+                success: function (rdsLst) {
+                    console.log(rdsLst);
+
+                    $.each(rdsLst, function (i, rs) {
+                        //alert(bm.BM_NAME)
+
+                        $('#rdsId').append('<option value=' + rs.rsD_ID + '>' + rs.rsD_NAME + '</option>')
+                    });
+
+                }
+            })
+        });
+
+
+        $("#periodId").change(function () {
+
+            var v = $("#periodId").val();
+            if (v == 9) {
+                $('#customDateDiv').show();
+            }
+            else
+            {
+                $('#customDateDiv').hide();
+            }
+        });
+
+        $("#btnGetData").click(function () {
+            
+            States=[]
+
+            var $selectedStates = $("#stateId").find('option:selected');
+            $selectedStates.each(function () {
+
+                var objState =
+                {
+                    "ZONE_STATE": $(this).text(),
+                };
+                States.push(objState);
+            });
+
+            BM=[]
+
+            var $selectedBM = $("#bmId").find('option:selected');
+            $selectedBM.each(function () {
+
+                var objBM =
+                {
+
+                    "BM_ID": $(this).val(),
+                    "BM_NAME": $(this).text(),
+                };
+
+
+                BM.push(objBM);
+            });
+
+            ASM = []
+
+            var $selectedASM = $("#asmId").find('option:selected');
+            $selectedASM.each(function () {
+                var objASM =
+                {
+
+                    "ASM_ID": $(this).val(),
+                    "ASM_NAME": $(this).text(),
+                };
+
+                ASM.push(objASM);
             });
 
             SOVM = []
 
             var $selectedSO = $("#soId").find('option:selected');
             $selectedSO.each(function () {
-                SOVM.push($(this).text());
+                var objSO =
+                {
+
+                    "SO_ID": $(this).val(),
+                    "SO_NAME": $(this).text(),
+                };
+
+                SOVM.push(objSO);
             });
 
             RDS = []
 
             var $selectedRDS = $("#rdsId").find('option:selected');
             $selectedRDS.each(function () {
-                RDS.push($(this).text());
+                var objRDS =
+                {
+
+                    "RSD_ID": $(this).val(),
+                    "RSD_NAME": $(this).text(),
+                };
+                RDS.push(objRDS);
             });
             // console.log(States);
-
+            
             $.ajax({
-                url: '@Url.Action("GetRSMData", "OutletWiseSalesDatabase")',
+       
                 type:"POST",
+                url: '@Url.Action("GetRawData", "OutletWiseSalesDatabase")',
                 data: {
-                    rsmName: $("#rsmId option:selected").text(),
+                    RSM_ID: $("#rsmId option:selected").val(),
+                    RSM_NAME: $("#rsmId option:selected").text(),
                     Region: $("#regionId option:selected").text(),
-                    States: States,
+                    Zone_States: States,
                     BMs:BM,
                     ASMs:ASM,
                     SOVMs: SOVM,
-                    RSDVMs:RDS,
+                    RSDVMs: RDS, 
                     Region: $("#regionId option:selected").text(),
+                    filterType: $("#filterId option:selected").val(),
+                    dataType: $("#periodId option:selected").val(),
                 },
                 success: function (data) {
                    
@@ -307,13 +675,7 @@
             })
         });
 
-        $(document).ready(function () {
-            MyBlah("hello");
-        });
-
-        function MyBlah(blah) {
-
-        }
+        
    
 </script>
 }

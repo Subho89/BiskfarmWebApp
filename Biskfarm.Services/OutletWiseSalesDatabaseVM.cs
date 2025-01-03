@@ -13,27 +13,42 @@ namespace Biskfarm.Services
     {
         public string Region { get; set; }
         public string RSM_NAME { get; set; }
-        public string RSM_ID { get; set; }
+        public int RSM_ID { get; set; }
         public string BM_NAME { get; set; }
-        public string BM_ID { get; set;}
+        public int BM_ID { get; set;}
         public string ASM_NAME { get; set; }
-        public string ASM_ID { get; set;}
+        public int ASM_ID { get; set;}
         public string SO_NAME { get; set; }
-        public string SO_ID { get; set;}
+        public int SO_ID { get; set;}
         public string RSD_NAME { get; set;}
-        public string RSD_ID { get;set;}
+        public int RSD_ID { get;set;}
         public string ZONE_STATE { get; set; }
     }
 
     public class SelectionVM
     {
         public string Region { get; set; }
+        public int RSM_ID { get; set; }
         public string RSM_NAME { get; set; }
-        public List<StateSelectionVM> States { get; set; }
+        public int BM_ID { get; set; }
+        public string BM_NAME { get; set; }
+        public string ASM_NAME { get; set; }
+        public int ASM_ID { get; set; }
+        public string SO_NAME { get; set; }
+        public int SO_ID { get; set; }
+        public string RSD_NAME { get; set; }
+        public int RSD_ID { get; set; }
+        public List<StateSelectionVM> Zone_States { get; set; }
         public List<BMVM> BMs { get; set; }
         public List<ASMVM> ASMs { get; set; }
         public List<SOVM> SOVMs { get; set; }
         public List<RSDVM> RSDVMs { get; set; }
+        public string fromDate { get; set; }
+        public string toDate { get; set; }
+        public string filterType { get; set; }
+        public string dataType { get; set; }
+        public bool isOnlySub { get; set; }
+        public string dataSource { get; set; }
     }
 
     public class StateSelectionVM
@@ -43,21 +58,25 @@ namespace Biskfarm.Services
 
     public class BMVM
     {
+        public int BM_ID { get; set; }
         public string BM_NAME { get; set; }
     }
 
     public class ASMVM
     {
+        public int ASM_ID { get; set; }
         public string ASM_NAME { get; set; }
     }
 
     public class SOVM
     {
+        public int SO_ID { get; set; }
         public string SO_NAME { get; set; }
     }
 
     public class RSDVM
     {
+        public int RSD_ID { get; set; }
         public string RSD_NAME { get; set; }
     }
 

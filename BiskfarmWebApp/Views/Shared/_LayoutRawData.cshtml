@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="~/Contents/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="~/Contents/dist/css/adminlte.min.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="~/Contents/plugins/daterangepicker/daterangepicker.css">
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -857,6 +859,7 @@
 
             <!-- Main content -->
             <section class="content">
+                
                 <div class="container-fluid">
                     <!-- SELECT2 EXAMPLE -->
                     <div class="card card-default">
@@ -876,42 +879,53 @@
                         <div class="card-body">
 
                             <div class="row">
+
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Select RSM</label>
                                         <select class="form-control select2" id="rsmId" style="width: 100%;">
-                                            @foreach (var rsm in Model.GroupBy(r=>r.RSM_NAME).Select(g=>g.First()))
+                                            <option value="0" selected disabled>Select RSM</option>
+                                            @foreach (var rsm in Model.GroupBy(r => r.RSM_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@rsm.RSM_NAME">@rsm.RSM_NAME</option>
+                                                <option value="@rsm.RSM_ID">@rsm.RSM_NAME</option>
                                             }
                                         </select>
                                     </div>
-                                    <!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Select Region</label>
                                         <select class="form-control select2" id="regionId" style="width: 100%;">
-                                            @foreach (var region in Model.GroupBy(r=>r.Region).Select(g=>g.First()))
+                                            <option value="0" selected disabled>Select Region</option>
+                                            @foreach (var region in Model.GroupBy(r => r.Region).Select(g => g.First()))
                                             {
                                                 <option value="@region.Region">@region.Region</option>
                                             }
 
                                         </select>
                                     </div>
+                                </div>
+
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>
                                             Select State
                                         </label>
-                                        <select class="select2" multiple="multiple" id="stateId" data-placeholder="Select a State" style="width: 100%;">
-                                            @foreach (var st in Model.GroupBy(r=>r.ZONE_STATE).Select(g=>g.First()))
+                                        <select class="select2 selectAll" multiple="multiple" id="stateId" data-placeholder="Select a State" style="width: 100%;">
+                                            <option value="all">Select All</option>
+                                            @foreach (var st in Model.GroupBy(r => r.ZONE_STATE).Select(g => g.First()))
                                             {
                                                 <option value="@st.ZONE_STATE">@st.ZONE_STATE</option>
                                             }
 
                                         </select>
                                     </div>
-                                    <!-- /.form-group -->
                                 </div>
-                                <!-- /.col -->
+
+                                <!-- /.form-group -->
+                            </div>
+
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>
@@ -920,84 +934,154 @@
                                         <select class="select2" multiple="multiple" id="bmId" data-placeholder="Select BM Name" style="width: 100%;">
                                             @foreach (var bm in Model.GroupBy(r => r.BM_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@bm.BM_NAME">@bm.BM_NAME</option>
+                                                <option value="@bm.BM_ID">@bm.BM_NAME</option>
                                             }
                                         </select>
                                     </div>
-                                    <!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Select ASM</label>
                                         <select class="form-control select2" id="asmId" multiple="multiple" style="width: 100%;">
                                             @foreach (var asm in Model.GroupBy(r => r.ASM_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@asm.ASM_NAME">@asm.ASM_NAME</option>
+                                                <option value="@asm.ASM_ID">@asm.ASM_NAME</option>
                                             }
                                         </select>
                                     </div>
-                                    <!-- /.form-group -->
-                                    <!-- /.form-group -->
+                                </div>
+
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Select SO</label>
                                         <select class="form-control select2" id="soId" multiple="multiple" style="width: 100%;">
                                             @foreach (var so in Model.GroupBy(r => r.SO_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@so.SO_NAME">@so.SO_NAME</option>
+                                                <option value="@so.SO_ID">@so.SO_NAME</option>
                                             }
                                         </select>
                                     </div>
+
                                     <!-- /.form-group -->
                                 </div>
-                                <!-- /.col -->
+                            </div>
+
+
+
+                            <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Select RDS</label>
                                         <select class="select2" multiple="multiple" id="rdsId" data-placeholder="Select RDS" style="width: 100%;">
                                             @foreach (var rds in Model.GroupBy(r => r.RDS_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@rds.RDS_NAME">@rds.RDS_NAME</option>
+                                                <option value="@rds.RDS_ID">@rds.RDS_NAME</option>
                                             }
 
                                         </select>
                                     </div>
-                                    <!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label>Select Period</label>
-                                        <select class="form-control select2" id="periodId" style="width: 100%;">
-                                            <option selected="selected" value="0">Select Date</option>
-                                            <option value="1">Last One Month</option>
-                                            <option value="3">Last Three Months</option>
-                                            <option value="6">Last Six Months</option>
-                                            <option value="9">Custom Date Range</option>
-                                        </select>        <!-- /.form-group -->
-                                        <!-- /.form-group -->
-                                        <div class="form-group">
-                                            <label>Select Filter</label>
-                                            <select class="form-control select2" id="filterId" style="width: 100%;">
-                                                <option value="B">Billed</option>
-                                                <option value="U">Unbilled</option>
+                                        <div class="input-group">
+                                            <label>Select Period</label>
+                                            <select class="form-control select2" id="periodId" style="width: 100%;">
+                                                <option selected="selected" value="0">Select Date</option>
+                                                <option value="1">Last One Month</option>
+                                                <option value="3">Last Three Months</option>
+                                                <option value="6">Last Six Months</option>
+                                                <option value="9">Custom Date Range</option>
                                             </select>
                                         </div>
-                                        <!-- /.form-group -->
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Select Source Data</label>
-                                            <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
-                                                <option value="0" selected>Select Source Data</option>
-                                                <option value="D">DMS(CDMS/PURNAM DATA)</option>
-                                                <option value="S">SFA(Mobile Application)</option>
-                                            </select>
-                                        </div>
-                                        <!-- /.form-group -->
-                                        <!-- /.form-group -->
                                     </div>
                                 </div>
-                                <!-- /.row -->
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Select Filter</label>
+                                        <select class="form-control select2" id="filterId" style="width: 100%;">
+                                            <option value="B">Billed</option>
+                                            <option value="U">Unbilled</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card">
-                                <div class="form-group row">
-                                    <div class="col-8 offset-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group" id="customDateDiv">
+                                        <label>Date range:</label>
+
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control float-right" id="customRange">
+                                        </div>
+                                        <!-- /.input group -->
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    @*  <div class="form-group">
+                                    <label>Select Source Data</label>
+                                    <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
+                                    <option value="0" selected>Select Source Data</option>
+                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
+                                    <option value="S">SFA(Mobile Application)</option>
+                                    </select>
+                                    </div> *@
+                                </div>
+                                <div class="col-md-4">
+                                    @* <div class="form-group">
+                                    <label>Select Source Data</label>
+                                    <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
+                                    <option value="0" selected>Select Source Data</option>
+                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
+                                    <option value="S">SFA(Mobile Application)</option>
+                                    </select>
+                                    </div> *@
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Select Source Data</label>
+                                        <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
+                                            <option value="0" selected>Select Source Data</option>
+                                            <option value="D">DMS(CDMS/PURNAM DATA)</option>
+                                            <option value="S">SFA(Mobile Application)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    @*  <div class="form-group">
+                                    <label>Select Source Data</label>
+                                    <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
+                                    <option value="0" selected>Select Source Data</option>
+                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
+                                    <option value="S">SFA(Mobile Application)</option>
+                                    </select>
+                                    </div> *@
+                                </div>
+                                <div class="col-md-4">
+                                    @* <div class="form-group">
+                                    <label>Select Source Data</label>
+                                    <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
+                                    <option value="0" selected>Select Source Data</option>
+                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
+                                    <option value="S">SFA(Mobile Application)</option>
+                                    </select>
+                                    </div> *@
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
                                         <button type="button" id="btnGetData" class="btn btn-primary waves-effect waves-light mr-1">
                                             Get Data
                                         </button>
@@ -1005,12 +1089,15 @@
                                 </div>
                             </div>
 
-                            @RenderBody()
 
                         </div>
-
                     </div>
-                    <!-- /.container-fluid -->
+
+                    <!-- /.row -->
+                    @RenderBody()
+
+                </div>
+                    
             </section>
             <!-- /.content -->
         </div>
@@ -1033,6 +1120,11 @@
     <script src="~/Contents/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="~/Contents/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- InputMask -->
+    <script src="~/Contents/plugins/moment/moment.min.js"></script>
+    <script src="~/Contents/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="~/Contents/plugins/daterangepicker/daterangepicker.js"></script>
     <!-- DataTables  & Plugins -->
     <script src="~/Contents/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="~/Contents/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -1058,6 +1150,8 @@
     <!-- Page specific script -->
     <script>
         $(function () {
+
+            $('#customRange').daterangepicker()
             //Initialize Select2 Elements
             $('.select2').select2()
 
@@ -1065,7 +1159,15 @@
             $('.select2bs4').select2({
                 theme: 'bootstrap4'
             })
+            $('#customDateDiv').hide()
 
+            $('.fav_clr').on("select2:select", function (e) {
+                var data = e.params.data.text;
+                if (data == 'all') {
+                    $(".fav_clr > option").prop("selected", "selected");
+                    $(".fav_clr").trigger("change");
+                }
+            });
                  //Datemask dd/mm/yyyy
           
         })

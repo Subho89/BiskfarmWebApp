@@ -24,6 +24,7 @@ namespace Biskfarm.DAL
         public DbSet<SO_MAST> SO_MAST { get; set; }
         public DbSet<RDS_Hierarchy> RDS_Hierarchy { get; set; }
         public DbSet<OutletWiseSalesDatabase> OutletSalesDb { get; set; }
+        public DbSet<RDS_BUSINESS_PROPOSAL> RDS_BUSINESS_PROPOSAL { get; set; }
         public DbSet<RDS_Demo> RDS_Demo { get; set; }
     }   
 }

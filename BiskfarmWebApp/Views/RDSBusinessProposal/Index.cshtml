@@ -1,0 +1,80 @@
+﻿@using Biskfarm.DAL.Model
+@using Biskfarm.Services
+@{
+    Layout = "~/Views/Shared/_LayoutForms.cshtml";
+    //Layout = null;
+}
+
+@* @model List<RDS_BUSINESS_PROPOSAL> *@
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>RDS Business Proposal</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">RDS Business Proposal</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <button class="btn btn-secondary" onclick="location.href='@Url.Action("Create", "RDSBusinessProposal")'">Create</button>
+            </div>
+            <div class="card-header">
+                <h3 class="card-title">RDS Business Proposal List</h3>
+            </div>
+            <div class="card-body">
+                <table id="routeSales" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Principal Co.</th>
+                            <th>Date Of Entry</th>
+                            <th>Name of RDS/Super Stockist</th>
+                            <th>Subsidy Approved</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td> <button  onclick="topFunction()" class="btnView btn-xs btn-warning"><i class="fas fa-edit"></i></button></td>
+                        </tr>
+
+                       @*  @foreach (var mdl in Model)
+                        {
+                            <tr>
+                                <td>@mdl.principalCo</td>
+                                <td>@mdl.dateOfEntry</td>
+                                <td>@mdl.nameOfRDSSuperStockist</td>
+                                <td>@mdl.rdsSubsidyApproved</td>
+                                <td> <button data-id="@mdl.rdsBusinessProposalId" onclick="topFunction()" class="btnView btn-xs btn-warning"><i class="fas fa-edit"></i></button></td>
+                            </tr>
+                        } *@
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Principal Co.</th>
+                            <th>Date Of Entry</th>
+                            <th>Name of RDS/Super Stockist</th>
+                            <th>Subsidy Approved</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</section>
