@@ -22,8 +22,85 @@ namespace BiskfarmWebApp.Controllers
         public IActionResult Index()
         {
 
-            databases = services.LoadingOutletList(db);
-            return View(databases);
+            var outlet = services.LoadingOutletList(db);
+            FormLoaderVM loaderVM = new FormLoaderVM();
+
+            loaderVM.Outlets = outlet;
+
+            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    con.Open();
+
+                    DataTable DataTbl1 = new DataTable();
+                    string qry =
+                        "WITH CTE" + System.Environment.NewLine +
+                        "AS" + System.Environment.NewLine +
+                        "(" + System.Environment.NewLine +
+                        "    SELECT 1 MON_NO,CONVERT(VARCHAR(50), DATENAME(MONTH, '2024-'+CAST(1 AS VARCHAR(50))+'-01')) AS ORDER_MONTH" + System.Environment.NewLine +
+                        "    UNION ALL" + System.Environment.NewLine +
+                        "    SELECT CTE.MON_NO+1 MON_NO,CONVERT(VARCHAR(50),DATENAME(MONTH, '2024-'+CAST(CTE.MON_NO+1 AS VARCHAR(50))+'-01')) AS ORDER_MONTH" + System.Environment.NewLine +
+                        "    FROM CTE" + System.Environment.NewLine +
+                        "    WHERE MON_NO<=11" + System.Environment.NewLine +
+                        ")" + System.Environment.NewLine +
+
+                        "SELECT * FROM CTE";
+
+                    SqlCommand cmd1 = new SqlCommand(qry, con);
+                    cmd1.CommandType = CommandType.Text;
+                    SqlDataAdapter adapter1 = new SqlDataAdapter(cmd1);
+
+                    adapter1.Fill(DataTbl1);
+
+                    loaderVM.MonthVMs = (from DataRow dr in DataTbl1.Rows
+                                         select new MonthVM()
+                                         {
+                                             MON_NO = (dr["MON_NO"].ToString()),
+                                             ORDER_MONTH = dr["ORDER_MONTH"].ToString(),
+
+
+
+                                         }).ToList();
+
+
+
+                    DataTbl1 = new DataTable();
+                    qry =
+                        "WITH CTE" + System.Environment.NewLine +
+                        "AS" + System.Environment.NewLine +
+                        "(" + System.Environment.NewLine +
+                        "	SELECT 1 SL_NO,(MAX(CM_CMDATE)) [MAX_DATE],[DBO].[GET_FINANCIAL_YEAR](CAST(MAX(CM_CMDATE) AS DATE)) FIN_YEAR" + System.Environment.NewLine +
+                        "	FROM IIMS_CMFILE(NOLOCK)" + System.Environment.NewLine +
+                        "	UNION ALL" + System.Environment.NewLine +
+                        "	SELECT CTE.SL_NO+1 SL_NO,(DATEADD(YEAR,-1,CTE.[MAX_DATE])) [MAX_DATE],[DBO].[GET_FINANCIAL_YEAR](DATEADD(YEAR,-1,CTE.[MAX_DATE])) FIN_YEAR" + System.Environment.NewLine +
+                        "	FROM CTE" + System.Environment.NewLine +
+                        "	WHERE SL_NO<=2" + System.Environment.NewLine +
+                        ")" + System.Environment.NewLine +
+
+                        "SELECT YEAR([MAX_DATE]) YEAR_NO,FIN_YEAR " + System.Environment.NewLine +
+                        "FROM CTE";
+
+                    cmd1 = new SqlCommand(qry, con);
+                    cmd1.CommandType = CommandType.Text;
+                    adapter1 = new SqlDataAdapter(cmd1);
+
+                    adapter1.Fill(DataTbl1);
+
+                    loaderVM.YearVMs = (from DataRow dr in DataTbl1.Rows
+                                        select new YearVM()
+                                        {
+                                            YEAR_NO = (dr["YEAR_NO"].ToString()),
+                                            FIN_YEAR = dr["FIN_YEAR"].ToString(),
+
+
+
+                                        }).ToList();
+
+                }
+            }
+
+            return View(loaderVM);
         }
 
         private string GetConnectionString()
@@ -302,7 +379,7 @@ namespace BiskfarmWebApp.Controllers
                                         cmd.Parameters.AddWithValue("@FILTER_TYPE", selection.filterType);
                                         cmd.Parameters.AddWithValue("@DATE_TYPE", selection.dataType);
                                         cmd.Parameters.AddWithValue("@IS_ONLY_SUB", 0);
-                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", "S");
+                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", selection.dataSource);
 
                                         SqlDataAdapter adapter1 = new SqlDataAdapter(cmd);
                                         adapter1.Fill(DataTbl1);
@@ -324,16 +401,6 @@ namespace BiskfarmWebApp.Controllers
 
 
                                                   }).ToList();
-                                        // outlet=List<OutletWiseSalesDatabase>(adapter1);
-                                        //SqlDataReader rdr = cmd.ExecuteReader();
-
-                                        //while(rdr.Read()) {
-                                        //    outlet.Add(new OutletWiseSalesDatabase()
-                                        //    {
-                                        //        RSM_NAME = rdr["RSM_NAME"].ToString(),
-                                        //    }); 
-                                        //}
-
 
                                     }
                                 }
@@ -347,74 +414,9 @@ namespace BiskfarmWebApp.Controllers
 
 
 
-            //using (SqlConnection con = new SqlConnection(GetConnectionString()))
-            //{
-            //    using (SqlCommand cmd = new SqlCommand())
-            //    {
-            //        con.Open();
-            //        DataTable DataTbl1 = new DataTable();
-
-            //        cmd.Connection = con;
-            //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //        cmd.CommandTimeout = 0;
-            //        cmd.CommandText = "DUMP_DATA_UNBILLED_OUTLETS";
-            //        cmd.Parameters.AddWithValue("@REGION", "REGION 6");
-            //        cmd.Parameters.AddWithValue("@ZONE_STATE", "TELANGANA");
-            //        cmd.Parameters.AddWithValue("@RSM_ID", "30");
-            //        cmd.Parameters.AddWithValue("@BM_ID", "1015");
-            //        cmd.Parameters.AddWithValue("@ASM_ID", "10059");
-            //        cmd.Parameters.AddWithValue("@SO_ID", "100064279");
-            //        cmd.Parameters.AddWithValue("@RDS_ID", "2565243");
-            //        cmd.Parameters.AddWithValue("@FROM_DATE", "");
-            //        cmd.Parameters.AddWithValue("@TO_DATE", "");
-            //        cmd.Parameters.AddWithValue("@FILTER_TYPE", "A");
-            //        cmd.Parameters.AddWithValue("@DATE_TYPE", "6");
-            //        cmd.Parameters.AddWithValue("@IS_ONLY_SUB", 0);
-            //        cmd.Parameters.AddWithValue("@DATA_SOURCE", "S");
-
-
-            //        SqlDataAdapter adapter1 = new SqlDataAdapter(cmd);
-            //        adapter1.Fill(DataTbl1);
-            //        outlet = (from DataRow dr in DataTbl1.Rows
-            //                  select new OutletWiseSalesDatabase()
-            //                  {
-            //                      Region = (dr["Region"].ToString()),
-            //                      ZONE_STATE = dr["ZONE_STATE"].ToString(),
-            //                      RSM_ID = Convert.ToInt32(dr["RSM_ID"]),
-            //                      RSM_NAME = dr["RSM_NAME"].ToString(),
-            //                      BM_ID = Convert.ToInt32(dr["BM_ID"]),
-            //                      BM_NAME = dr["BM_NAME"].ToString(),
-            //                      ASM_ID = Convert.ToInt32(dr["ASM_ID"]),
-            //                      ASM_NAME = dr["ASM_NAME"].ToString(),
-            //                      SO_ID = Convert.ToInt32(dr["SO_ID"]),
-            //                      SO_NAME = dr["SO_NAME"].ToString(),
-            //                      RDS_ID = Convert.ToInt32(dr["RDS_ID"]),
-            //                      RDS_NAME = dr["ASM_NAME"].ToString(),
-            //                  }).ToList();
-            //        // outlet=List<OutletWiseSalesDatabase>(adapter1);
-            //        //SqlDataReader rdr = cmd.ExecuteReader();
-
-            //        //while(rdr.Read()) {
-            //        //    outlet.Add(new OutletWiseSalesDatabase()
-            //        //    {
-            //        //        RSM_NAME = rdr["RSM_NAME"].ToString(),
-            //        //    }); 
-            //        //}
-
-            //        var v = outlet;
-            //    }
-            //}
-
-
             return PartialView(outlet);
         }
 
 
-        //public List<OutletWiseSalesDatabase> GetOutlets()
-        //{
-
-
-
-        //}
     }
 }

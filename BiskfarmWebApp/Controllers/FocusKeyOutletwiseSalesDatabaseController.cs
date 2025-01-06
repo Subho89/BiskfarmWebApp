@@ -7,12 +7,12 @@ using System.Data;
 
 namespace BiskfarmWebApp.Controllers
 {
-    public class RouteWiseSalesDatabaseController : Controller
+    public class FocusKeyOutletwiseSalesDatabaseController : Controller
     {
         private readonly BiskfarmContext db;
         OutletWiseSalesDatabaseServices services = new OutletWiseSalesDatabaseServices();
         private IConfiguration configuration;
-        public RouteWiseSalesDatabaseController(BiskfarmContext _db, IConfiguration _con)
+        public FocusKeyOutletwiseSalesDatabaseController(BiskfarmContext _db, IConfiguration _con)
         {
             db = _db;
             configuration = _con;
@@ -20,6 +20,9 @@ namespace BiskfarmWebApp.Controllers
         public IActionResult Index()
         {
             var outlet = services.LoadingOutletList(db);
+
+            List<OutletWiseSalesDatabaseVM> outletVM = new List<OutletWiseSalesDatabaseVM>();
+
             FormLoaderVM loaderVM = new FormLoaderVM();
 
             loaderVM.Outlets = outlet;
@@ -105,6 +108,7 @@ namespace BiskfarmWebApp.Controllers
             return this.configuration.GetConnectionString("dbBiskfarm");
         }
 
+
         public IActionResult GetRawData(SelectionVM selection)
         {
             List<OutletWiseSalesDatabase> outlet = new List<OutletWiseSalesDatabase>();
@@ -129,7 +133,7 @@ namespace BiskfarmWebApp.Controllers
                                         cmd.Connection = con;
                                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                                         cmd.CommandTimeout = 0;
-                                        cmd.CommandText = "DUMP_DATA_UNCOVERED_ROUTES";
+                                        cmd.CommandText = "DUMP_DATA_UNBILLED_UNBILLED_FOCUS_SKU_OUTLETS";
                                         cmd.Parameters.AddWithValue("@REGION", selection.Region);
                                         cmd.Parameters.AddWithValue("@ZONE_STATE", state.ZONE_STATE);
                                         cmd.Parameters.AddWithValue("@RSM_ID", selection.RSM_ID);
@@ -137,12 +141,12 @@ namespace BiskfarmWebApp.Controllers
                                         cmd.Parameters.AddWithValue("@ASM_ID", asm.ASM_ID);
                                         cmd.Parameters.AddWithValue("@SO_ID", so.SO_ID);
                                         cmd.Parameters.AddWithValue("@RDS_ID", rds.RSD_ID);
-                                        cmd.Parameters.AddWithValue("@FROM_DATE", selection.fromDate);
-                                        cmd.Parameters.AddWithValue("@TO_DATE", selection.toDate);
+                                        cmd.Parameters.AddWithValue("@MON_NO", selection.monthNo);
+                                        cmd.Parameters.AddWithValue("@YEAR_NO", selection.yearNo);
                                         cmd.Parameters.AddWithValue("@FILTER_TYPE", selection.filterType);
                                         cmd.Parameters.AddWithValue("@DATE_TYPE", selection.dataType);
-                                        cmd.Parameters.AddWithValue("@IS_ONLY_SUB", 0);
-                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", "S");
+                                        cmd.Parameters.AddWithValue("@IS_KEY_OUTLET", 1);
+                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", selection.dataSource);
 
                                         SqlDataAdapter adapter1 = new SqlDataAdapter(cmd);
                                         adapter1.Fill(DataTbl1);
@@ -164,16 +168,6 @@ namespace BiskfarmWebApp.Controllers
 
 
                                                   }).ToList();
-                                        // outlet=List<OutletWiseSalesDatabase>(adapter1);
-                                        //SqlDataReader rdr = cmd.ExecuteReader();
-
-                                        //while(rdr.Read()) {
-                                        //    outlet.Add(new OutletWiseSalesDatabase()
-                                        //    {
-                                        //        RSM_NAME = rdr["RSM_NAME"].ToString(),
-                                        //    }); 
-                                        //}
-
 
                                     }
                                 }
@@ -183,7 +177,8 @@ namespace BiskfarmWebApp.Controllers
                         }
                     }
                 }
-            }          
+            }
+
 
 
             return PartialView(outlet);

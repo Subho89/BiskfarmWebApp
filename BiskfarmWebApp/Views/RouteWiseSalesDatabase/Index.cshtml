@@ -4,21 +4,39 @@
 }
 
 
+@section pageHeader {
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Route wise Sales Database </h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Route wise Sales Database </li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+}
+
 <div class="card" id="rawData">
 
     <!-- /.card-body -->
 </div>
 
 
-
 @section Scripts {
     <script>
 
-
-
         $(function () {
-            $('#sourceDataId').hide();
-            $('#filterId').hide();
+            $("#yearDiv").hide();
+            $("#monthDiv").hide();
         });
 
         $("#rsmId").change(function () {
@@ -446,8 +464,8 @@
                     RSDVM.push(objRSD);
                 }
             });
-
-
+            var dateArray = $("#customRange").val().split('-');
+            console.log($("#customRange").val());
             var filterType = "";
 
             if ($('#filterId :selected').length == 3) {
@@ -478,14 +496,23 @@
             else if (!RSDVM.length > 0) {
                 alert("Please Select RSD");
             }
-            else if (filterType == "") {
+            else if (filterType == null) {
                 alert("Please Select Filter Type");
+            }
+            else if ($("#periodId option:selected").val() == 0) {
+                alert("Please Select Period Type");
+            }
+            else if ($("#periodId option:selected").val() == 9 && !$("#customRange").val()) {
+                alert("Please set Custom Date Range");
+            }
+            else if ($("#sourceDataId option:selected").val() == 0) {
+                alert("Please Select Source Data Type");
             }
             else {
                 $.ajax({
 
                     type: "POST",
-                    url: '@Url.Action("GetRawData", "OutletWiseSalesDatabase")',
+                    url: '@Url.Action("GetRawData", "RouteWiseSalesDatabase")',
                     data: {
                         RSM_ID: $("#rsmId option:selected").val(),
                         RSM_NAME: $("#rsmId option:selected").text(),
@@ -495,9 +522,11 @@
                         ASMs: ASM,
                         SOVMs: SOVM,
                         RSDVMs: RSDVM,
-
+                        dataSource: $("#sourceDataId option:selected").val(),
                         filterType: filterType,
                         dataType: $("#periodId option:selected").val(),
+                        fromDate: dateArray[0],
+                        toDate: dateArray[1]
                     },
                     success: function (result) {
                         $("#rawData").html("");

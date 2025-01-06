@@ -1,5 +1,6 @@
 ﻿@using Biskfarm.DAL.Model
-@model List<OutletWiseSalesDatabase>
+@using Biskfarm.Services
+@model FormLoaderVM
 
 <!DOCTYPE html>
 <html lang="en">
@@ -168,7 +169,7 @@
             <!-- Brand Logo -->
             <a href="~/Contents/index3.html" class="brand-link">
                 <img src="~/Contents/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">Biskfarm</span>
             </a>
 
             <!-- Sidebar -->
@@ -200,635 +201,71 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Dashboard
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="~/Contents/index.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/Contents/index2.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/Contents/index3.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v3</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Widgets
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Layout Options
-                                    <i class="fas fa-angle-left right"></i>
-                                    <span class="badge badge-info right">6</span>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../layout/top-nav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/top-nav-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Top Navigation + Sidebar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/boxed.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Boxed</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-sidebar-custom.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-topnav.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Navbar</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/fixed-footer.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Fixed Footer</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../layout/collapsed-sidebar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Collapsed Sidebar</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
-                                <p>
-                                    Charts
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../charts/chartjs.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>ChartJS</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../charts/flot.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Flot</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../charts/inline.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Inline</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../charts/uplot.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>uPlot</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tree"></i>
-                                <p>
-                                    UI Elements
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../UI/general.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>General</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/icons.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Icons</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/buttons.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Buttons</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/sliders.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Sliders</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/modals.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Modals & Alerts</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/navbar.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Navbar & Tabs</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/timeline.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Timeline</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../UI/ribbons.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ribbons</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    Forms
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../forms/general.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>General Elements</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../forms/advanced.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Advanced Elements</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../forms/editors.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Editors</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../forms/validation.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Validation</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                       
+                        
+                        
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Tables
+                                    Sales Database Forms
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../tables/simple.html" class="nav-link">
+                                    <a href="~/OutletWiseSalesDatabase" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Simple Tables</p>
+                                        <p>Outlet Wise Sales Database</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/data.html" class="nav-link active">
+                                    <a href="~/RouteWiseSalesDatabase" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>DataTables</p>
+                                        <p>Route Wise Sales Database</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../tables/jsgrid.html" class="nav-link">
+                                    <a href=" ~/FocusSKUOutletWiseSalesDatabase" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>jsGrid</p>
+                                        <p>Focus SKU OutletWise Sales Databaser</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/FocusKeyOutletwiseSalesDatabase" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Focus Key Outletwise Sales Database</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="~/SubStockiestSalesDatabase" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sub Stockiest Sales Database</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href=" ~/Top5BrandsOutletwiseSalesDatabase" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Top 5 Brands Outletwise Sales Database</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-header">EXAMPLES</li>
+                        <li class="nav-header">RDS Forms</li>
                         <li class="nav-item">
-                            <a href="../calendar.html" class="nav-link">
+                            <a href="~/RDSuperProfile" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <p>
-                                    Calendar
-                                    <span class="badge badge-info right">2</span>
+                                    RDS Super Profile
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../gallery.html" class="nav-link">
+                            <a href="~/RDSBusinessProposal" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
-                                    Gallery
+                                    RDS Business Proposal
                                 </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="../kanban.html" class="nav-link">
-                                <i class="nav-icon fas fa-columns"></i>
-                                <p>
-                                    Kanban Board
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-envelope"></i>
-                                <p>
-                                    Mailbox
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../mailbox/mailbox.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Inbox</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../mailbox/compose.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Compose</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../mailbox/read-mail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Read</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Pages
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../examples/invoice.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Invoice</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/profile.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Profile</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/e-commerce.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>E-commerce</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/projects.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Projects</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/project-add.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Project Add</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/project-edit.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Project Edit</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/project-detail.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Project Detail</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/contacts.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Contacts</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/faq.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>FAQ</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/contact-us.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Contact us</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-plus-square"></i>
-                                <p>
-                                    Extras
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Login & Register v1
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../examples/login.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Login v1</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../examples/register.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Register v1</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../examples/forgot-password.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Forgot Password v1</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../examples/recover-password.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Recover Password v1</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Login & Register v2
-                                            <i class="fas fa-angle-left right"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="../examples/login-v2.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Login v2</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../examples/register-v2.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Register v2</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../examples/forgot-password-v2.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Forgot Password v2</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="../examples/recover-password-v2.html" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Recover Password v2</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/lockscreen.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Lockscreen</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/legacy-user-menu.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Legacy User Menu</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/language-menu.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Language Menu</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/404.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Error 404</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/500.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Error 500</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/pace.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Pace</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../examples/blank.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Blank Page</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/Contents/starter.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Starter Page</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-search"></i>
-                                <p>
-                                    Search
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../search/simple.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Simple Search</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../search/enhanced.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Enhanced</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-header">MISCELLANEOUS</li>
-                        <li class="nav-item">
-                            <a href="~/Contents/iframe.html" class="nav-link">
-                                <i class="nav-icon fas fa-ellipsis-h"></i>
-                                <p>Tabbed IFrame Plugin</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://adminlte.io/docs/3.1/" class="nav-link">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>Documentation</p>
-                            </a>
-                        </li>
-                        <li class="nav-header">MULTI LEVEL EXAMPLE</li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-circle nav-icon"></i>
-                                <p>Level 1</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-circle"></i>
-                                <p>
-                                    Level 1
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Level 2</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>
-                                            Level 2
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>
-                                    <ul class="nav nav-treeview">
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon"></i>
-                                                <p>Level 3</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon"></i>
-                                                <p>Level 3</p>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#" class="nav-link">
-                                                <i class="far fa-dot-circle nav-icon"></i>
-                                                <p>Level 3</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Level 2</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-circle nav-icon"></i>
-                                <p>Level 1</p>
-                            </a>
-                        </li>
-                        <li class="nav-header">LABELS</li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-danger"></i>
-                                <p class="text">Important</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-warning"></i>
-                                <p>Warning</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-circle text-info"></i>
-                                <p>Informational</p>
                             </a>
                         </li>
                     </ul>
@@ -839,276 +276,283 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        @RenderSection("pageHeader")
-                        <!-- /.card-header -->
-                        <div class="card-body">
+       
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Select RSM</label>
-                                        <select class="form-control select2" id="rsmId" style="width: 100%;">
-                                            <option value="0" selected disabled>Select RSM</option>
-                                            @foreach (var rsm in Model.GroupBy(r => r.RSM_NAME).Select(g => g.First()))
-                                            {
-                                                <option value="@rsm.RSM_ID">@rsm.RSM_NAME (@rsm.RSM_ID)</option>
-                                            }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Select Region</label>
-                                        <select class="form-control select2" id="regionId" style="width: 100%;">
-                                            <option value="0" selected disabled>Select Region</option>
-                                            @foreach (var region in Model.GroupBy(r => r.Region).Select(g => g.First()))
-                                            {
-                                                <option value="@region.Region">@region.Region </option>
-                                            }
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+             @RenderSection("pageHeader")
 
-                                        </select>
-                                    </div>
 
-                                   
 
-                                </div>
+            <section>
 
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>
-                                            Select State
-                                        </label>
-                                        <select class="select2 selectAll multiselect" multiple="multiple" id="stateId" data-placeholder="Select a State" style="width: 100%;">
-                                            
-                                            @foreach (var st in Model.GroupBy(r => r.ZONE_STATE).Select(g => g.First()))
-                                            {
-                                                <option value="@st.ZONE_STATE">@st.ZONE_STATE</option>
-                                            }
+                <!-- /.card-header -->
+                <div class="card-body">
 
-                                        </select>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select RSM</label>
+                                <select class="form-control select2" id="rsmId" style="width: 100%;">
+                                    <option value="0" selected disabled>Select RSM</option>
+                                    @foreach (var rsm in Model.Outlets.GroupBy(r => r.RSM_NAME).Select(g => g.First()))
+                                    {
+                                        <option value="@rsm.RSM_ID">@rsm.RSM_NAME (@rsm.RSM_ID)</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Region</label>
+                                <select class="form-control select2" id="regionId" style="width: 100%;">
+                                    <option value="0" selected disabled>Select Region</option>
+                                    @foreach (var region in Model.Outlets.GroupBy(r => r.Region).Select(g => g.First()))
+                                    {
+                                        <option value="@region.Region">@region.Region </option>
+                                    }
 
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="chkState">
-                                        <label class="form-check-label">Select All</label>
-                                    </div>
-                                </div>
-
-                                <!-- /.form-group -->
+                                </select>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>
-                                            Select BM
-                                        </label>
-                                        <select class="select2" multiple="multiple" id="bmId" data-placeholder="Select BM Name" style="width: 100%;">
-                                            
-                                            @foreach (var bm in Model.GroupBy(r => r.BM_NAME).Select(g => g.First()))
-                                            {
-                                                <option value="@bm.BM_ID">@bm.BM_NAME (@bm.BM_ID)</option>
-                                            }
-                                        </select>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="chkBM">
-                                        <label class="form-check-label">Select All</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Select ASM</label>
-                                        <select class="form-control select2" id="asmId" multiple="multiple" style="width: 100%;">                                            
-                                            @foreach (var asm in Model.GroupBy(r => r.ASM_NAME).Select(g => g.First()))
-                                            {
-                                                <option value="@asm.ASM_ID">@asm.ASM_NAME (@asm.ASM_ID)</option>
-                                            }
-                                        </select>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="chkASM">
-                                        <label class="form-check-label">Select All</label>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Select SO</label>
-                                        <select class="form-control select2" id="soId" multiple="multiple" style="width: 100%;">
-                                            
-                                            @foreach (var so in Model.GroupBy(r => r.SO_NAME).Select(g => g.First()))
-                                            {
-                                                <option value="@so.SO_ID">@so.SO_NAME (@so.SO_ID)</option>
-                                            }
-                                        </select>
-                                    </div>
-
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="chkSO">
-                                        <label class="form-check-label">Select All</label>
-                                    </div>
-
-                                    <!-- /.form-group -->
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Select RDS</label>
-                                        <select class="select2" multiple="multiple" id="rdsId" data-placeholder="Select RDS" style="width: 100%;">
-                                            
-                                            @foreach (var rds in Model.GroupBy(r => r.RDS_NAME).Select(g => g.First()))
-                                            {
-                                                <option value="@rds.RDS_ID">@rds.RDS_NAME (@rds.RDS_ID)</option>
-                                            }
-
-                                        </select>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="chkRDS">
-                                        <label class="form-check-label">Select All</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <label>Select Period</label>
-                                            <select class="form-control select2" id="periodId" style="width: 100%;">
-                                                <option selected="selected" value="0">Select Date</option>
-                                                <option value="1">Last One Month</option>
-                                                <option value="3">Last Three Months</option>
-                                                <option value="6">Last Six Months</option>
-                                                <option value="9">Custom Date Range</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Select Filter</label>
-                                        <select class="form-control select2" multiple="multiple" id="filterId" style="width: 100%;">
-                                            
-                                            <option value="B">Billed</option>
-                                            <option value="U">Unbilled</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="chkFilter">
-                                        <label class="form-check-label">Select All</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group" id="customDateDiv">
-                                        <label>Date range:</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    <i class="far fa-calendar-alt"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" class="form-control float-right" id="customRange">
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                   
-                                </div>
-                                <div class="col-md-4">
-                                   
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label>Select Source Data</label>
-                                        <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
-                                            <option value="0" selected>Select Source Data</option>
-                                            <option value="D">DMS(CDMS/PURNAM DATA)</option>
-                                            <option value="S">SFA(Mobile Application)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group" id="monthDiv">
-                                        <label>Select Month</label>
-                                        <select class="select2" data-placeholder="Select Month" id="monthId" style="width: 100%;">
-                                            <option>January</option>
-                                            <option>February</option>
-                                            <option>March</option>
-                                            <option>April</option>
-                                            <option>May</option>
-                                            <option>June</option>
-                                            <option>July</option>
-                                            <option>August</option>
-                                            <option>September</option>
-                                            <option>October</option>
-                                            <option>November</option>
-                                            <option>December</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group" id="yearDiv">
-                                        <label>Select Year</label>
-                                        <select class="form-control select2" id="yearId" style="width: 100%;">
-                                            <option selected="selected" value="1">2024-25</option>
-                                            <option value="1">2023-24</option>
-                                            <option value="2">2022-23</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-4">
-
-                                    <div class="form-group">
-                                        <button type="button" id="btnGetData" class="btn btn-primary waves-effect waves-light mr-1">
-                                            Get Data
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
 
 
                         </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Select State
+                                </label>
+                                <select class="select2 selectAll multiselect" multiple="multiple" id="stateId" data-placeholder="Select a State" style="width: 100%;">
+
+                                    @foreach (var st in Model.Outlets.GroupBy(r => r.ZONE_STATE).Select(g => g.First()))
+                                    {
+                                        <option value="@st.ZONE_STATE">@st.ZONE_STATE</option>
+                                    }
+
+                                </select>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chkState">
+                                <label class="form-check-label">Select All</label>
+                            </div>
+                        </div>
+
+                        <!-- /.form-group -->
                     </div>
 
-                    <!-- /.row -->
-                    @RenderBody()
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>
+                                    Select BM
+                                </label>
+                                <select class="select2" multiple="multiple" id="bmId" data-placeholder="Select BM Name" style="width: 100%;">
+
+                                    @foreach (var bm in Model.Outlets.GroupBy(r => r.BM_NAME).Select(g => g.First()))
+                                    {
+                                        <option value="@bm.BM_ID">@bm.BM_NAME (@bm.BM_ID)</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chkBM">
+                                <label class="form-check-label">Select All</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select ASM</label>
+                                <select class="form-control select2" id="asmId" multiple="multiple" style="width: 100%;">
+                                    @foreach (var asm in Model.Outlets.GroupBy(r => r.ASM_NAME).Select(g => g.First()))
+                                    {
+                                        <option value="@asm.ASM_ID">@asm.ASM_NAME (@asm.ASM_ID)</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chkASM">
+                                <label class="form-check-label">Select All</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select SO</label>
+                                <select class="form-control select2" id="soId" multiple="multiple" style="width: 100%;">
+
+                                    @foreach (var so in Model.Outlets.GroupBy(r => r.SO_NAME).Select(g => g.First()))
+                                    {
+                                        <option value="@so.SO_ID">@so.SO_NAME (@so.SO_ID)</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chkSO">
+                                <label class="form-check-label">Select All</label>
+                            </div>
+
+                            <!-- /.form-group -->
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select RDS</label>
+                                <select class="select2" multiple="multiple" id="rdsId" data-placeholder="Select RDS" style="width: 100%;">
+
+                                    @foreach (var rds in Model.Outlets.GroupBy(r => r.RDS_NAME).Select(g => g.First()))
+                                    {
+                                        <option value="@rds.RDS_ID">@rds.RDS_NAME (@rds.RDS_ID)</option>
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chkRDS">
+                                <label class="form-check-label">Select All</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label>Select Period</label>
+                                    <select class="form-control select2" id="periodId" style="width: 100%;">
+                                        <option selected="selected" value="0">Select Date</option>
+                                        <option value="1">Last One Month</option>
+                                        <option value="3">Last Three Months</option>
+                                        <option value="6">Last Six Months</option>
+                                        <option value="9">Custom Date Range</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Filter</label>
+                                <select class="form-control select2" multiple="multiple" id="filterId" style="width: 100%;">
+
+                                    <option value="B">Billed</option>
+                                    <option value="U">Unbilled</option>
+                                </select>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="chkFilter">
+                                <label class="form-check-label">Select All</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" id="customDateDiv">
+                                <label>Date range:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control float-right" id="customRange">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Select Source Data</label>
+                                <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
+                                    <option value="0" selected>Select Source Data</option>
+                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
+                                    <option value="S">SFA(Mobile Application)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" id="monthDiv">
+                                <label>Select Month</label>
+                                <select class="select2" data-placeholder="Select Month" id="monthId" style="width: 100%;">
+
+
+                                    @foreach (var rds in Model.MonthVMs.GroupBy(r => r.MON_NO).Select(g => g.First()))
+                                    {
+                                        <option value="@rds.MON_NO">@rds.ORDER_MONTH</option>
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" id="yearDiv">
+                                <label>Select Year</label>
+                                <select class="form-control select2" data-placeholder="Select Year" id="yearId" style="width: 100%;">
+
+                                    @foreach (var rds in Model.YearVMs.GroupBy(r => r.YEAR_NO).Select(g => g.First()))
+                                    {
+                                        <option value="@rds.YEAR_NO">@rds.FIN_YEAR</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <button type="button" id="btnGetData" class="btn btn-primary waves-effect waves-light mr-1">
+                                    Get Data
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
-                    
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.1.0
-            </div>
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-        </footer>
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+                @RenderBody()
+
+        </div>
+
+        <!-- /.row -->
+        
+
+    </div>
+
+    </section>
+    <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <div class="float-right d-none d-sm-block">
+            <b>Version</b> 3.1.0
+        </div>
+        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
@@ -1139,9 +583,9 @@
     <script src="~/Contents/dist/js/demo.js"></script>
     <!-- Select2 -->
     <script src="~/Contents/plugins/select2/js/select2.full.min.js"></script>
-        <!-- InputMask -->
-<script src="~/Contents/plugins/moment/moment.min.js"></script>
-<script src="~/Contents/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <!-- InputMask -->
+    <script src="~/Contents/plugins/moment/moment.min.js"></script>
+    <script src="~/Contents/plugins/inputmask/jquery.inputmask.min.js"></script>
     <!-- Page specific script -->
     <script>
         $(function () {
@@ -1157,8 +601,8 @@
             })
             $('#customDateDiv').hide()
 
-                 //Datemask dd/mm/yyyy
-          
+            //Datemask dd/mm/yyyy
+
         })
 
         // $(function () {
@@ -1169,14 +613,13 @@
         // });
 
 
-        
+
 
         $('#chkState').change(function () {
             if (this.checked) {
                 $('#stateId option').prop('selected', true);
             }
-            else
-            {
+            else {
                 $('#stateId option').prop('selected', false);
             }
         });
@@ -1185,7 +628,7 @@
             if (this.checked) {
                 $('#bmId option').prop('selected', true);
             }
-            else{
+            else {
                 $('#bmId option').prop('selected', false);
             }
         });
@@ -1203,7 +646,7 @@
             if (this.checked) {
                 $('#soId option').prop('selected', true);
             }
-            else{
+            else {
                 $('#soId option').prop('selected', false);
             }
         });
@@ -1212,7 +655,7 @@
             if (this.checked) {
                 $('#rdsId option').prop('selected', true);
             }
-            else{
+            else {
                 $('#rdsId option').prop('selected', false);
             }
         });

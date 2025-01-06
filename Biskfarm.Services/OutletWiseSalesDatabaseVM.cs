@@ -59,6 +59,8 @@ namespace Biskfarm.Services
         public string dataSource { get; set; }
         public List<YearVM> YearVMs { get; set; }
         public List<MonthVM> MonthVMs { get; set; }
+        public string monthNo { get; set; }
+        public string yearNo { get; set; }
     }
 
     public class YearVM

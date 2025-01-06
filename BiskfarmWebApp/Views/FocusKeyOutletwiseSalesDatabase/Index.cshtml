@@ -7,16 +7,16 @@
 @section pageHeader {
 
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+    <section class="content-header">  
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Outlet Wise Sales Database</h1>
+                    <h1>Focus Key Outlet wise Sales Database </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Outlet Wise Sales Database</li>
+                        <li class="breadcrumb-item active">Focus Key Outlet wise Sales Database </li>
                     </ol>
                 </div>
             </div>
@@ -30,13 +30,12 @@
     <!-- /.card-body -->
 </div>
 
-
 @section Scripts {
     <script>
 
         $(function () {
-            $("#yearDiv").hide();
-            $("#monthDiv").hide();
+            // $("#monthId").hide();
+            // $("#yearId").hide();
         });
 
         $("#rsmId").change(function () {
@@ -465,9 +464,6 @@
                 }
             });
 
-            var dateArray = $("#customRange").val().split('-');
-            console.log(dateArray);
-
 
             var filterType = "";
 
@@ -502,20 +498,11 @@
             else if (filterType == "") {
                 alert("Please Select Filter Type");
             }
-            else if ($("#periodId option:selected").val() == 0) {
-                alert("Please Select Period Type");
-            }
-            else if ($("#periodId option:selected").val() == 9 && !$("#customRange").val()) {
-                alert("Please set Custom Date Range");
-            }
-            else if ($("#sourceDataId option:selected").val() == 0) {
-                alert("Please Select Source Data Type");
-            }
             else {
                 $.ajax({
 
                     type: "POST",
-                    url: '@Url.Action("GetRawData", "OutletWiseSalesDatabase")',
+                    url: '@Url.Action("GetRawData", "FocusKeyOutletwiseSalesDatabase")',
                     data: {
                         RSM_ID: $("#rsmId option:selected").val(),
                         RSM_NAME: $("#rsmId option:selected").text(),
@@ -528,8 +515,8 @@
                         dataSource: $("#sourceDataId option:selected").val(),
                         filterType: filterType,
                         dataType: $("#periodId option:selected").val(),
-                        fromDate: dateArray[0],
-                        toDate: dateArray[1]
+                        monthNo: $("#monthId option:selected").val(),
+                        yearNo: $("#yearId option:selected").val()
                     },
                     success: function (result) {
                         $("#rawData").html("");

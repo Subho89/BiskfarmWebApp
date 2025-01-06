@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Outlet Wise Sales Database</h1>
+                    <h1>Top 5 Brands Outlet wise Sales Database</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Outlet Wise Sales Database</li>
+                        <li class="breadcrumb-item active">Top 5 Brands Outlet wise Sales Database</li>
                     </ol>
                 </div>
             </div>
@@ -464,11 +464,8 @@
                     RSDVM.push(objRSD);
                 }
             });
-
             var dateArray = $("#customRange").val().split('-');
-            console.log(dateArray);
-
-
+            console.log($("#customRange").val());
             var filterType = "";
 
             if ($('#filterId :selected').length == 3) {
@@ -499,7 +496,7 @@
             else if (!RSDVM.length > 0) {
                 alert("Please Select RSD");
             }
-            else if (filterType == "") {
+            else if (filterType == null) {
                 alert("Please Select Filter Type");
             }
             else if ($("#periodId option:selected").val() == 0) {
@@ -515,7 +512,7 @@
                 $.ajax({
 
                     type: "POST",
-                    url: '@Url.Action("GetRawData", "OutletWiseSalesDatabase")',
+                    url: '@Url.Action("GetRawData", "Top5BrandsOutletwiseSalesDatabase")',
                     data: {
                         RSM_ID: $("#rsmId option:selected").val(),
                         RSM_NAME: $("#rsmId option:selected").text(),

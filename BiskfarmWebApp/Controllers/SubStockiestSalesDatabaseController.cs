@@ -7,12 +7,13 @@ using System.Data;
 
 namespace BiskfarmWebApp.Controllers
 {
-    public class RouteWiseSalesDatabaseController : Controller
+    public class SubStockiestSalesDatabaseController : Controller
     {
         private readonly BiskfarmContext db;
         OutletWiseSalesDatabaseServices services = new OutletWiseSalesDatabaseServices();
         private IConfiguration configuration;
-        public RouteWiseSalesDatabaseController(BiskfarmContext _db, IConfiguration _con)
+
+        public SubStockiestSalesDatabaseController(BiskfarmContext _db, IConfiguration _con)
         {
             db = _db;
             configuration = _con;
@@ -129,7 +130,7 @@ namespace BiskfarmWebApp.Controllers
                                         cmd.Connection = con;
                                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                                         cmd.CommandTimeout = 0;
-                                        cmd.CommandText = "DUMP_DATA_UNCOVERED_ROUTES";
+                                        cmd.CommandText = "DUMP_DATA_UNBILLED_OUTLETS";
                                         cmd.Parameters.AddWithValue("@REGION", selection.Region);
                                         cmd.Parameters.AddWithValue("@ZONE_STATE", state.ZONE_STATE);
                                         cmd.Parameters.AddWithValue("@RSM_ID", selection.RSM_ID);
@@ -141,8 +142,8 @@ namespace BiskfarmWebApp.Controllers
                                         cmd.Parameters.AddWithValue("@TO_DATE", selection.toDate);
                                         cmd.Parameters.AddWithValue("@FILTER_TYPE", selection.filterType);
                                         cmd.Parameters.AddWithValue("@DATE_TYPE", selection.dataType);
-                                        cmd.Parameters.AddWithValue("@IS_ONLY_SUB", 0);
-                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", "S");
+                                        cmd.Parameters.AddWithValue("@IS_ONLY_SUB", 1);
+                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", "D");
 
                                         SqlDataAdapter adapter1 = new SqlDataAdapter(cmd);
                                         adapter1.Fill(DataTbl1);
@@ -183,7 +184,7 @@ namespace BiskfarmWebApp.Controllers
                         }
                     }
                 }
-            }          
+            }
 
 
             return PartialView(outlet);

@@ -5,33 +5,30 @@
 
 
 @section pageHeader {
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Focus SKU Outlet wise Sales Database</h1>
-                    </div>
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Focus SKU Outlet wise Sales Database</li>
-                        </ol>
-                    </div>
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Focus SKU Outlet wise Sales Database </h1>
                 </div>
-            </div><!-- /.container-fluid -->
-        </section>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Focus SKU Outlet wise Sales Database </li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
 
 }
-
 
 <div class="card" id="rawData">
 
     <!-- /.card-body -->
 </div>
-
-
 
 @section Scripts {
     <script>
@@ -505,19 +502,21 @@
                 $.ajax({
 
                     type: "POST",
-                    url: '@Url.Action("GetRawData", "OutletWiseSalesDatabase")',
+                    url: '@Url.Action("GetRawData", "FocusSKUOutletWiseSalesDatabase")',
                     data: {
-                        RSM_ID: $("#rsmId option:selected").val(),
-                        RSM_NAME: $("#rsmId option:selected").text(),
-                        Region: $("#regionId option:selected").text(),
-                        Zone_States: States,
-                        BMs: BM,
-                        ASMs: ASM,
-                        SOVMs: SOVM,
-                        RSDVMs: RSDVM,
-
-                        filterType: filterType,
-                        dataType: $("#periodId option:selected").val(),
+                            RSM_ID: $("#rsmId option:selected").val(),
+                            RSM_NAME: $("#rsmId option:selected").text(),
+                            Region: $("#regionId option:selected").text(),
+                            Zone_States: States,
+                            BMs: BM,
+                            ASMs: ASM,
+                            SOVMs: SOVM,
+                            RSDVMs: RSDVM,
+                            dataSource: $("#sourceDataId option:selected").val(),
+                            filterType: filterType,
+                            dataType: $("#periodId option:selected").val(),
+                            monthNo: $("#monthId option:selected").val(),
+                            yearNo: $("#yearId option:selected").val()
                     },
                     success: function (result) {
                         $("#rawData").html("");

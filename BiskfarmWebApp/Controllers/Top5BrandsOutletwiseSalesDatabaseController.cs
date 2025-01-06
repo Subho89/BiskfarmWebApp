@@ -7,12 +7,13 @@ using System.Data;
 
 namespace BiskfarmWebApp.Controllers
 {
-    public class RouteWiseSalesDatabaseController : Controller
+    public class Top5BrandsOutletwiseSalesDatabaseController : Controller
     {
         private readonly BiskfarmContext db;
         OutletWiseSalesDatabaseServices services = new OutletWiseSalesDatabaseServices();
         private IConfiguration configuration;
-        public RouteWiseSalesDatabaseController(BiskfarmContext _db, IConfiguration _con)
+
+        public Top5BrandsOutletwiseSalesDatabaseController(BiskfarmContext _db, IConfiguration _con)
         {
             db = _db;
             configuration = _con;
@@ -129,7 +130,7 @@ namespace BiskfarmWebApp.Controllers
                                         cmd.Connection = con;
                                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
                                         cmd.CommandTimeout = 0;
-                                        cmd.CommandText = "DUMP_DATA_UNCOVERED_ROUTES";
+                                        cmd.CommandText = "DUMP_DATA_UNBILLED_TOP_5_OUTLETS";
                                         cmd.Parameters.AddWithValue("@REGION", selection.Region);
                                         cmd.Parameters.AddWithValue("@ZONE_STATE", state.ZONE_STATE);
                                         cmd.Parameters.AddWithValue("@RSM_ID", selection.RSM_ID);
@@ -142,7 +143,7 @@ namespace BiskfarmWebApp.Controllers
                                         cmd.Parameters.AddWithValue("@FILTER_TYPE", selection.filterType);
                                         cmd.Parameters.AddWithValue("@DATE_TYPE", selection.dataType);
                                         cmd.Parameters.AddWithValue("@IS_ONLY_SUB", 0);
-                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", "S");
+                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", selection.dataSource);
 
                                         SqlDataAdapter adapter1 = new SqlDataAdapter(cmd);
                                         adapter1.Fill(DataTbl1);
@@ -164,15 +165,7 @@ namespace BiskfarmWebApp.Controllers
 
 
                                                   }).ToList();
-                                        // outlet=List<OutletWiseSalesDatabase>(adapter1);
-                                        //SqlDataReader rdr = cmd.ExecuteReader();
-
-                                        //while(rdr.Read()) {
-                                        //    outlet.Add(new OutletWiseSalesDatabase()
-                                        //    {
-                                        //        RSM_NAME = rdr["RSM_NAME"].ToString(),
-                                        //    }); 
-                                        //}
+                                        
 
 
                                     }
@@ -183,7 +176,7 @@ namespace BiskfarmWebApp.Controllers
                         }
                     }
                 }
-            }          
+            }
 
 
             return PartialView(outlet);
