@@ -22,56 +22,6 @@ namespace BiskfarmWebApp.Controllers
         public IActionResult Index()
         {
 
-            using(SqlConnection con =new SqlConnection(GetConnectionString()))
-            {
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    con.Open();
-                    DataTable DataTbl1 = new DataTable();
-                    List<OutletWiseSalesDatabase> outlet = new List<OutletWiseSalesDatabase>();
-                    cmd.Connection=con;
-                    cmd.CommandType=System.Data.CommandType.StoredProcedure;
-                    cmd.CommandTimeout = 0;
-                    cmd.CommandText = "DUMP_DATA_UNBILLED_OUTLETS";
-                    cmd.Parameters.AddWithValue("@REGION", "REGION 6");
-                    cmd.Parameters.AddWithValue("@ZONE_STATE", "TELANGANA");
-                    cmd.Parameters.AddWithValue("@RSM_ID", "30");
-                    cmd.Parameters.AddWithValue("@BM_ID", "1015");
-                    cmd.Parameters.AddWithValue("@ASM_ID", "10059");
-                    cmd.Parameters.AddWithValue("@SO_ID", "100064279");
-                    cmd.Parameters.AddWithValue("@RDS_ID", "2565243");
-                    cmd.Parameters.AddWithValue("@FROM_DATE", "");
-                    cmd.Parameters.AddWithValue("@TO_DATE", "");
-                    cmd.Parameters.AddWithValue("@FILTER_TYPE", "A");
-                    cmd.Parameters.AddWithValue("@DATE_TYPE", "6");
-                    cmd.Parameters.AddWithValue("@IS_ONLY_SUB",0);
-                    cmd.Parameters.AddWithValue("@DATA_SOURCE", "S");
-
-                    
-                    SqlDataAdapter adapter1 = new SqlDataAdapter(cmd);
-                    adapter1.Fill(DataTbl1);
-                    outlet  = (from DataRow dr in DataTbl1.Rows
-                               select new OutletWiseSalesDatabase()
-                               {
-                                   Region = (dr["Region"].ToString()),
-                                   ZONE_STATE = dr["ZONE_STATE"].ToString(),
-                                   RSM_ID = Convert.ToInt32( dr["RSM_ID"]),
-                                   BM_ID = Convert.ToInt32(dr["BM_ID"]),
-                               }).ToList();
-                    // outlet=List<OutletWiseSalesDatabase>(adapter1);
-                    //SqlDataReader rdr = cmd.ExecuteReader();
-
-                    //while(rdr.Read()) {
-                    //    outlet.Add(new OutletWiseSalesDatabase()
-                    //    {
-                    //        RSM_NAME = rdr["RSM_NAME"].ToString(),
-                    //    }); 
-                    //}
-
-                    var v= outlet;
-                }
-            }
-
             databases = services.LoadingOutletList(db);
             return View(databases);
         }
@@ -108,7 +58,7 @@ namespace BiskfarmWebApp.Controllers
             if(vm.Zone_States!=null) {
                 foreach (var state in vm.Zone_States)
                 {
-
+                    
                     var bm = rsmLst.Where(r => r.ZONE_STATE.ToString() == state.ZONE_STATE).Select(x => new { x.BM_ID, x.BM_NAME }).Distinct().ToList();
 
                     foreach (var b in bm)
@@ -315,10 +265,156 @@ namespace BiskfarmWebApp.Controllers
 
             return Json(rsdLst.GroupBy(r => r.RSD_ID).Select(r => r.First()));
         }
-        public JsonResult GetRawData(SelectionVM selection)
+        public IActionResult GetRawData(SelectionVM selection)
         {
-            databases = services.GetData(db,selection);
-            return Json(databases);
+            List<OutletWiseSalesDatabase> outlet = new List<OutletWiseSalesDatabase>();
+
+            foreach (var state in selection.Zone_States)
+            {
+                foreach (var bm in selection.BMs)
+                {
+                    foreach (var asm in selection.ASMs)
+                    {
+                        foreach (var so in selection.SOVMs)
+                        {
+                            foreach (var rds in selection.RSDVMs)
+                            {
+                                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                                {
+                                    using (SqlCommand cmd = new SqlCommand())
+                                    {
+                                        con.Open();
+                                        DataTable DataTbl1 = new DataTable();
+
+                                        cmd.Connection = con;
+                                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                                        cmd.CommandTimeout = 0;
+                                        cmd.CommandText = "DUMP_DATA_UNBILLED_OUTLETS";
+                                        cmd.Parameters.AddWithValue("@REGION", selection.Region);
+                                        cmd.Parameters.AddWithValue("@ZONE_STATE", state.ZONE_STATE);
+                                        cmd.Parameters.AddWithValue("@RSM_ID", selection.RSM_ID);
+                                        cmd.Parameters.AddWithValue("@BM_ID", bm.BM_ID);
+                                        cmd.Parameters.AddWithValue("@ASM_ID", asm.ASM_ID);
+                                        cmd.Parameters.AddWithValue("@SO_ID", so.SO_ID);
+                                        cmd.Parameters.AddWithValue("@RDS_ID", rds.RSD_ID);
+                                        cmd.Parameters.AddWithValue("@FROM_DATE", selection.fromDate);
+                                        cmd.Parameters.AddWithValue("@TO_DATE", selection.toDate);
+                                        cmd.Parameters.AddWithValue("@FILTER_TYPE", selection.filterType);
+                                        cmd.Parameters.AddWithValue("@DATE_TYPE", selection.dataType);
+                                        cmd.Parameters.AddWithValue("@IS_ONLY_SUB", 0);
+                                        cmd.Parameters.AddWithValue("@DATA_SOURCE", "S");
+
+                                        SqlDataAdapter adapter1 = new SqlDataAdapter(cmd);
+                                        adapter1.Fill(DataTbl1);
+                                        outlet = (from DataRow dr in DataTbl1.Rows
+                                                  select new OutletWiseSalesDatabase()
+                                                  {
+                                                      Region = (dr["Region"].ToString()),
+                                                      ZONE_STATE = dr["ZONE_STATE"].ToString(),
+                                                      RSM_ID = Convert.ToInt32(dr["RSM_ID"]),
+                                                      RSM_NAME = dr["RSM_NAME"].ToString(),
+                                                      BM_ID = Convert.ToInt32(dr["BM_ID"]),
+                                                      BM_NAME = dr["BM_NAME"].ToString(),
+                                                      ASM_ID = Convert.ToInt32(dr["ASM_ID"]),
+                                                      ASM_NAME = dr["ASM_NAME"].ToString(),
+                                                      SO_ID = Convert.ToInt32(dr["SO_ID"]),
+                                                      SO_NAME = dr["SO_NAME"].ToString(),
+                                                      RDS_ID = Convert.ToInt32(dr["RDS_ID"]),
+                                                      RDS_NAME = dr["ASM_NAME"].ToString(),
+
+
+                                                  }).ToList();
+                                        // outlet=List<OutletWiseSalesDatabase>(adapter1);
+                                        //SqlDataReader rdr = cmd.ExecuteReader();
+
+                                        //while(rdr.Read()) {
+                                        //    outlet.Add(new OutletWiseSalesDatabase()
+                                        //    {
+                                        //        RSM_NAME = rdr["RSM_NAME"].ToString(),
+                                        //    }); 
+                                        //}
+
+
+                                    }
+                                }
+
+
+                            }
+                        }
+                    }
+                }
+            }
+
+
+
+            //using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            //{
+            //    using (SqlCommand cmd = new SqlCommand())
+            //    {
+            //        con.Open();
+            //        DataTable DataTbl1 = new DataTable();
+
+            //        cmd.Connection = con;
+            //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //        cmd.CommandTimeout = 0;
+            //        cmd.CommandText = "DUMP_DATA_UNBILLED_OUTLETS";
+            //        cmd.Parameters.AddWithValue("@REGION", "REGION 6");
+            //        cmd.Parameters.AddWithValue("@ZONE_STATE", "TELANGANA");
+            //        cmd.Parameters.AddWithValue("@RSM_ID", "30");
+            //        cmd.Parameters.AddWithValue("@BM_ID", "1015");
+            //        cmd.Parameters.AddWithValue("@ASM_ID", "10059");
+            //        cmd.Parameters.AddWithValue("@SO_ID", "100064279");
+            //        cmd.Parameters.AddWithValue("@RDS_ID", "2565243");
+            //        cmd.Parameters.AddWithValue("@FROM_DATE", "");
+            //        cmd.Parameters.AddWithValue("@TO_DATE", "");
+            //        cmd.Parameters.AddWithValue("@FILTER_TYPE", "A");
+            //        cmd.Parameters.AddWithValue("@DATE_TYPE", "6");
+            //        cmd.Parameters.AddWithValue("@IS_ONLY_SUB", 0);
+            //        cmd.Parameters.AddWithValue("@DATA_SOURCE", "S");
+
+
+            //        SqlDataAdapter adapter1 = new SqlDataAdapter(cmd);
+            //        adapter1.Fill(DataTbl1);
+            //        outlet = (from DataRow dr in DataTbl1.Rows
+            //                  select new OutletWiseSalesDatabase()
+            //                  {
+            //                      Region = (dr["Region"].ToString()),
+            //                      ZONE_STATE = dr["ZONE_STATE"].ToString(),
+            //                      RSM_ID = Convert.ToInt32(dr["RSM_ID"]),
+            //                      RSM_NAME = dr["RSM_NAME"].ToString(),
+            //                      BM_ID = Convert.ToInt32(dr["BM_ID"]),
+            //                      BM_NAME = dr["BM_NAME"].ToString(),
+            //                      ASM_ID = Convert.ToInt32(dr["ASM_ID"]),
+            //                      ASM_NAME = dr["ASM_NAME"].ToString(),
+            //                      SO_ID = Convert.ToInt32(dr["SO_ID"]),
+            //                      SO_NAME = dr["SO_NAME"].ToString(),
+            //                      RDS_ID = Convert.ToInt32(dr["RDS_ID"]),
+            //                      RDS_NAME = dr["ASM_NAME"].ToString(),
+            //                  }).ToList();
+            //        // outlet=List<OutletWiseSalesDatabase>(adapter1);
+            //        //SqlDataReader rdr = cmd.ExecuteReader();
+
+            //        //while(rdr.Read()) {
+            //        //    outlet.Add(new OutletWiseSalesDatabase()
+            //        //    {
+            //        //        RSM_NAME = rdr["RSM_NAME"].ToString(),
+            //        //    }); 
+            //        //}
+
+            //        var v = outlet;
+            //    }
+            //}
+
+
+            return PartialView(outlet);
         }
+
+
+        //public List<OutletWiseSalesDatabase> GetOutlets()
+        //{
+
+
+
+        //}
     }
 }

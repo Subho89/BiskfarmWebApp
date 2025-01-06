@@ -5,223 +5,60 @@
 }
 
 
-@* @using Biskfarm.DAL.Model
-@model List<OutletWiseSalesDatabase> *@
-
-@* <section class="content">
-    <div class="container-fluid">
-        <!-- SELECT2 EXAMPLE -->
-        <div class="card card-default">
-            <div class="card-header">
-                <h3 class="card-title">Outlet Wise Sales Database</h3>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
+@section pageHeader {
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Outlet Wise Sales Database</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Outlet Wise Sales Database</li>
+                    </ol>
                 </div>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
+        </div><!-- /.container-fluid -->
+    </section>
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Select RSM</label>
-                            <select class="form-control select2" style="width: 100%;">
-                                @foreach(var rsm in Model)
-                                {
-                                    <option value="@rsm.RSM_ID">@rsm.RSM_NAME</option>
-                                }                               
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                        <div class="form-group">
-                            <label>Select Region</label>
-                            <select class="form-control select2" style="width: 100%;">
-                                @foreach(var region in Model)
-                                {
-                                    <option value="@region.Region">@region.Region</option>
-                                }
-                                
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                Select State
-                            </label>
-                            <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                                @foreach(var st in Model)
-                                {
-                                    <option value="@st.ZONE_STATE">@st.ZONE_STATE</option>
-                                }
-                                
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>
-                                Select BM
-                            </label>
-                            <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-                                @foreach(var bm in Model)
-                                {
-                                    <option value="@bm.BM_ID">@bm.BM_NAME</option>
-                                }
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                        <div class="form-group">
-                            <label>Select ASM</label>
-                            <select class="form-control select2" multiple="multiple" style="width: 100%;">
-                                @foreach(var asm in Model)
-                                {
-                                    <option value="@asm.ASM_ID">@asm.ASM_NAME</option>
-                                }
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                        <!-- /.form-group -->
-                        <div class="form-group">
-                            <label>Select SO</label>
-                            <select class="form-control select2" multiple="multiple" style="width: 100%;">
-                                @foreach(var so in Model)
-                                {
-                                    <option value="@so.SO_ID">@so.SO_NAME</option>
-                                }
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Select RDS</label>
-                            <select class="select2" multiple="multiple" data-placeholder="Select RDS" style="width: 100%;">
-                                @foreach(var rds in Model)
-                                {
-                                    <option value="@rds.RDS_ID">@rds.RDS_NAME</option>
-                                }
-                                
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                        <div class="form-group">
-                            <label>Select Period</label>
-                            <select class="form-control select2" style="width: 100%;">
-                                <option selected="selected" value="0">Select Date</option>
-                                <option value="1">Last One Month</option>
-                                <option value="3">Last Three Months</option>
-                                <option value="6">Last Six Months</option>
-                                <option value="9">Custom Date Range</option>
-                                </select>
--+                         <!-- /.form-group -->
-                        <!-- /.form-group -->
-                        <div class="form-group">
-                            <label>Select Filter</label>
-                               <select class="form-control select2"  style="width: 100%;">
-                                <option value="B">Billed</option>
-                                <option value="U">Unbilled</option>
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                    </div>
+    }
+    <!-- Main content -->
+    <section class="content">
 
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Select Source Data</label>
-                            <select class="select2"  data-placeholder="Select a Source Data" style="width: 100%;">
-                                <option value="0" selected>Select Source Data</option>
-                                <option value="D">DMS(CDMS/PURNAM DATA)</option>
-                                <option value="S">SFA(Mobile Application)</option>
-                            </select>
-                        </div>
-                        <!-- /.form-group -->
-                       
-                        <!-- /.form-group -->
-                    </div>
-                </div>
-                <!-- /.row -->
-            </div>
-
-            <div class="card">
+        <div class="container-fluid">
+            <!-- SELECT2 EXAMPLE -->
+            <div class="card card-default">
                 <div class="card-header">
-                    <h3 class="card-title">Outlet Wise Sales Database</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <table id="outSales" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Region</th>
-                                <th>RSM_NAME</th>
-                                <th>RSM_ID</th>
-                                <th>BM_NAME</th>
-                                <th>BM_ID</th>
-                                <th>ASM_NAME</th>
-                                <th>ASM_ID</th>
-                                <th>SO_NAME</th>
-                                <th>SO_ID</th>
-                                <th>RDS_NAME</th>
-                                <th>RDS_ID</th>
-                                <th>ZONE_STATE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach(var mdl in Model)
-                            {
-                                <tr>
-                                    <td width="5%">@mdl.Region</td>
-                                    <td width="10%">@mdl.RSM_NAME</td>
-                                    <td width="5%">@mdl.RSM_ID</td>
-                                    <td width="10%">@mdl.BM_NAME</td>
-                                    <td width="5%">@mdl.BM_ID</td>
-                                    <td width="10%">@mdl.ASM_NAME</td>
-                                    <td width="5%">@mdl.ASM_ID</td>
-                                    <td width="10%">@mdl.SO_NAME</td>
-                                    <td width="5%">@mdl.SO_ID</td>
-                                    <td width="10%">@mdl.RDS_NAME</td>
-                                    <td width="5%">@mdl.RDS_ID</td>
-                                    <td width="10%">@mdl.ZONE_STATE</td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                    <th>Region</th>
-                                    <th>RSM_NAME</th>
-                                    <th>RSM_ID</th>
-                                    <th>BM_NAME</th>
-                                    <th>BM_ID</th>
-                                    <th>ASM_NAME</th>
-                                    <th>ASM_ID</th>
-                                    <th>SO_NAME</th>
-                                    <th>SO_ID</th>
-                                    <th>RDS_NAME</th>
-                                    <th>RDS_ID</th>
-                                    <th>ZONE_STATE</th>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-                <!-- /.card-body -->
-            </div>
+                    <h3 class="card-title">Select fields</h3>
 
-        </div>
-       
-    </div>
-    <!-- /.container-fluid -->
-</section> *@
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+
+<div class="card" id="rawData">
+  
+    <!-- /.card-body -->
+</div>
+
 
 
 @section Scripts {
 <script>
+
+        $(function () {
+            $("#yearDiv").hide();
+            $("#monthDiv").hide();
+        });
 
         $("#rsmId").change(function () {
 
@@ -233,7 +70,7 @@
                     RSM_ID: $("#rsmId option:selected").val(),
                 },
                 success: function (region) {
-
+                    $('#regionId').append('<option value=0>Select Region</option>');
 
                     $.each(region, function (i, reg) {
                         $('#regionId').append('<option value=' + reg + '>' + reg + '</option>')
@@ -262,11 +99,11 @@
                 },
                 success: function (state) {
 
-                    
+                    $('#stateId').append('<option value=all>Select All</option>');
                     $.each(state, function (i, st) {
                         $('#stateId').append('<option value=' + st + '>' + st + '</option>')
                     });
-                    $('#stateId').append('<option value="0" disabled>Select Region</option>');
+                    // $('#stateId').append('<option value="0" disabled>Select Region</option>');
                 }
             })
         });
@@ -276,12 +113,16 @@
                 States=[]
             var $selectedStates = $("#stateId").find('option:selected');
             $selectedStates.each(function () {
+                if ($(this).val() != "all") {
+                    var objState =
+                    {
 
-                var objState =
-                {
-                    "ZONE_STATE": $(this).text(),
-                };
-                States.push(objState);
+                        "ZONE_STATE": $(this).text(),
+
+
+                    };
+                    States.push(objState);
+                }
             });
                
 
@@ -303,10 +144,12 @@
                     vm: obj,
                 },
                 success: function (bmLst) {
+
+                    $('#bmId').append('<option value=all>Select All</option>');
                     $.each(bmLst, function (i, bm) {
                         //alert(bm.BM_NAME)
 
-                        $('#bmId').append('<option value=' + bm.bM_ID + '>' + bm.bM_NAME + '</option>')
+                        $('#bmId').append('<option value=' + bm.bM_ID + '>' + bm.bM_NAME + '(' + bm.bM_ID+')'+'</option>')
                     });
 
                 }
@@ -318,12 +161,13 @@
             States = []
             var $selectedStates = $("#stateId").find('option:selected');
             $selectedStates.each(function () {
-
-                var objState =
-                {
-                    "ZONE_STATE": $(this).text(),
-                };
-                States.push(objState);
+                if ($(this).val() != "all") {
+                    var objState =
+                    {
+                        "ZONE_STATE": $(this).text(),
+                    };
+                    States.push(objState);
+                }
             });
 
 
@@ -331,7 +175,7 @@
 
                 var $selectedBM = $("#bmId").find('option:selected');
                 $selectedBM.each(function () {
-
+                if ($(this).val() != "all") {
                     var objBM =
                     {
 
@@ -341,6 +185,7 @@
 
 
                     BM.push(objBM);
+                }
                 });
 
             var obj = {
@@ -363,10 +208,12 @@
                 },
                 success: function (asmLst) {
 
+                    $('#asmId').append('<option value=all>Select All</option>');
+
                     $.each(asmLst, function (i, asm) {
                         //alert(bm.BM_NAME)
 
-                        $('#asmId').append('<option value=' + asm.asM_ID + '>' + asm.asM_NAME + '</option>')
+                        $('#asmId').append('<option value=' + asm.asM_ID + '>' + asm.asM_NAME + '(' + asm.asM_ID + ')' + '</option>')
                     });
 
                 }
@@ -378,12 +225,13 @@
             States = []
             var $selectedStates = $("#stateId").find('option:selected');
             $selectedStates.each(function () {
-
-                var objState =
-                {
-                    "ZONE_STATE": $(this).text(),
-                };
-                States.push(objState);
+                if ($(this).val() != "all") {
+                    var objState =
+                    {
+                        "ZONE_STATE": $(this).text(),
+                    };
+                    States.push(objState);
+                }
             });
 
 
@@ -391,22 +239,24 @@
 
             var $selectedBM = $("#bmId").find('option:selected');
             $selectedBM.each(function () {
+                if ($(this).val() != "all") {
+                    var objBM =
+                    {
 
-                var objBM =
-                {
-
-                    "BM_ID": $(this).val(),
-                    "BM_NAME": $(this).text(),
-                };
+                        "BM_ID": $(this).val(),
+                        "BM_NAME": $(this).text(),
+                    };
 
 
-                BM.push(objBM);
+                    BM.push(objBM);
+                }
             });
 
                 ASM = []
 
                 var $selectedASM = $("#asmId").find('option:selected');
                 $selectedASM.each(function () {
+                if ($(this).val() != "all") {
                     var objASM =
                     {
 
@@ -415,6 +265,7 @@
                     };
 
                     ASM.push(objASM);
+                }
                 });
 
             var obj = {
@@ -437,10 +288,15 @@
                     vm: obj,
                 },
                 success: function (soLst) {
+
+
+                    $('#soId').append('<option value=all>Select All</option>');
+
+
                     $.each(soLst, function (i, so) {
                         //alert(bm.BM_NAME)
 
-                        $('#soId').append('<option value=' + so.sO_ID + '>' + so.sO_NAME + '</option>')
+                        $('#soId').append('<option value=' + so.sO_ID + '>' + so.sO_NAME + '(' + so.sO_ID + ')' + '</option>')
                     });
 
                 }
@@ -453,12 +309,13 @@
             States = []
             var $selectedStates = $("#stateId").find('option:selected');
             $selectedStates.each(function () {
-
-                var objState =
-                {
-                    "ZONE_STATE": $(this).text(),
-                };
-                States.push(objState);
+                if ($(this).val() != "all") {
+                    var objState =
+                    {
+                        "ZONE_STATE": $(this).text(),
+                    };
+                    States.push(objState);
+                }
             });
 
 
@@ -466,36 +323,40 @@
 
             var $selectedBM = $("#bmId").find('option:selected');
             $selectedBM.each(function () {
+                if ($(this).val() != "all") {
+                    var objBM =
+                    {
 
-                var objBM =
-                {
-
-                    "BM_ID": $(this).val(),
-                    "BM_NAME": $(this).text(),
-                };
+                        "BM_ID": $(this).val(),
+                        "BM_NAME": $(this).text(),
+                    };
 
 
-                BM.push(objBM);
+                    BM.push(objBM);
+                }
             });
 
             ASM = []
 
             var $selectedASM = $("#asmId").find('option:selected');
             $selectedASM.each(function () {
-                var objASM =
-                {
+                if ($(this).val() != "all") {
+                    var objASM =
+                    {
 
-                    "ASM_ID": $(this).val(),
-                    "ASM_NAME": $(this).text(),
-                };
+                        "ASM_ID": $(this).val(),
+                        "ASM_NAME": $(this).text(),
+                    };
 
-                ASM.push(objASM);
+                    ASM.push(objASM);
+                }
             });
 
                 SOVM = []
 
                 var $selectedSO = $("#soId").find('option:selected');
                 $selectedSO.each(function () {
+                if ($(this).val() != "all") {
                     var objSO =
                     {
 
@@ -504,6 +365,7 @@
                     };
 
                     SOVM.push(objSO);
+                }
                 });
 
             var obj = {
@@ -527,12 +389,14 @@
                     vm: obj,
                 },
                 success: function (rdsLst) {
-                    console.log(rdsLst);
+                    //console.log(rdsLst);
+
+                    $('#rdsId').append('<option value=all>Select All</option>');
 
                     $.each(rdsLst, function (i, rs) {
                         //alert(bm.BM_NAME)
 
-                        $('#rdsId').append('<option value=' + rs.rsD_ID + '>' + rs.rsD_NAME + '</option>')
+                        $('#rdsId').append('<option value=' + rs.rsD_ID + '>' + rs.rsD_NAME + '(' + rs.rsD_ID + ')' + '</option>')
                     });
 
                 }
@@ -540,17 +404,7 @@
         });
 
 
-        $("#periodId").change(function () {
-
-            var v = $("#periodId").val();
-            if (v == 9) {
-                $('#customDateDiv').show();
-            }
-            else
-            {
-                $('#customDateDiv').hide();
-            }
-        });
+        
 
         $("#btnGetData").click(function () {
             
@@ -558,121 +412,140 @@
 
             var $selectedStates = $("#stateId").find('option:selected');
             $selectedStates.each(function () {
-
-                var objState =
-                {
-                    "ZONE_STATE": $(this).text(),
-                };
-                States.push(objState);
+                if ($(this).val() != "all") {
+                    var objState =
+                    {
+                        "ZONE_STATE": $(this).text(),
+                    };
+                    States.push(objState);
+                }
             });
 
             BM=[]
 
             var $selectedBM = $("#bmId").find('option:selected');
             $selectedBM.each(function () {
+                if ($(this).val() != "all") {
+                    var objBM =
+                    {
 
-                var objBM =
-                {
-
-                    "BM_ID": $(this).val(),
-                    "BM_NAME": $(this).text(),
-                };
+                        "BM_ID": $(this).val(),
+                        "BM_NAME": $(this).text(),
+                    };
 
 
-                BM.push(objBM);
+                    BM.push(objBM);
+                }
             });
 
             ASM = []
 
             var $selectedASM = $("#asmId").find('option:selected');
             $selectedASM.each(function () {
-                var objASM =
-                {
+                if ($(this).val() != "all") {
+                    var objASM =
+                    {
 
-                    "ASM_ID": $(this).val(),
-                    "ASM_NAME": $(this).text(),
-                };
+                        "ASM_ID": $(this).val(),
+                        "ASM_NAME": $(this).text(),
+                    };
 
-                ASM.push(objASM);
+                    ASM.push(objASM);
+                }
             });
 
             SOVM = []
 
             var $selectedSO = $("#soId").find('option:selected');
             $selectedSO.each(function () {
-                var objSO =
-                {
+                if ($(this).val() != "all") {
+                    var objSO =
+                    {
 
-                    "SO_ID": $(this).val(),
-                    "SO_NAME": $(this).text(),
-                };
+                        "SO_ID": $(this).val(),
+                        "SO_NAME": $(this).text(),
+                    };
 
-                SOVM.push(objSO);
-            });
-
-            RDS = []
-
-            var $selectedRDS = $("#rdsId").find('option:selected');
-            $selectedRDS.each(function () {
-                var objRDS =
-                {
-
-                    "RSD_ID": $(this).val(),
-                    "RSD_NAME": $(this).text(),
-                };
-                RDS.push(objRDS);
-            });
-            // console.log(States);
-            
-            $.ajax({
-       
-                type:"POST",
-                url: '@Url.Action("GetRawData", "OutletWiseSalesDatabase")',
-                data: {
-                    RSM_ID: $("#rsmId option:selected").val(),
-                    RSM_NAME: $("#rsmId option:selected").text(),
-                    Region: $("#regionId option:selected").text(),
-                    Zone_States: States,
-                    BMs:BM,
-                    ASMs:ASM,
-                    SOVMs: SOVM,
-                    RSDVMs: RDS, 
-                    Region: $("#regionId option:selected").text(),
-                    filterType: $("#filterId option:selected").val(),
-                    dataType: $("#periodId option:selected").val(),
-                },
-                success: function (data) {
-                   
-                    $('#regionId').find('option').remove();
-                    // $("#geek-select").find("option").remove().end().append(
-                    //     '<option value = "gfg">GeeksForGeeks</option>');
-                    // let 
-
-                    // // $.each($('element').data(), function (key, value) {
-                    // //     myArray.push({ key: key, value: value });
-                    // // });
-
-                    region = [];
-
-                    $(data).each(
-                        function (index, item) {
-
-                            if (region.indexOf(item.region) == -1) {
-                                region.push(item.region)
-                            }
-                        }
-                    )
-
-                    $(region).each(
-                        function (index, item) {
-
-                            $('#regionId').append('<option value=' + item + '>' + item + '</option>')
-
-                        }
-                    )
-                    // console.log(region);
+                    SOVM.push(objSO);
                 }
-            })
+            });
+
+            RSDVM = []
+
+            var $selectedRSD = $("#rdsId").find('option:selected');
+            $selectedRSD.each(function () {
+                if ($(this).val() != "all") {
+                    var objRSD =
+                    {
+
+                        "RSD_ID": $(this).val(),
+                        "RSD_NAME": $(this).text(),
+                    };
+
+                    RSDVM.push(objRSD);
+                }
+            });
+
+
+            var filterType = "";
+
+            if ($('#filterId :selected').length == 3) {
+                filterType = "A";
+            }
+            else {
+                filterType = $("#filterId option:selected").val()
+            }
+
+            if ($("#rsmId option:selected").val() == 0) {
+                alert("Please Select RSM");
+            }
+            else if ($("#regionId option:selected").val()==0) {
+                alert("Please Select Region");
+            }
+            else if (!States.length>0 ){
+                alert("Please Select States");
+            }
+            else if (!BM.length > 0 ){
+                alert("Please Select BM");
+            }
+            else if (!ASM.length > 0 ){
+                alert("Please Select ASM");
+            }
+            else if (!SOVM.length > 0 ){
+                alert("Please Select SO");
+            }
+            else if (!RSDVM.length > 0 ){
+                alert("Please Select RSD");
+            }
+            else if (filterType=="") {
+                alert("Please Select Filter Type");
+            }
+            else {
+                $.ajax({
+
+                    type: "POST",
+                    url: '@Url.Action("GetRawData", "OutletWiseSalesDatabase")',
+                    data: {
+                        RSM_ID: $("#rsmId option:selected").val(),
+                        RSM_NAME: $("#rsmId option:selected").text(),
+                        Region: $("#regionId option:selected").text(),
+                        Zone_States: States,
+                        BMs: BM,
+                        ASMs: ASM,
+                        SOVMs: SOVM,
+                        RSDVMs: RSDVM,
+
+                        filterType: filterType,
+                        dataType: $("#periodId option:selected").val(),
+                    },
+                    success: function (result) {
+                        $("#rawData").html("");
+                        $("#rawData").html(result);
+
+                    }
+                })
+            }            
+            
         });
 
         

@@ -1,4 +1,5 @@
 ﻿
+using Biskfarm.DAL.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,13 @@ namespace Biskfarm.Services
         public string ZONE_STATE { get; set; }
     }
 
+    public class FormLoaderVM
+    {
+        public List<OutletWiseSalesDatabase> Outlets { get; set; }
+        public List<YearVM> YearVMs { get; set; }
+        public List<MonthVM> MonthVMs { get; set; }
+    }
+
     public class SelectionVM
     {
         public string Region { get; set; }
@@ -49,8 +57,21 @@ namespace Biskfarm.Services
         public string dataType { get; set; }
         public bool isOnlySub { get; set; }
         public string dataSource { get; set; }
+        public List<YearVM> YearVMs { get; set; }
+        public List<MonthVM> MonthVMs { get; set; }
     }
 
+    public class YearVM
+    {
+        public string YEAR_NO { get; set; }
+        public string FIN_YEAR { get; set; }
+    }
+
+    public class MonthVM
+    {
+        public string MON_NO { get; set; }
+        public string ORDER_MONTH { get; set; }
+    }
     public class StateSelectionVM
     {
         public string ZONE_STATE { get; set; }

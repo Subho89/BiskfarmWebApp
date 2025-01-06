@@ -839,47 +839,11 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>DataTables</h1>
-                        </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">DataTables</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div><!-- /.container-fluid -->
-            </section>
-
-            <!-- Main content -->
-            <section class="content">
-                
-                <div class="container-fluid">
-                    <!-- SELECT2 EXAMPLE -->
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title">Outlet Wise Sales Database</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
+        @RenderSection("pageHeader")
                         <!-- /.card-header -->
                         <div class="card-body">
 
                             <div class="row">
-
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Select RSM</label>
@@ -887,7 +851,7 @@
                                             <option value="0" selected disabled>Select RSM</option>
                                             @foreach (var rsm in Model.GroupBy(r => r.RSM_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@rsm.RSM_ID">@rsm.RSM_NAME</option>
+                                                <option value="@rsm.RSM_ID">@rsm.RSM_NAME (@rsm.RSM_ID)</option>
                                             }
                                         </select>
                                     </div>
@@ -899,11 +863,14 @@
                                             <option value="0" selected disabled>Select Region</option>
                                             @foreach (var region in Model.GroupBy(r => r.Region).Select(g => g.First()))
                                             {
-                                                <option value="@region.Region">@region.Region</option>
+                                                <option value="@region.Region">@region.Region </option>
                                             }
 
                                         </select>
                                     </div>
+
+                                   
+
                                 </div>
 
                                 <div class="col-md-4">
@@ -911,14 +878,19 @@
                                         <label>
                                             Select State
                                         </label>
-                                        <select class="select2 selectAll" multiple="multiple" id="stateId" data-placeholder="Select a State" style="width: 100%;">
-                                            <option value="all">Select All</option>
+                                        <select class="select2 selectAll multiselect" multiple="multiple" id="stateId" data-placeholder="Select a State" style="width: 100%;">
+                                            
                                             @foreach (var st in Model.GroupBy(r => r.ZONE_STATE).Select(g => g.First()))
                                             {
                                                 <option value="@st.ZONE_STATE">@st.ZONE_STATE</option>
                                             }
 
                                         </select>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="chkState">
+                                        <label class="form-check-label">Select All</label>
                                     </div>
                                 </div>
 
@@ -932,22 +904,33 @@
                                             Select BM
                                         </label>
                                         <select class="select2" multiple="multiple" id="bmId" data-placeholder="Select BM Name" style="width: 100%;">
+                                            
                                             @foreach (var bm in Model.GroupBy(r => r.BM_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@bm.BM_ID">@bm.BM_NAME</option>
+                                                <option value="@bm.BM_ID">@bm.BM_NAME (@bm.BM_ID)</option>
                                             }
                                         </select>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="chkBM">
+                                        <label class="form-check-label">Select All</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Select ASM</label>
-                                        <select class="form-control select2" id="asmId" multiple="multiple" style="width: 100%;">
+                                        <select class="form-control select2" id="asmId" multiple="multiple" style="width: 100%;">                                            
                                             @foreach (var asm in Model.GroupBy(r => r.ASM_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@asm.ASM_ID">@asm.ASM_NAME</option>
+                                                <option value="@asm.ASM_ID">@asm.ASM_NAME (@asm.ASM_ID)</option>
                                             }
                                         </select>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="chkASM">
+                                        <label class="form-check-label">Select All</label>
                                     </div>
                                 </div>
 
@@ -955,11 +938,17 @@
                                     <div class="form-group">
                                         <label>Select SO</label>
                                         <select class="form-control select2" id="soId" multiple="multiple" style="width: 100%;">
+                                            
                                             @foreach (var so in Model.GroupBy(r => r.SO_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@so.SO_ID">@so.SO_NAME</option>
+                                                <option value="@so.SO_ID">@so.SO_NAME (@so.SO_ID)</option>
                                             }
                                         </select>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="chkSO">
+                                        <label class="form-check-label">Select All</label>
                                     </div>
 
                                     <!-- /.form-group -->
@@ -973,12 +962,17 @@
                                     <div class="form-group">
                                         <label>Select RDS</label>
                                         <select class="select2" multiple="multiple" id="rdsId" data-placeholder="Select RDS" style="width: 100%;">
+                                            
                                             @foreach (var rds in Model.GroupBy(r => r.RDS_NAME).Select(g => g.First()))
                                             {
-                                                <option value="@rds.RDS_ID">@rds.RDS_NAME</option>
+                                                <option value="@rds.RDS_ID">@rds.RDS_NAME (@rds.RDS_ID)</option>
                                             }
 
                                         </select>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="chkRDS">
+                                        <label class="form-check-label">Select All</label>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -999,10 +993,15 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label>Select Filter</label>
-                                        <select class="form-control select2" id="filterId" style="width: 100%;">
+                                        <select class="form-control select2" multiple="multiple" id="filterId" style="width: 100%;">
+                                            
                                             <option value="B">Billed</option>
                                             <option value="U">Unbilled</option>
                                         </select>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="chkFilter">
+                                        <label class="form-check-label">Select All</label>
                                     </div>
                                 </div>
                             </div>
@@ -1023,24 +1022,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    @*  <div class="form-group">
-                                    <label>Select Source Data</label>
-                                    <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
-                                    <option value="0" selected>Select Source Data</option>
-                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
-                                    <option value="S">SFA(Mobile Application)</option>
-                                    </select>
-                                    </div> *@
+                                   
                                 </div>
                                 <div class="col-md-4">
-                                    @* <div class="form-group">
-                                    <label>Select Source Data</label>
-                                    <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
-                                    <option value="0" selected>Select Source Data</option>
-                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
-                                    <option value="S">SFA(Mobile Application)</option>
-                                    </select>
-                                    </div> *@
+                                   
                                 </div>
                             </div>
 
@@ -1057,24 +1042,34 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    @*  <div class="form-group">
-                                    <label>Select Source Data</label>
-                                    <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
-                                    <option value="0" selected>Select Source Data</option>
-                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
-                                    <option value="S">SFA(Mobile Application)</option>
-                                    </select>
-                                    </div> *@
+                                    <div class="form-group" id="monthDiv">
+                                        <label>Select Month</label>
+                                        <select class="select2" data-placeholder="Select Month" id="monthId" style="width: 100%;">
+                                            <option>January</option>
+                                            <option>February</option>
+                                            <option>March</option>
+                                            <option>April</option>
+                                            <option>May</option>
+                                            <option>June</option>
+                                            <option>July</option>
+                                            <option>August</option>
+                                            <option>September</option>
+                                            <option>October</option>
+                                            <option>November</option>
+                                            <option>December</option>
+
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
-                                    @* <div class="form-group">
-                                    <label>Select Source Data</label>
-                                    <select class="select2" data-placeholder="Select a Source Data" id="sourceDataId" style="width: 100%;">
-                                    <option value="0" selected>Select Source Data</option>
-                                    <option value="D">DMS(CDMS/PURNAM DATA)</option>
-                                    <option value="S">SFA(Mobile Application)</option>
-                                    </select>
-                                    </div> *@
+                                    <div class="form-group" id="yearDiv">
+                                        <label>Select Year</label>
+                                        <select class="form-control select2" id="yearId" style="width: 100%;">
+                                            <option selected="selected" value="1">2024-25</option>
+                                            <option value="1">2023-24</option>
+                                            <option value="2">2022-23</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 
@@ -1151,6 +1146,7 @@
     <script>
         $(function () {
 
+
             $('#customRange').daterangepicker()
             //Initialize Select2 Elements
             $('.select2').select2()
@@ -1161,23 +1157,86 @@
             })
             $('#customDateDiv').hide()
 
-            $('.fav_clr').on("select2:select", function (e) {
-                var data = e.params.data.text;
-                if (data == 'all') {
-                    $(".fav_clr > option").prop("selected", "selected");
-                    $(".fav_clr").trigger("change");
-                }
-            });
                  //Datemask dd/mm/yyyy
           
         })
 
-        $(function () {
-            $("#outSales").DataTable({
-                "responsive": true, "lengthChange": true, "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#outSales_wrapper .col-md-6:eq(0)');
+        // $(function () {
+        //     $("#rawTable").DataTable({
+        //         "responsive": true, "lengthChange": true, "autoWidth": false,
+        //         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        //     }).buttons().container().appendTo('#rawTable_wrapper .col-md-6:eq(0)');
+        // });
+
+
+        
+
+        $('#chkState').change(function () {
+            if (this.checked) {
+                $('#stateId option').prop('selected', true);
+            }
+            else
+            {
+                $('#stateId option').prop('selected', false);
+            }
         });
+
+        $('#chkBM').change(function () {
+            if (this.checked) {
+                $('#bmId option').prop('selected', true);
+            }
+            else{
+                $('#bmId option').prop('selected', false);
+            }
+        });
+
+        $('#chkASM').change(function () {
+            if (this.checked) {
+                $('#asmId option').prop('selected', true);
+            }
+            else {
+                $('#asmId option').prop('selected', false);
+            }
+        });
+
+        $('#chkSO').change(function () {
+            if (this.checked) {
+                $('#soId option').prop('selected', true);
+            }
+            else{
+                $('#soId option').prop('selected', false);
+            }
+        });
+
+        $('#chkRDS').change(function () {
+            if (this.checked) {
+                $('#rdsId option').prop('selected', true);
+            }
+            else{
+                $('#rdsId option').prop('selected', false);
+            }
+        });
+
+        $('#chkFilter').change(function () {
+            if (this.checked) {
+                $('#filterId option').prop('selected', true);
+            }
+            else {
+                $('#filterId option').prop('selected', false);
+            }
+        });
+
+        $("#periodId").change(function () {
+
+            var v = $("#periodId").val();
+            if (v == 9) {
+                $('#customDateDiv').show();
+            }
+            else {
+                $('#customDateDiv').hide();
+            }
+        });
+
     </script>
     @RenderSection("Scripts", false/*required*/)
 </body>

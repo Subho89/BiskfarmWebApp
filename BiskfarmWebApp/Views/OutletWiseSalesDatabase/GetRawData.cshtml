@@ -1,15 +1,12 @@
 ﻿@using Biskfarm.DAL.Model
 @model List<OutletWiseSalesDatabase>
 
-
-
-<div class="card">
     <div class="card-header">
         <h3 class="card-title">Outlet Wise Sales Database</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-        <table id="outSales" class="table table-bordered table-striped">
+    <table id="rawTable" class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Region</th>
@@ -65,3 +62,20 @@
     </div>
     <!-- /.card-body -->
 </div>
+
+@* @section Scripts { *@
+    
+
+
+    <script>
+        $("document").ready(function () {
+            $("#rawTable").DataTable({
+                "responsive": true, "lengthChange": true, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#rawTable_wrapper .col-md-6:eq(0)');
+        });
+        $(function () {
+            
+        });
+    </script>
+@* } *@

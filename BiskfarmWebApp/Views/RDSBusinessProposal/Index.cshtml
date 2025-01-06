@@ -5,7 +5,7 @@
     //Layout = null;
 }
 
-@* @model List<RDS_BUSINESS_PROPOSAL> *@
+@model List<RDS_BUSINESS_PROPOSAL>
 
 <section class="content-header">
     <div class="container-fluid">
@@ -44,15 +44,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                       @*  <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td> <button  onclick="topFunction()" class="btnView btn-xs btn-warning"><i class="fas fa-edit"></i></button></td>
-                        </tr>
+                        </tr> *@
 
-                       @*  @foreach (var mdl in Model)
+                        @foreach (var mdl in Model)
                         {
                             <tr>
                                 <td>@mdl.principalCo</td>
@@ -61,7 +61,7 @@
                                 <td>@mdl.rdsSubsidyApproved</td>
                                 <td> <button data-id="@mdl.rdsBusinessProposalId" onclick="topFunction()" class="btnView btn-xs btn-warning"><i class="fas fa-edit"></i></button></td>
                             </tr>
-                        } *@
+                        }
                     </tbody>
                     <tfoot>
                         <tr>

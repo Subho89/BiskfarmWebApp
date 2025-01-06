@@ -18,13 +18,19 @@ namespace BiskfarmWebApp.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var lst = rdsServices.GetAll(db);
+            return View(lst);
         }
 
         public IActionResult Create()
         {
             var inputServices =  rdsServices.HeirarchyList(db);
             return View(inputServices);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            return View();
         }
 
         [HttpPost]
