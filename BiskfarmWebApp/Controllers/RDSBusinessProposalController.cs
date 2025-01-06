@@ -30,7 +30,8 @@ namespace BiskfarmWebApp.Controllers
 
         public IActionResult Edit(int id)
         {
-            return View();
+            var rds= rdsServices.GetRDSBusinessProposal(db,id);
+            return View(rds);
         }
 
         [HttpPost]

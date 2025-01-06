@@ -31,6 +31,14 @@ namespace Biskfarm.Services
 
         }
 
+        public RDS_BUSINESS_PROPOSAL GetRDSBusinessProposal(BiskfarmContext context, int id)
+        {
+            db=context;
+            var rds = db.RDS_BUSINESS_PROPOSAL.Where(r => r.rdsBusinessProposalId == id).FirstOrDefault();
+
+            return rds;
+        }
+
         public List<RDS_Hierarchy> HeirarchyList(BiskfarmContext context)
         {
             db = context;

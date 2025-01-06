@@ -93,5 +93,37 @@ namespace Biskfarm.DAL.Model
         public Nullable<int> accepted { get; set; }
         public Nullable<int> approved { get; set; }
         public Nullable<decimal> rdsSubsidyProposed { get; set; }
+        public Nullable<decimal> salesTot { get; set; }
+        public Nullable<decimal> outletsTot { get; set; }
+        public Nullable<decimal> cdNormTot { get; set; }
+        public Nullable<decimal> cvNormTot { get; set; }
+        public Nullable<decimal> comTot { get; set; }
+        public Nullable<decimal> routesTot { get; set; }
+        public Nullable<decimal> outletsTotal { get; set; }
+        public Nullable<decimal> salesTotal { get; set; }
+        public Nullable<decimal> totRedAuto { get; set; }
+        public Nullable<decimal> totRedManual { get; set; }
+        public Nullable<decimal> totUnit { get; set; }
+        public Nullable<decimal> dsCost { get; set; }
+        public Nullable<decimal> totExpenditure { get; set; }
+        public Nullable<decimal> indirectCost { get; set; }
+        public Nullable<decimal> giVal { get; set; }
+        public Nullable<decimal> niVal { get; set; }
+        public Nullable<decimal> arVal { get; set; }
+        public Nullable<int> giDays { get; set; }
+        public Nullable<int> giNorm { get; set; }
+        public Nullable<decimal> tmsOut { get; set; }
+        public Nullable<decimal> marginPercent { get; set; }
+        public Nullable<decimal> giOut { get; set; }
+        public Nullable<decimal> tmDiscount { get; set; }
+        public Nullable<decimal> geOut { get; set; }
+        public Nullable<decimal> reExpense { get; set; }
+        public Nullable<decimal> salesmanExpense { get; set; }
+        public Nullable<decimal> indirectExpense { get; set; }
+        public Nullable<decimal> grossExpenditure { get; set; }
+        public Nullable<decimal> netMargin { get; set; }
+        public Nullable<decimal> netMarginPercent { get; set; }
+        public Nullable<decimal> roiCalculation { get; set; }
+        public Nullable<decimal> rdsSubsidyEstimated { get; set; }
     }
 }

@@ -69,8 +69,17 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <select name="appointmentPlanId" id="appointmentPlanId" class="form-control" placeholder="Select">
-                                    <option value="1" selected>Replacement</option>
-                                    <option value="2">New Appointment</option>
+                                    @if (Model.appointmentPlanId == 1)
+                                    {
+                                        <option value="1" selected>Replacement</option>
+                                        <option value="2">New Appointment</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="1" >Replacement</option>
+                                        <option value="2" selected>New Appointment</option>
+                                    }
+
                                 </select>
                             </div>
                         </div>
@@ -86,7 +95,7 @@
 
                         <div class="form-group">
                             <label>Town </label>
-                            <input type="text" required class="form-control" name="town" placeholder="Town" id="town">
+                            <input type="text" required class="form-control" name="town" placeholder="Town" id="town" value="@Model.town">
                         </div>
 
                     </div>
@@ -97,7 +106,7 @@
 
                         <div class="form-group">
                             <label>District </label>
-                            <input type="text" required class="form-control" name="district" placeholder="District" id="district">
+                            <input type="text" required class="form-control" name="district" placeholder="District" id="district" value="@Model.district">
                         </div>
 
                     </div>
@@ -108,7 +117,7 @@
 
                         <div class="form-group">
                             <label>State </label>
-                            <input type="text" required class="form-control" name="state" placeholder="State" id="state">
+                            <input type="text" required class="form-control" name="state" placeholder="State" id="state" value="@Model.state">
                         </div>
 
                     </div>
@@ -146,10 +155,10 @@
                         <tbody>
                             <tr>
                                 <td>Sales (Rs/month)</td>
-                                <td><input type="number" min="0" step="0.01" id="salesGenRetail" name="salesGenRetail" /></td>
-                                <td><input type="number" min="0" step="0.01" id="salesKeyOutlet" name="salesKeyOutlet" /></td>
-                                <td><input type="number" min="0" step="0.01" id="salesWholesale" name="salesWholesale" /></td>
-                                <td><input type="number" min="0" step="0.01" id="salesOther" name="salesOther" /></td>
+                                <td><input type="number" min="0" step="0.01" id="salesGenRetail" name="salesGenRetail" value="@Model.salesGenRetail"/></td>
+                                <td><input type="number" min="0" step="0.01" id="salesKeyOutlet" name="salesKeyOutlet" value="@Model.salesKeyOutlet" /></td>
+                                <td><input type="number" min="0" step="0.01" id="salesWholesale" name="salesWholesale" value="@Model.salesWholesale" /></td>
+                                <td><input type="number" min="0" step="0.01" id="salesOther" name="salesOther" value="@Model.salesOther" /></td>
                                 <td><input type="number" min="0" step="0.01" id="salesTot" readonly /></td>
                             </tr>
                             <tr>
