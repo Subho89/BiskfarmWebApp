@@ -28,7 +28,7 @@ namespace BiskfarmWebApp.Controllers
             return View(inputServices);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult View(int id)
         {
             var rds= rdsServices.GetRDSBusinessProposal(db,id);
             return View(rds);
