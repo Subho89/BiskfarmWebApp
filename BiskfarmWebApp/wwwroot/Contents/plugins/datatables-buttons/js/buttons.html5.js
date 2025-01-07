@@ -309,7 +309,8 @@ var _exportData = function ( dt, config )
 		return s;
 	};
 
-	var header = config.header ? join( data.header )+newLine : '';
+	var header = config.header ? join(data.header) + newLine : '';
+	//var header =  '';
 	var footer = config.footer && data.footer ? newLine+join( data.footer ) : '';
 	var body = [];
 

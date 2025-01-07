@@ -125,5 +125,9 @@ namespace Biskfarm.DAL.Model
         public Nullable<decimal> netMarginPercent { get; set; }
         public Nullable<decimal> roiCalculation { get; set; }
         public Nullable<decimal> rdsSubsidyEstimated { get; set; }
+        public string? tmsRemarks { get; set; }
+        public string? marginRemarks { get; set; }
+        public string? giRemarks { get; set; }
+        public string? tmRemarks { get; set; }
     }
 }
