@@ -49,7 +49,7 @@
                                 <td>@mdl.principalCo</td>
                                 <td>@mdl.dateOfEntry</td>
                                 <td>@mdl.nameOfProp1</td>
-                                <td> <button data-id="@mdl.rdsSuperProfileId" onclick="topFunction()" class="btnView btn-xs btn-warning"><i class="fas fa-edit"></i></button></td>
+                                <td> <button class="btnView btn-xs btn-warning" onclick="location.href='@Url.Action("View", "RDSuperProfile",new {id=mdl.rdsSuperProfileId})'"><i class="fas fa-edit"></i></button></td>
                             </tr>
                 }
                     </tbody>

@@ -24,6 +24,11 @@ namespace BiskfarmWebApp.Controllers
             return View();
         }
 
+        public IActionResult View(int id)
+        {
+            var rds= rdsServices.GetProfileById(db,id);
+            return View(rds);
+        }
         public IActionResult Create()
         {
             var inputServices = rdsServices.GetRDSSuperProfileInputParameters(db);

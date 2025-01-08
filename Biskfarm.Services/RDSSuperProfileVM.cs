@@ -27,11 +27,14 @@ namespace Biskfarm.Services
         public int soHeadQuarterId { get; set; }
         public string? soName { get; set; }
         public int reasonForAppointment { get; set; }
+        public string populationOfTown { get; set; }
         public Nullable<decimal> expectedMonthlyBusiness { get; set; }
         public int nofMarketsLocalTown { get; set; }
         public int nofExTown { get; set; }
         public int nofRoutesLocalTown { get; set; }
         public int nofRoutesExTown { get; set; }
+        public string? totNofMarkets { get; set; }
+        public string? totNofRoutes { get; set; }
         public string? godownAddress { get; set; }
         public int nofDeliveryUnit { get; set; }
         public int secondaryOrderBillingSytem { get; set; }
@@ -47,7 +50,7 @@ namespace Biskfarm.Services
         public string? areaOfOp { get; set; }
         public int inventoryNormPlan { get; set; }
         public int marketCreditPlan { get; set; }
-        public Nullable<bool> investmentProposedAndAgreed { get; set; }
+        public Nullable<bool> rdIvst { get; set; }
         public Nullable<bool> rdsSubsidyReq { get; set; }
         public int nofDSIRSPlanned { get; set; }
         public int nofMandays { get; set; }
@@ -73,8 +76,12 @@ namespace Biskfarm.Services
         public int approvedBy { get; set; }
         public int acceptedBy { get; set; }
         public DateOnly dateOfEntry { get; set; }
+        public string recommendName { get; set; }
+        public string approveName { get; set; }
+        public string acceptedName { get; set; }
         public List<RDS_Distributors> distributorsList { get; set; }
         public List<RDS_SubStockist> SubStockist { get; set; }
+        public List<SOMast> SOMasts { get; set; }
     }
 
     public class RDS_Distributors

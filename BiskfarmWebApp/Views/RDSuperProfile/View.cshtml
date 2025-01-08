@@ -4,8 +4,7 @@
 }
 
 @using Biskfarm.Services
-@model RDSSuperProfileInputVM
-
+@model RDSSuperProfileVM
 
 <section class="content">
 
@@ -28,7 +27,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Principal Co. </label>
-                                <input type="text" required class="form-control" name="principalCo" placeholder="Principal Company" id="principalCo">
+                                <input type="text" required class="form-control" name="principalCo" placeholder="Principal Company" id="principalCo" value="@Model.principalCo">
                                 <input type="hidden" id="distributorsList" name="distributorsList" />
                                 <input type="hidden" id="SubStockist" name="SubStockist" />
                             </div>
@@ -37,7 +36,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Date:</label>
-                               <input type="text" class="form-control" name="dateOfEntry" id="dateOfEntry" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+                                <input type="text" class="form-control" name="dateOfEntry" id="dateOfEntry" data-inputmask-alias="datetime" value="@Model.dateOfEntry" data-inputmask-inputformat="dd/mm/yyyy" data-mask>
                             </div>
                         </div>
 
@@ -48,14 +47,14 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Name of Propreiter/Partner/Director 1:</label>
-                                <input type="text" required class="form-control" name="nameOfProp1" placeholder="Name of Propreiter/Partner/Director 1" id="nameOfProp1">
+                                <input type="text" required class="form-control" name="nameOfProp1" placeholder="Name of Propreiter/Partner/Director 1" id="nameOfProp1" value="@Model.nameOfProp1">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Name of Propreiter/Partner/Director 2:</label>
-                                <input type="text" required class="form-control" name="nameOfProp2" placeholder="Name of Propreiter/Partner/Director 1" id="nameOfProp2">
+                                <input type="text" required class="form-control" name="nameOfProp2" placeholder="Name of Propreiter/Partner/Director 1" id="nameOfProp2" value="@Model.nameOfProp2">
                             </div>
                         </div>
                     </div>
@@ -63,13 +62,13 @@
                         <div class="col-sm-6">
                             <label for="hori-pass1" class="col-6 col-form-label">Residence Address 1 </label>
                             <div class="col-6">
-                                <textarea class="form-control" rows="3" placeholder="Enter Residence Address" id="residenceAddress1" name="residenceAddress1"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Enter Residence Address" id="residenceAddress1" name="residenceAddress1" >@Model.residenceAddress1</textarea>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="hori-pass1" class="col-6 col-form-label">Residence Address 2 </label>
                             <div class="col-10">
-                                <textarea class="form-control" rows="3" placeholder="Enter Residence Address" id="residenceAddress2" name="residenceAddress2"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Enter Residence Address" id="residenceAddress2" name="residenceAddress2" >@Model.residenceAddress2</textarea>
                             </div>
                         </div>
                     </div>
@@ -78,14 +77,14 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Contact Number 1:</label>
-                                <input type="text" required class="form-control" name="contactNo1" placeholder="Contact Number 1" id="contactNo1">
+                                <input type="text" required class="form-control" name="contactNo1" placeholder="Contact Number 1" id="contactNo1" value="@Model.contactNo1">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Contact Number 2:</label>
-                                <input type="text" required class="form-control" name="contactNo2" placeholder="Contact Number 2" id="contactNo2">
+                                <input type="text" required class="form-control" name="contactNo2" placeholder="Contact Number 2" id="contactNo2" value="@Model.contactNo2">
                             </div>
                         </div>
                     </div>
@@ -94,7 +93,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Email Address:</label>
-                                <input type="email" required class="form-control" name="emailAddress" placeholder="Email Address" id="emailAddress">
+                                <input type="email" required class="form-control" name="emailAddress" placeholder="Email Address" id="emailAddress" value="@Model.emailAddress">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -102,6 +101,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <select name="closingDayId" id="closingDayId" class="form-control" placeholder="Select">
+                                    if(@Model.closingDayId==1){
                                     <option value="1" selected>Sunday</option>
                                     <option value="2">Monday</option>
                                     <option value="3">Tuesday</option>
@@ -109,6 +109,62 @@
                                     <option value="5">Thursdayday</option>
                                     <option value="6">Friday</option>
                                     <option value="7">Saturday</option>
+                                    }
+                                    else if(@Model.closingDayId==2){
+                                    <option value="1">Sunday</option>
+                                    <option value="2" selected>Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesay</option>
+                                    <option value="5">Thursdayday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                    }
+                                    else if(@Model.closingDayId==3){
+                                    <option value="1">Sunday</option>
+                                    <option value="2" >Monday</option>
+                                    <option value="3" selected>Tuesday</option>
+                                    <option value="4">Wednesay</option>
+                                    <option value="5">Thursdayday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                    }
+                                    else if(@Model.closingDayId==4){
+                                    <option value="1">Sunday</option>
+                                    <option value="2" >Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4" selected>Wednesay</option>
+                                    <option value="5">Thursdayday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                    }
+                                    else if(@Model.closingDayId==5){
+                                    <option value="1">Sunday</option>
+                                    <option value="2" >Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesay</option>
+                                    <option value="5" selected>Thursdayday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7">Saturday</option>
+                                    }
+                                    else if(@Model.closingDayId==6){
+                                    <option value="1">Sunday</option>
+                                    <option value="2" >Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesay</option>
+                                    <option value="5">Thursdayday</option>
+                                    <option value="6" selected>Friday</option>
+                                    <option value="7">Saturday</option>
+                                    }
+                                    else if(@Model.closingDayId==7){
+                                    <option value="1">Sunday</option>
+                                    <option value="2" >Monday</option>
+                                    <option value="3">Tuesday</option>
+                                    <option value="4">Wednesay</option>
+                                    <option value="5">Thursdayday</option>
+                                    <option value="6">Friday</option>
+                                    <option value="7" selected>Saturday</option>
+                                    }
+                                   
                                 </select>
                             </div>
                         </div>
@@ -117,28 +173,22 @@
                         <div class="col-sm-4">
                             <label for="hori-pass1" class="col-4 col-form-label">Office Address </label>
                             <div class="col-10">
-                                <textarea class="form-control" rows="3" placeholder="Enter Office Address" id="officeAddress" name="officeAddress"></textarea>
+                                <textarea class="form-control" rows="3" placeholder="Enter Office Address" id="officeAddress" name="officeAddress" >@Model.officeAddress</textarea>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Pincode:</label>
-                                <input type="text" class="form-control" name="pinCode" placeholder="Pincode" id="pinCode">
+                                <input type="text" class="form-control" name="pinCode" placeholder="Pincode" id="pinCode" value="@Model.pinCode">
                             </div>
                         </div>
 
                         <div class="col-sm-4">
                             <label for="hori-pass1" class="col-4 col-form-label">Town </label>
                             <div class="col-10">
-                                @*<input type="text" placeholder="Material Unit" id="MaterialUnit" class="form-control" name="Unit">*@
-                                <select name="town" id="town" class="form-control select2" placeholder="Select">
-                                    <option value="0" selected disabled>Select the Town</option>
-                                    @*  @foreach (var uts in Model.Towns)
-                                    {
-                                    <option value=@uts.TOWN_CODE>@uts.TOWN_NAME</option>
-                                    } *@
-                                </select>
+                                <input type="text" placeholder="Town" id="town" class="form-control" name="town" value="@Model.town">
+                               
                             </div>
                         </div>
                     </div>
@@ -147,14 +197,14 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>District:</label>
-                                <input type="text" class="form-control" name="district" placeholder="District" id="district">
+                                <input type="text" class="form-control" name="district" placeholder="District" id="district" value="@Model.district">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <!-- text input -->
                             <div class="form-group">
                                 <label>State:</label>
-                                <input type="text" class="form-control" name="state" placeholder="State" id="state">
+                                <input type="text" class="form-control" name="state" placeholder="State" id="state" value="@Model.state">
                             </div>
                         </div>
 
@@ -162,7 +212,7 @@
                         <div class="col-sm-4">
                             <label for="hori-pass1" class="col-4 col-form-label">Town Code</label>
                             <div class="col-10">
-                                <input type="text" placeholder="Town Code" id="townCode" class="form-control" name="townCode">
+                                <input type="text" placeholder="Town Code" id="townCode" class="form-control" name="townCode" value="@Model.townCode">
                             </div>
                         </div>
                     </div>
@@ -175,6 +225,10 @@
                                     <option value="0" selected>Select SO Headquarter</option>
                                     @foreach (var uts in Model.SOMasts)
                                     {
+                                        if (Model.soHeadQuarterId == uts.SO_ID)
+                                        {
+                                            <option value=@uts.SO_ID selected>@uts.SO_NAME</option>
+                                        }
                                         <option value=@uts.SO_ID>@uts.SO_NAME</option>
                                     }
                                 </select>
@@ -201,10 +255,35 @@
                                         <label for="hori-pass1" class="col-4 col-form-label">Reason For Appointment </label>
                                         <div class="col-7">
                                             <select name="reasonForAppointment" id="reasonForAppointment" class="form-control" placeholder="Select">
-                                                <option value="1">Replacement</option>
-                                                <option value="2">New town - route planning</option>
-                                                <option value="3">GST Change</option>
-                                                <option value="4">Firm Name Change</option>
+                                                @if (Model.reasonForAppointment == 1)
+                                                {
+                                                    <option value="1" selected>Replacement</option>
+                                                    <option value="2">New town - route planning</option>
+                                                    <option value="3">GST Change</option>
+                                                    <option value="4">Firm Name Change</option>
+                                                }
+                                                else if (Model.reasonForAppointment == 2)
+                                                {
+                                                    <option value="1" >Replacement</option>
+                                                    <option value="2" selected>New town - route planning</option>
+                                                    <option value="3">GST Change</option>
+                                                    <option value="4">Firm Name Change</option>
+                                                }
+                                                 else if (Model.reasonForAppointment == 3)
+                                                {
+                                                    <option value="1" >Replacement</option>
+                                                    <option value="2" >New town - route planning</option>
+                                                    <option value="3" selected>GST Change</option>
+                                                    <option value="4">Firm Name Change</option>
+                                                }
+                                                else if (Model.reasonForAppointment == 4)
+                                                {
+                                                    <option value="1" >Replacement</option>
+                                                    <option value="2" >New town - route planning</option>
+                                                    <option value="3">GST Change</option>
+                                                    <option value="4" selected>Firm Name Change</option>
+                                                }
+
 
                                             </select>
                                         </div>
@@ -232,8 +311,8 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td width="50%"><input type="text" class="form-control" name="populationOfTown" placeholder="Population of Town" id="populationOfTown"></td>
-                                                                <td width="50%"><input type="text" class="form-control" name="expectedMonthlyBusiness" placeholder="Expected Monthly Business" id="expectedMonthlyBusiness"></td>
+                                                                <td width="50%"><input type="text" class="form-control" name="populationOfTown" placeholder="Population of Town" id="populationOfTown" value="@Model.populationOfTown"></td>
+                                                                <td width="50%"><input type="text" class="form-control" name="expectedMonthlyBusiness" placeholder="Expected Monthly Business" id="expectedMonthlyBusiness" value="@Model.expectedMonthlyBusiness"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -249,9 +328,9 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofMarketsLocalTown" placeholder="No. of Markets in Local Town" id="nofMarketsLocalTown"></td>
-                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofExTown" placeholder="No. of ExTown" id="nofExTown"></td>
-                                                                <td width="30%"><input type="number" min="0" class="form-control" placeholder="Total" readonly id="totNofMarkets" name="totNofMarkets"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofMarketsLocalTown" placeholder="No. of Markets in Local Town" id="nofMarketsLocalTown" value="@Model.nofMarketsLocalTown"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofExTown" placeholder="No. of ExTown" id="nofExTown" value="@Model.nofExTown"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" placeholder="Total" readonly id="totNofMarkets" name="totNofMarkets" value="@Model.totNofMarkets"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -267,9 +346,9 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofRoutesLocalTown" placeholder="No. of Routes in Local Town" id="nofRoutesLocalTown"></td>
-                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofRoutesExTown" placeholder="No. of Routes ExTown" id="nofRoutesExTown"></td>
-                                                                <td width="30%"><input type="number" min="0" class="form-control" placeholder="Total" readonly id="totNofRoutes" name="totNofRoutes"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofRoutesLocalTown" placeholder="No. of Routes in Local Town" id="nofRoutesLocalTown" value="@Model.nofRoutesLocalTown"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" name="nofRoutesExTown" placeholder="No. of Routes ExTown" id="nofRoutesExTown" value="@Model.nofRoutesExTown"></td>
+                                                                <td width="30%"><input type="number" min="0" class="form-control" placeholder="Total" readonly id="totNofRoutes" name="totNofRoutes" value="@Model.totNofRoutes"></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -298,14 +377,14 @@
                                         <div class="col-sm-12">
                                             <label>Godown Address </label>
                                             <div class="col-12">
-                                                <textarea class="form-control" rows="3" placeholder="Enter Godown Address" id="godownAddress" name="godownAddress"></textarea>
+                                                <textarea class="form-control" rows="3" placeholder="Enter Godown Address" id="godownAddress" name="godownAddress" >@Model.godownAddress</textarea>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Area of Godown Space Provided (1 sqft for every 3 Cases of Stock Stored):</label>
-                                            <input type="text" class="form-control" name="areaOfGodown" placeholder="Area of Godown Space" id="areaOfGodown">
+                                            <input type="text" class="form-control" name="areaOfGodown" placeholder="Area of Godown Space" id="areaOfGodown" value="@Model.areaOfGodown">
                                         </div>
                                     </div>
                                 </div>
@@ -314,13 +393,13 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>No. of Delivery Units : </label>
-                                            <input type="text" class="form-control" name="nofDeliveryUnit" placeholder="No. of Delivery Units" id="nofDeliveryUnit">
+                                            <input type="text" class="form-control" name="nofDeliveryUnit" placeholder="No. of Delivery Units" id="nofDeliveryUnit" value="@Model.nofDeliveryUnit">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Unit Detail :</label>
-                                            <input type="text" class="form-control" name="unitDetails" placeholder="Area of Godown Space" id="unitDetails">
+                                            <input type="text" class="form-control" name="unitDetails" placeholder="Area of Godown Space" id="unitDetails" >
                                         </div>
                                     </div>
                                 </div>
@@ -329,13 +408,13 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Secondary Order Billing System (Computerised / Manual): </label>
-                                            <input type="text" class="form-control" name="secondaryOrderBillingSytem" placeholder="Secondary Order Billing System" id="secondaryOrderBillingSytem">
+                                            <input type="text" class="form-control" name="secondaryOrderBillingSytem" placeholder="Secondary Order Billing System" id="secondaryOrderBillingSytem" value="@Model.secondaryOrderBillingSytem">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Distributor Management System (DMS) :</label>
-                                            <input type="text" class="form-control" name="dms" placeholder="Distributor Management System" id="dms">
+                                            <input type="text" class="form-control" name="dms" placeholder="Distributor Management System" id="dms" value="@Model.dms">
                                         </div>
                                     </div>
                                 </div>
@@ -366,32 +445,25 @@
                                                 <th>Payment Term</th>
                                                 <th>No. of Routes / Subs</th>
                                                 <th>No. of Outlets</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-sm btn-success" onclick="BtnDistributorAdd()">+</button>
-                                                </th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody id="tbodyDistributor">
-                                            <tr id="trowDistributor" class="d-none clsDistributor"> 
-                                                <td> <input type="text" class="form-control distributorForCompany" name="distributorForCompany" placeholder="Distributor for Company" id="distributorForCompany"></td>
-                                                <td> <input type="date" class="form-control dateOfAppointment" name="dateOfAppointment" placeholder="Date of Appointment" id="dateOfAppointment"></td>
-                                                <td> <input type="number" step="0.1" min="0" class="form-control currentAvgMonthlyBusiness" name="currentAvgMonthlyBusiness" placeholder="Current Avg Business" id="currentAvgMonthlyBusiness"></td>
-                                                <td> <input type="text" class="form-control paymentTerm" name="paymentTerm" placeholder="Payment Terms" id="paymentTerm"></td>
-                                                <td> <input type="text" class="form-control nofRoutes" name="nofRoutes" placeholder="Nof Routes" id="nofRoutes"></td>
-                                                <td> <input type="text" class="form-control nofOutlets" name="nofOutlets" placeholder="Nof Outlets" id="nofOutlets"></td>
-                                                <td class="NoPrint"><button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button></td> 
+                                            @foreach(var dst in Model.distributorsList)
+                                            {
+                                                <tr>
+                                                    <td>@dst.distributorForCompany</td>
+                                                <td>@dst.dateOfAppointment</td>
+                                                <td>@dst.currentAvgMonthlyBusiness</td>
+                                                    <td>@dst.paymentTerm</td>
+                                                    <td>@dst.nofRoutes</td>
+                                                    <td>@dst.nofOutlets</td>
+                                                </tr>                                          
 
 
-                                               @*  <td> <input type="text" class="form-control clsdistributorForCompany"  placeholder="Distributor for Company" id="distributorForCompany"></td>
-                                                <td> <input type="date" class="form-control clsdateOfAppointment"  placeholder="Date of Appointment" id="dateOfAppointment"></td>
-                                                <td> <input type="number" step="0.1" min="0" class="form-control clscurrentAvgMonthlyBusiness" placeholder="Current Avg Business" id="currentAvgMonthlyBusiness"></td>
-                                                <td> <input type="text" class="form-control clspaymentTerm"  placeholder="Payment Terms" id="paymentTerm"></td>
-                                                <td> <input type="text" class="form-control clsnofRoutes"  placeholder="Nof Routes" id="nofRoutes"></td>
-                                                <td> <input type="text" class="form-control clsnofOutlets" placeholder="Nof Outlets" id="nofOutlets"></td>
-                                                <td class="NoPrint"><button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button></td> *@
-
-
-                                            </tr>
+                                         
+                                            }
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -418,13 +490,69 @@
                                             <label>Schedule day of Primary invoicing (PDP) : </label>
                                             <div class="col-12">
                                                 <select name="scheduleDayOfPrimaryInvoicing" id="scheduleDayOfPrimaryInvoicing" class="form-control" placeholder="Select">
+                                                    if(@Model.scheduleDayOfPrimaryInvoicing==1){
                                                     <option value="1" selected>Sunday</option>
-                                                    <option value="2" >Monday</option>
-                                                    <option value="3" >Tuesday</option>
-                                                    <option value="4" >Wednesay</option>
-                                                    <option value="5" >Thursdayday</option>
-                                                    <option value="6" >Friday</option>
-                                                    <option value="7" >Saturday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.scheduleDayOfPrimaryInvoicing==2){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2" selected>Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.scheduleDayOfPrimaryInvoicing==3){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3" selected>Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.scheduleDayOfPrimaryInvoicing==4){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4" selected>Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.scheduleDayOfPrimaryInvoicing==5){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5" selected>Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.scheduleDayOfPrimaryInvoicing==6){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6" selected>Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.scheduleDayOfPrimaryInvoicing==7){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7" selected>Saturday</option>
+                                                    }
                                                 </select>
                                             </div>
                                         </div>
@@ -432,7 +560,7 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Expected No. of Primary Invoices / Monthly:</label>
-                                            <input type="number" required class="form-control" name="expectedNofInvoices" placeholder="Expected No. of Primary Invoices / Monthly" id="expectedNofInvoices">
+                                            <input type="number" required class="form-control" name="expectedNofInvoices" placeholder="Expected No. of Primary Invoices / Monthly" id="expectedNofInvoices" value="@Model.expectedNofInvoices">
                                         </div>
                                     </div>
                                 </div>
@@ -441,19 +569,19 @@
                                     <div class="col-sm-4">
                                         <div class="col-sm-12">
                                             <label>Value Per Order: </label>
-                                            <input type="text" required class="form-control" name="valuePerOrder" placeholder="Value Per Order" id="valuePerOrder">
+                                            <input type="text" required class="form-control" name="valuePerOrder" placeholder="Value Per Order" id="valuePerOrder" value="@Model.valuePerOrder">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="col-sm-12">
                                             <label>CBB Per Order:</label>
-                                            <input type="text" required class="form-control" name="cbbPerOrder" placeholder="CBB Per Order" id="cbbPerOrder">
+                                            <input type="text" required class="form-control" name="cbbPerOrder" placeholder="CBB Per Order" id="cbbPerOrder" value="@Model.cbbPerOrder">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="col-sm-12">
                                             <label>Area of Operation:</label>
-                                            <input type="text" required class="form-control" name="areaOfOp" placeholder="Area Of Operation" id="areaOfOp">
+                                            <input type="text" required class="form-control" name="areaOfOp" placeholder="Area Of Operation" id="areaOfOp" value="@Model.areaOfOp">
                                         </div>
                                     </div>
                                 </div>
@@ -463,13 +591,69 @@
                                         <div class="col-sm-12">
                                             <label>Inventory Norm Plan (No. Of Days) : </label>
                                             <select name="inventoryNormPlan" id="inventoryNormPlan" class="form-control" placeholder="Select">
+                                                if(@Model.inventoryNormPlan==1){
                                                 <option value="1" selected>Sunday</option>
-                                                <option value="2" >Monday</option>
-                                                <option value="3" >Tuesday</option>
-                                                <option value="4" >Wednesay</option>
-                                                <option value="5" >Thursdayday</option>
-                                                <option value="6" >Friday</option>
-                                                <option value="7" >Saturday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.inventoryNormPlan==2){
+                                                <option value="1">Sunday</option>
+                                                <option value="2" selected>Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.inventoryNormPlan==3){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3" selected>Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.inventoryNormPlan==4){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4" selected>Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.inventoryNormPlan==5){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5" selected>Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.inventoryNormPlan==6){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6" selected>Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.inventoryNormPlan==7){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7" selected>Saturday</option>
+                                                }
                                             </select>
 
                                         </div>
@@ -479,13 +663,69 @@
                                             <label>Market Credit Plan (No. of Days): </label>
                                             <!-- text input -->
                                             <select name="marketCreditPlan" id="marketCreditPlan" class="form-control" placeholder="Select">
+                                                if(@Model.marketCreditPlan==1){
                                                 <option value="1" selected>Sunday</option>
-                                                <option value="2" >Monday</option>
-                                                <option value="3" >Tuesday</option>
-                                                <option value="4" >Wednesay</option>
-                                                <option value="5" >Thursdayday</option>
-                                                <option value="6" >Friday</option>
-                                                <option value="7" >Saturday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.marketCreditPlan==2){
+                                                <option value="1">Sunday</option>
+                                                <option value="2" selected>Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.marketCreditPlan==3){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3" selected>Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.marketCreditPlan==4){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4" selected>Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.marketCreditPlan==5){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5" selected>Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.marketCreditPlan==6){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6" selected>Friday</option>
+                                                <option value="7">Saturday</option>
+                                                }
+                                                else if(@Model.marketCreditPlan==7){
+                                                <option value="1">Sunday</option>
+                                                <option value="2">Monday</option>
+                                                <option value="3">Tuesday</option>
+                                                <option value="4">Wednesay</option>
+                                                <option value="5">Thursdayday</option>
+                                                <option value="6">Friday</option>
+                                                <option value="7" selected>Saturday</option>
+                                                }
                                             </select>
                                         </div>
                                     </div>
@@ -495,17 +735,38 @@
                                     <div class="col-sm-6">
                                             <!-- radio -->
                                             <div class="form-group clearfix">
+                                            @if (Model.rdIvst==true)
+                                            {
                                                 <div class="icheck-success d-inline">
-                                                <input type="radio" name="rdIvst" checked id="rdIvstYes" value="1">
-                                                <label for="radioSuccess1">Yes
-                                                </label>
+                                                    <input type="radio" name="rdIvst" checked id="rdIvstYes" value="1">
+                                                    <label for="radioSuccess1">
+                                                        Yes
+                                                    </label>
                                                 </div>
                                                 <div class="icheck-success d-inline">
-                                                <input type="radio" name="rdIvst" id="rdIvstNo" value="0">
-                                                <label for="radioSuccess2">No
-                                                </label>
+                                                    <input type="radio" name="rdIvst" id="rdIvstNo" value="0">
+                                                    <label for="radioSuccess2">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            }
+                                            else
+
+                                            {
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" name="rdIvst"  id="rdIvstYes" value="1">
+                                                    <label for="radioSuccess1">
+                                                        Yes
+                                                    </label>
                                                 </div>
                                                 <div class="icheck-success d-inline">
+                                                    <input type="radio" name="rdIvst" checked id="rdIvstNo" value="0">
+                                                    <label for="radioSuccess2">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            }
+                                            <div class="icheck-success d-inline">
                                                 @* <input type="radio" name="r3" disabled id="radioSuccess3"> *@
                                                 <label for="radioSuccess3">
                                                     Investment proposed and agreed
@@ -516,17 +777,37 @@
                                     <div class="col-sm-6">
                                             <!-- radio -->
                                             <div class="form-group clearfix">
+                                            @if (Model.rdsSubsidyReq == true)
+                                            {
                                                 <div class="icheck-success d-inline">
-                                                <input type="radio" name="rdsSubsidyReq" checked id="rdRdsYes" value="1">
-                                                <label for="radioSuccess1">Yes
-                                                </label>
+                                                    <input type="radio" name="rdRds" checked id="rdRdsYes" value="1">
+                                                    <label for="radioSuccess1">
+                                                        Yes
+                                                    </label>
                                                 </div>
                                                 <div class="icheck-success d-inline">
-                                                <input type="radio" name="rdsSubsidyReq" id="rdRdsNo" value="0">
-                                                <label for="radioSuccess2">No
-                                                </label>
+                                                    <input type="radio" name="rdRds" id="rdRdsNo" value="0">
+                                                    <label for="radioSuccess2">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="icheck-success d-inline">
+                                                    <input type="radio" name="rdRds"  id="rdRdsYes" value="1">
+                                                    <label for="radioSuccess1">
+                                                        Yes
+                                                    </label>
                                                 </div>
                                                 <div class="icheck-success d-inline">
+                                                    <input type="radio" name="rdRds" checked id="rdRdsNo" value="0">
+                                                    <label for="radioSuccess2">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            }
+                                            <div class="icheck-success d-inline">
                                                 @* <input type="radio" name="r3" disabled id="radioSuccess3"> *@
                                                 <label for="radioSuccess3">
                                                     RDS Subsidy required
@@ -539,13 +820,13 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>No. of DS / ISR Planned: </label>
-                                            <input type="text" required class="form-control" name="nofDSIRSPlanned" placeholder="No. of DS/IRS Planned" id="nofDSIRSPlanned">
+                                            <input type="text" required class="form-control" name="nofDSIRSPlanned" placeholder="No. of DS/IRS Planned" id="nofDSIRSPlanned" value="@Model.nofDSIRSPlanned">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>No. of Mandays / month by SO: </label>
-                                            <input type="text" required class="form-control" name="nofMandays" placeholder="No. of Mandays" id="nofMandays">
+                                            <input type="text" required class="form-control" name="nofMandays" placeholder="No. of Mandays" id="nofMandays" value="@Model.nofMandays">
                                         </div>
                                     </div>
                                 </div>
@@ -553,13 +834,13 @@
                                     <div class="col-sm-6">
                                         <label for="hori-pass1" class="col-6 col-form-label">ASM Comment on (Replacement / new RDS): </label>
                                         <div class="col-8">
-                                            <textarea class="form-control" rows="3" placeholder="ASM Comment on (Replacement / new RDS)" id="asmComment" name="asmComment"></textarea>
+                                            <textarea class="form-control" rows="3" placeholder="ASM Comment on (Replacement / new RDS)" id="asmComment" name="asmComment" >@Model.asmComment</textarea>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="hori-pass1" class="col-6 col-form-label">BM Feedback on (Replacement / new RDS) : </label>
                                         <div class="col-8">
-                                            <textarea class="form-control" rows="3" placeholder="BM Feedback on (Replacement / new RDS)" id="bmFeedback" name="bmFeedback"></textarea>
+                                            <textarea class="form-control" rows="3" placeholder="BM Feedback on (Replacement / new RDS)" id="bmFeedback" name="bmFeedback" >@Model.bmFeedback</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -574,20 +855,21 @@
                                                 <th>Distance from RDS / Super</th>
                                                 <th>Expected Business</th>
                                                 <th># Outlets</th>
-                                                <th>
-                                                    <button type="button" class="btn btn-sm btn-success" onclick="BtnRoutesAdd()">+</button>
-                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody id="tbodyRoutes">
-                                            <tr id="trowRoutes" class="d-none">
-                                                <td> <input type="text" class="form-control" name="nameOfRouteSubStockist" placeholder="Name of Routes" id="nameOfRouteSubStockist"></td>
-                                                <td> <input type="text" class="form-control" name="freqOfVisit" placeholder="Frequency of Visit" id="freqOfVisit"></td>
-                                                <td> <input type="text" class="form-control" name="distanceFromRDS" placeholder="Distance from RDS" id="distanceFromRDS"></td>
-                                                <td> <input type="text" class="form-control" name="expectedBusiness" placeholder="Expected Business" id="expectedBusiness"></td>
-                                                <td> <input type="text" class="form-control" name="outlets" placeholder="Outlets" id="outlets"></td>
-                                                <td class="NoPrint"><button type="button" class="btn btn-sm btn-danger" onclick="BtnDel(this)">X</button></td>
-                                            </tr>
+                                            @foreach(var ss in Model.SubStockist)
+                                            {
+                                                <tr>
+                                                    <td> @ss.nameOfRouteSubStockist</td>
+                                                    <td> @ss.freqOfVisit</td>
+                                                    <td> @ss.distanceFromRDS</td>
+                                                    <td> @ss.expectedBusiness</td>
+                                                    <td> @ss.outlets</td>
+                                                    
+                                                </tr>
+                                            }
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -610,7 +892,7 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Years of Establishment : </label>
-                                            <input type="number" required class="form-control" name="yearOfEstablishment" placeholder="Year of Establishment" id="yearOfEstablishment">
+                                            <input type="number" required class="form-control" name="yearOfEstablishment" placeholder="Year of Establishment" id="yearOfEstablishment" value="@Model.yearOfEstablishment">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -618,8 +900,17 @@
                                             <label>Type (Proprietorship/Partnership) :</label>
                                             <div class="col-12">
                                                 <select name="typeOfOwnership" id="typeOfOwnership" class="form-control" placeholder="Select">
-                                                    <option value="1" >Propreitorship</option>
-                                                    <option value="2" >Partnership</option>
+                                                   
+                                                    @if (@Model.typeOfOwnership == 1)
+                                                    {
+                                                        <option value="1" selected>Propreitorship</option>
+                                                        <option value="2">Partnership</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="1" >Propreitorship</option>
+                                                        <option value="2" selected>Partnership</option>
+                                                    }
                                                 </select>
                                             </div>
                                         </div>
@@ -630,13 +921,13 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>GST Reg. No.: </label>
-                                            <input type="text" required class="form-control" name="gst" placeholder="GST Reg No." id="gst">
+                                            <input type="text" required class="form-control" name="gst" placeholder="GST Reg No." id="gst" value="@Model.gst">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Person Incharge:</label>
-                                            <input type="text" required class="form-control" name="personIncharge" placeholder="Person Incharge" id="personIncharge">
+                                            <input type="text" required class="form-control" name="personIncharge" placeholder="Person Incharge" id="personIncharge" value="@Model.personIncharge">
                                         </div>
                                     </div>
                                 </div>
@@ -645,13 +936,13 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>PAN CARD NO:</label>
-                                            <input type="text" required class="form-control" name="panCard" placeholder="PAN CARD NO" id="panCard">
+                                            <input type="text" required class="form-control" name="panCard" placeholder="PAN CARD NO" id="panCard" value="@Model.panCard">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Mobile No. of Person Incharge:</label>
-                                            <input type="text" required class="form-control" name="mobileNofPersonIncharge" placeholder="Mobile No. of Person Incharge" id="mobileNofPersonIncharge">
+                                            <input type="text" required class="form-control" name="mobileNofPersonIncharge" placeholder="Mobile No. of Person Incharge" id="mobileNofPersonIncharge" value="@Model.mobileNofPersonIncharge">
                                         </div>
                                     </div>
                                 </div>
@@ -659,13 +950,13 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>FSSAI  Reg.  No: </label>
-                                            <input type="text" required class="form-control" name="fssai" placeholder="FSSAI  Reg.  No" id="fssai">
+                                            <input type="text" required class="form-control" name="fssai" placeholder="FSSAI  Reg.  No" id="fssai" value="@Model.fssai">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Source of Finance to be invested in business:</label>
-                                            <input type="text" required class="form-control" name="sourceOfFund" placeholder="Source of Finance to be invested in business" id="sourceOfFund">
+                                            <input type="text" required class="form-control" name="sourceOfFund" placeholder="Source of Finance to be invested in business" id="sourceOfFund" value="@Model.sourceOfFund">
                                         </div>
                                     </div>
                                 </div>
@@ -673,13 +964,13 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Bank Name: </label>
-                                            <input type="text" required class="form-control" name="bankName" placeholder="Bank Name" id="bankName">
+                                            <input type="text" required class="form-control" name="bankName" placeholder="Bank Name" id="bankName" value="@Model.bankName">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Account No:</label>
-                                            <input type="text" required class="form-control" name="accNo" placeholder="Banch Name" id="accNo">
+                                            <input type="text" required class="form-control" name="accNo" placeholder="Banch Name" id="accNo" value="@Model.accNo">
                                         </div>
                                     </div>
                                 </div>
@@ -688,13 +979,13 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Branch Name: </label>
-                                            <input type="text" required class="form-control" name="branchName" placeholder="Branch Name" id="branchName">
+                                            <input type="text" required class="form-control" name="branchName" placeholder="Branch Name" id="branchName" value="@Model.branchName">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>IFSC:</label>
-                                            <input type="text" required class="form-control" name="ifsc" placeholder="IFSC" id="ifsc">
+                                            <input type="text" required class="form-control" name="ifsc" placeholder="IFSC" id="ifsc" value="@Model.ifsc">
                                         </div>
                                     </div>
                                 </div>
@@ -705,7 +996,7 @@
                                     <div class="col-sm-6">
                                         <div class="col-sm-12">
                                             <label>Branch Address: </label>
-                                            <input type="text" required class="form-control" name="branchAddress" placeholder="Branch Address" id="branchAddress">
+                                            <input type="text" required class="form-control" name="branchAddress" placeholder="Branch Address" id="branchAddress" value="@Model.branchAddress">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -713,9 +1004,25 @@
                                             <label>Type of A/C (Current/Cash Credit) :</label>
                                             <div class="col-12">
                                                 <select name="typeOfAC" id="typeOfAC" class="form-control" placeholder="Select">
-                                                    <option value="1" >Cash</option>
-                                                    <option value="2" >Current</option>
-                                                    <option value="3" >Credit</option>
+                                                    @if (Model.typeOfAC == 1)
+                                                    {
+                                                        <option value="1" selected>Cash</option>
+                                                        <option value="2" >Current</option>
+                                                        <option value="3" >Credit</option>
+                                                    }
+                                                    else if (Model.typeOfAC == 2)
+                                                    {
+                                                        <option value="1" >Cash</option>
+                                                    <option value="2" selected>Current</option>
+                                                        <option value="3" >Credit</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="1" >Cash</option>
+                                                        <option value="2" >Current</option>
+                                                        <option value="3" selected>Credit</option>
+                                                    }
+
                                                 </select>
                                             </div>
                                         </div>
@@ -728,8 +1035,16 @@
                                             <label>Payment Mode :</label>
                                             <div class="col-12">
                                                 <select name="paymentMode" id="paymentMode" class="form-control" placeholder="Select">
-                                                    <option value="1" >Cash</option>
-                                                    <option value="2" >Internet Banking</option>
+                                                    @if (Model.paymentMode == 1)
+                                                    {
+                                                        <option value="1" selected>Cash</option>
+                                                        <option value="2" >Internet Banking</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="1" >Cash</option>
+                                                        <option value="2" selected>Internet Banking</option>
+                                                    }
                                                 </select>
                                             </div>
                                         </div>
@@ -739,6 +1054,7 @@
                                             <label>Transit Day :</label>
                                             <div class="col-12">
                                                 <select name="transitDay" id="transitDay" class="form-control" placeholder="Select">
+                                                    if(@Model.transitDay==1){
                                                     <option value="1" selected>Sunday</option>
                                                     <option value="2">Monday</option>
                                                     <option value="3">Tuesday</option>
@@ -746,6 +1062,61 @@
                                                     <option value="5">Thursdayday</option>
                                                     <option value="6">Friday</option>
                                                     <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.transitDay==2){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2" selected>Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.transitDay==3){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3" selected>Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.transitDay==4){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4" selected>Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.transitDay==5){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5" selected>Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.transitDay==6){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6" selected>Friday</option>
+                                                    <option value="7">Saturday</option>
+                                                    }
+                                                    else if(@Model.transitDay==7){
+                                                    <option value="1">Sunday</option>
+                                                    <option value="2">Monday</option>
+                                                    <option value="3">Tuesday</option>
+                                                    <option value="4">Wednesay</option>
+                                                    <option value="5">Thursdayday</option>
+                                                    <option value="6">Friday</option>
+                                                    <option value="7" selected>Saturday</option>
+                                                    }
                                                 </select>
                                             </div>
                                         </div>
@@ -775,37 +1146,19 @@
                                                 <th>Accepted By</th>
                                             </tr>
                                         </thead>
-                                        <tbody> 
+                                        <tbody>
                                             <tr>
                                                 <td>
-                                                    <select name="recommendedBy" id="recommendedBy" class="form-control select2" placeholder="Select">
-                                                        <option value="0" selected disabled>Recommended By</option>
-                                                        @foreach (var uts in Model.Hierarchy)
-                                                        {
-                                                            <option value=@uts.hierarchyId>@uts.hierarchyName</option>
-                                                        }
-                                                    </select>
+                                                    <input type="text" value="@Model.recommendName" />
 
                                                 </td>
                                                 <td>
-                                                    <select name="approvedBy" id="approvedBy" class="form-control select2" placeholder="Select">
-                                                        <option value="0" selected disabled>Approved By</option>
-                                                        @foreach (var uts in Model.Hierarchy)
-                                                        {
-                                                            <option value=@uts.hierarchyId>@uts.hierarchyName</option>
-                                                        }
-                                                    </select>
+                                                    <input type="text" value="@Model.approveName" />
                                                 </td>
                                                 <td>
-                                                    <select name="acceptedBy" id="acceptedBy" class="form-control select2" placeholder="Select">
-                                                        <option value="0" selected disabled>Accepted By</option>
-                                                        @foreach (var uts in Model.Hierarchy)
-                                                        {
-                                                            <option value=@uts.hierarchyId>@uts.hierarchyName</option>
-                                                        }
-                                                    </select>
+                                                    <input type="text" value="@Model.acceptedName" />
                                                 </td>
-                                               
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -816,17 +1169,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <div class="col-8 offset-4">
-                            <button type="button" id="btnSave" class="btn btn-primary waves-effect waves-light mr-1">
-                                Submit
-                            </button>
-                            <button type="reset" id="btnCancel"
-                                    class="btn btn-secondary waves-effect">
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
+                    
 
                 </form>
             </div>
@@ -946,9 +1289,6 @@
             var soHeadQuarterId = $("#soHeadQuarterId").val();
             var soName = $("#soName").val();
             var reasonForAppointment = $("#reasonForAppointment").val();
-            var populationOfTown = $("#populationOfTown").val();
-            var totNofMarkets = $("#totNofMarkets").val();
-            var totNofRoutes = $("#totNofRoutes").val();
             var expectedMonthlyBusiness = $("#expectedMonthlyBusiness").val();
             var nofMarketsLocalTown = $("#nofMarketsLocalTown").val();
             var nofExTown = $("#nofExTown").val();
@@ -969,14 +1309,14 @@
             var areaOfOp = $("#areaOfOp").val();
             var inventoryNormPlan = $("#inventoryNormPlan").val();
             var marketCreditPlan = $("#marketCreditPlan").val();
-            var rdIvst = false;
+            var investmentProposedAndAgreed = false;
             if ($('input[name="rdIvst"]:checked').val()=="1"){
-                rdIvst = true;
+                investmentProposedAndAgreed = true;
             }
+            
+            var rdsSubsidyReq =false;
 
-            var rdsSubsidyReq = false;
-
-            if ($('input[name="rdsSubsidyReq"]:checked').val() == "1") {
+            if ($('input[name="rdRds"]:checked').val() == "1") {
                 rdsSubsidyReq = true;
             }
 
@@ -1026,14 +1366,11 @@
                 soHeadQuarterId: soHeadQuarterId,
                 soName: soName,
                 reasonForAppointment: reasonForAppointment,
-                populationOfTown: populationOfTown,
                 expectedMonthlyBusiness: expectedMonthlyBusiness,
                 nofMarketsLocalTown: nofMarketsLocalTown,
                 nofExTown: nofExTown,
                 nofRoutesLocalTown: nofRoutesLocalTown,
                 nofRoutesExTown: nofRoutesExTown,
-                totNofMarkets: totNofMarkets,
-                totNofRoutes: totNofRoutes,
                 godownAddress: godownAddress,
                 nofDeliveryUnit: nofDeliveryUnit,
                 secondaryOrderBillingSytem: secondaryOrderBillingSytem,
@@ -1049,7 +1386,7 @@
                 areaOfOp: areaOfOp,
                 inventoryNormPlan: inventoryNormPlan,
                 marketCreditPlan: marketCreditPlan,
-                rdIvst: rdIvst,
+                investmentProposedAndAgreed: investmentProposedAndAgreed,
                 rdsSubsidyReq: rdsSubsidyReq,
                 nofDSIRSPlanned: nofDSIRSPlanned,
                 nofMandays: nofMandays,
