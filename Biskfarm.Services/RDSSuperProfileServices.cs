@@ -1,8 +1,12 @@
 ﻿using Biskfarm.DAL;
 using Biskfarm.DAL.Model;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net.Http;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,14 +22,24 @@ namespace Biskfarm.Services
         //    db=_db;
         //}
 
-        public RDSSuperProfileInputVM GetRDSSuperProfileInputParameters(BiskfarmContext context)
+        public RDSSuperProfileInputVM GetRDSSuperProfileInputParameters(BiskfarmContext context, string soId,string conStr)
         {
+            int SO_ID = 0;
+            if (soId.Contains("SO"))
+            {
+                soId=soId.Replace("SO",string.Empty);
+            }
+            if (soId.All(char.IsDigit)){
+                SO_ID = Convert.ToInt32(soId);
+            }
+            
             db = context;
             RDSSuperProfileInputVM rDSSuperProfileInputVM = new RDSSuperProfileInputVM();
 
             rDSSuperProfileInputVM.Towns = new List<TownMastVM>();
             rDSSuperProfileInputVM.SOMasts = new List<SOMast>();
             rDSSuperProfileInputVM.Hierarchy = new List<HierarchyVM>();
+            rDSSuperProfileInputVM.RSDVMs = new List<RSDVM>();
 
             // var towns=db.TOWN_MASTER.ToList();
             var so = db.SO_MAST.ToList();
@@ -54,8 +68,70 @@ namespace Biskfarm.Services
                 rDSSuperProfileInputVM.SOMasts.Add(s);
             }
 
+            List<OutletWiseSalesDatabase> outlet = new List<OutletWiseSalesDatabase>();
+
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                //using (SqlCommand cmd = new SqlCommand())
+                {
+                    con.Open();
+                    DataTable DataTbl1 = new DataTable();
+                    string qry = "SELECT  NEW_ZONE_GRP REGION,(SELECT DISTINCT R.RSM_NAME FROM RSM_MAST R WHERE R.RSM_ID=VW.RSM_ID)  RSM_NAME,RSM_ID, BM_NAME BM_NAME,BM_ID,\r\n        ASM_NAME ASM_NAME,ASM_ID,\r\n        SO_NAME  SO_NAME,SO_ID,\r\n        RDS_NAME RDS_NAME,RDS_ID,ZONE_STATE\r\nFROM BM_ASM_SO_RDS_MAST VW(NOLOCK)\r\nWHERE RDS_NAME NOT LIKE '%INACTIVE%'";
+
+                    SqlCommand cmd1 = new SqlCommand(qry, con);
+                    cmd1.CommandType = CommandType.Text;
+
+                    SqlDataAdapter adapter1 = new SqlDataAdapter(cmd1);
+                    adapter1.Fill(DataTbl1);
+                    outlet = (from DataRow dr in DataTbl1.Rows
+                              select new OutletWiseSalesDatabase()
+                              {
+                                  Region = (dr["Region"].ToString()),
+                                  ZONE_STATE = dr["ZONE_STATE"].ToString(),
+                                  RSM_ID = Convert.ToInt32(dr["RSM_ID"]),
+                                  RSM_NAME = dr["RSM_NAME"].ToString(),
+                                  BM_ID = Convert.ToInt32(dr["BM_ID"]),
+                                  BM_NAME = dr["BM_NAME"].ToString(),
+                                  ASM_ID = Convert.ToInt32(dr["ASM_ID"]),
+                                  ASM_NAME = dr["ASM_NAME"].ToString(),
+                                  SO_ID = (dr["SO_ID"]).ToString(),
+                                  SO_NAME = dr["SO_NAME"].ToString(),
+                                  RDS_ID = Convert.ToInt32(dr["RDS_ID"]),
+                                  RDS_NAME = dr["ASM_NAME"].ToString(),
+
+
+                              }).ToList();
+
+
+                }
+            }
+
+            if (SO_ID != 0)
+            {
+                var rsd = outlet.Where(r => r.SO_ID == SO_ID.ToString()).Select(x => new { x.RDS_ID, x.RDS_NAME }).Distinct().ToList();
+
+                foreach (var r in rsd)
+                {
+                    RSDVM objRDS = new RSDVM();
+                    objRDS.RSD_ID = r.RDS_ID;
+                    objRDS.RSD_NAME = r.RDS_NAME;
+                    rDSSuperProfileInputVM.RSDVMs.Add(objRDS);
+                }
+            }
+            else
+            {
+
+            }
+
+
+
+
+
+
+
             return rDSSuperProfileInputVM;
         }
+
 
         public bool SaveRDSSuperProfile(BiskfarmContext context,RDSSuperProfileVM profile)
         {
@@ -128,9 +204,14 @@ namespace Biskfarm.Services
                 rds.recommendedBy = profile.recommendedBy;
                 rds.approvedBy= profile.approvedBy;
                 rds.acceptedBy= profile.acceptedBy;
+                if (rds.reasonForAppointment == 1)
+                {
+                    rds.replacementRDSId = profile.replacementRDSId;
+                }                
+                rds.soId = profile.soId;
 
                 rds.dateOfEntry = profile.dateOfEntry;
-
+                rds.rdApproved=profile.rdApproved;
                 db.RDS_SuperProfile.Add(rds);
                 db.SaveChanges();
 
@@ -173,13 +254,14 @@ namespace Biskfarm.Services
 
         }
 
-        public RDSSuperProfileVM GetProfileById(BiskfarmContext context,int id)
+        public RDSSuperProfileVM GetProfileById(BiskfarmContext context,int id, string conStr)
         {
             db = context;
             RDS_SuperProfile profile=db.RDS_SuperProfile.Where(r=>r.rdsSuperProfileId == id).FirstOrDefault();
 
             RDSSuperProfileVM rds=new RDSSuperProfileVM();
 
+            rds.soId = profile.soId;
             rds.principalCo = profile.principalCo;
             rds.nameOfProp1 = profile.nameOfProp1;
             rds.nameOfProp2 = profile.nameOfProp2;
@@ -241,12 +323,13 @@ namespace Biskfarm.Services
             rds.mobileNofPersonIncharge = profile.mobileNofPersonIncharge;
             rds.sourceOfFund = profile.sourceOfFund;
             rds.branchAddress = profile.branchAddress;
-            rds.recommendName = db.RDS_Hierarchy.FirstOrDefault(r=>r.hierarchyId== profile.recommendedBy).hierarchyName;
-            rds.approveName = db.RDS_Hierarchy.FirstOrDefault(r => r.hierarchyId == profile.acceptedBy).hierarchyName;
-            rds.acceptedName = db.RDS_Hierarchy.FirstOrDefault(r => r.hierarchyId == profile.approvedBy).hierarchyName;
+            //rds.recommendName = db.RDS_Hierarchy.FirstOrDefault(r=>r.hierarchyId== profile.recommendedBy).hierarchyName;
+            //rds.approveName = db.RDS_Hierarchy.FirstOrDefault(r => r.hierarchyId == profile.acceptedBy).hierarchyName;
+            //rds.acceptedName = db.RDS_Hierarchy.FirstOrDefault(r => r.hierarchyId == profile.approvedBy).hierarchyName;
 
             rds.dateOfEntry = profile.dateOfEntry;
-
+            rds.replacementRDSId=(int)profile.replacementRDSId;
+            rds.rdApproved=profile.rdApproved;
 
             List<RDS_Distributors> distributors = new List<RDS_Distributors>();
             
@@ -301,6 +384,70 @@ namespace Biskfarm.Services
                 rds.SOMasts.Add(s);
             }
 
+            int SO_ID = 0;
+            if (rds.soId.Contains("SO"))
+            {
+                var soIdstr = rds.soId.Replace("SO", string.Empty);
+                SO_ID = Convert.ToInt32(soIdstr);
+            }
+            
+
+            List<OutletWiseSalesDatabase> outlet = new List<OutletWiseSalesDatabase>();
+
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                //using (SqlCommand cmd = new SqlCommand())
+                {
+                    con.Open();
+                    DataTable DataTbl1 = new DataTable();
+                    string qry = "SELECT  NEW_ZONE_GRP REGION,(SELECT DISTINCT R.RSM_NAME FROM RSM_MAST R WHERE R.RSM_ID=VW.RSM_ID)  RSM_NAME,RSM_ID, BM_NAME BM_NAME,BM_ID,\r\n        ASM_NAME ASM_NAME,ASM_ID,\r\n        SO_NAME  SO_NAME,SO_ID,\r\n        RDS_NAME RDS_NAME,RDS_ID,ZONE_STATE\r\nFROM BM_ASM_SO_RDS_MAST VW(NOLOCK)\r\nWHERE RDS_NAME NOT LIKE '%INACTIVE%'";
+
+                    SqlCommand cmd1 = new SqlCommand(qry, con);
+                    cmd1.CommandType = CommandType.Text;
+
+                    SqlDataAdapter adapter1 = new SqlDataAdapter(cmd1);
+                    adapter1.Fill(DataTbl1);
+                    outlet = (from DataRow dr in DataTbl1.Rows
+                              select new OutletWiseSalesDatabase()
+                              {
+                                  Region = (dr["Region"].ToString()),
+                                  ZONE_STATE = dr["ZONE_STATE"].ToString(),
+                                  RSM_ID = Convert.ToInt32(dr["RSM_ID"]),
+                                  RSM_NAME = dr["RSM_NAME"].ToString(),
+                                  BM_ID = Convert.ToInt32(dr["BM_ID"]),
+                                  BM_NAME = dr["BM_NAME"].ToString(),
+                                  ASM_ID = Convert.ToInt32(dr["ASM_ID"]),
+                                  ASM_NAME = dr["ASM_NAME"].ToString(),
+                                  SO_ID = (dr["SO_ID"]).ToString(),
+                                  SO_NAME = dr["SO_NAME"].ToString(),
+                                  RDS_ID = Convert.ToInt32(dr["RDS_ID"]),
+                                  RDS_NAME = dr["ASM_NAME"].ToString(),
+
+
+                              }).ToList();
+
+
+                }
+            }
+
+            rds.RSDVMs = new List<RSDVM>();
+
+            if (SO_ID != 0)
+            {
+                var rsd = outlet.Where(r => r.SO_ID == SO_ID.ToString()).Select(x => new { x.RDS_ID, x.RDS_NAME }).Distinct().ToList();
+
+                foreach (var r in rsd)
+                {
+                    RSDVM objRDS = new RSDVM();
+                    objRDS.RSD_ID = r.RDS_ID;
+                    objRDS.RSD_NAME = r.RDS_NAME;
+                    rds.RSDVMs.Add(objRDS);
+                }
+            }
+            else
+            {
+
+            }
 
 
             rds.distributorsList=distributors;
@@ -309,10 +456,10 @@ namespace Biskfarm.Services
             return rds;
         }
 
-        public List<RDS_SuperProfile> GetAll(BiskfarmContext context)
+        public List<RDS_SuperProfile> GetAll(BiskfarmContext context,string soId)
         {
             db = context;
-            return db.RDS_SuperProfile.ToList();
+            return db.RDS_SuperProfile.Where(r=>r.soId==soId).ToList();
         }
 
     }

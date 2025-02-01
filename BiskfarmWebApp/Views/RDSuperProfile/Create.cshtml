@@ -28,6 +28,7 @@
                             <!-- text input -->
                             <div class="form-group">
                                 <label>Principal Co. </label>
+                                <input type="hidden" name="soId" id="soId" value="@ViewBag.SO_ID"/>
                                 <input type="text" required class="form-control" name="principalCo" placeholder="Principal Company" id="principalCo">
                                 <input type="hidden" id="distributorsList" name="distributorsList" />
                                 <input type="hidden" id="SubStockist" name="SubStockist" />
@@ -208,6 +209,20 @@
 
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="col-sm-6" id="rdsID">
+                                       
+                                            <label for="hori-pass1" class="col-4 col-form-label">Select RDS </label>
+                                            <div class="col-7">
+                                            <select name="replacementRDSId" id="replacementRDSId" class="form-control" placeholder="Select">
+                                                
+                                                @foreach (var uts in Model.RSDVMs)
+                                                {
+                                                    <option value=@uts.RSD_ID>@uts.RSD_NAME (@uts.RSD_ID)</option>
+                                                }
+
+                                            </select>
+                                            </div>
                                     </div>
                                 </div>
                                 <!-- /.card-header -->
@@ -765,8 +780,37 @@
                                     <h3 class="card-title">Authorization Check</h3>
                                 </div>
 
+
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <!-- radio -->
+                                        <div class="form-group clearfix">
+                                            <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdApproved" checked id="rdApprovedYes" value="1">
+                                                <label for="radioSuccess1">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdApproved" id="rdApprovedNo" value="0">
+                                                <label for="radioSuccess2">
+                                                    No
+                                                </label>
+                                            </div>
+                                            <div class="icheck-success d-inline">
+                                                @* <input type="radio" name="r3" disabled id="radioSuccess3"> *@
+                                                <label for="radioSuccess3">
+                                                    Accepted
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                                 <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0">
+                                @* <div class="card-body table-responsive p-0">
                                     <table class="table table-hover text-nowrap table-striped" id="tblAuthorization">
                                         <thead>
                                             <tr>
@@ -809,7 +853,7 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> *@
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
@@ -876,8 +920,19 @@
         }
 
 
-        
 
+        $("#reasonForAppointment").change(function () {
+
+            // alert($("#reasonForAppointment").val());
+
+            if ($("#reasonForAppointment").val() == "1") {
+                $("#rdsID").show();
+            }
+            else {
+                $("#rdsID").hide();
+            }
+            
+        });
 
         $("#btnSave").click(function () {
             var distributorData = [];
@@ -969,11 +1024,17 @@
             var areaOfOp = $("#areaOfOp").val();
             var inventoryNormPlan = $("#inventoryNormPlan").val();
             var marketCreditPlan = $("#marketCreditPlan").val();
+            var replacementRDSId = $("#replacementRDSId").val();
             var rdIvst = false;
             if ($('input[name="rdIvst"]:checked').val()=="1"){
                 rdIvst = true;
             }
+            var rdApproved = false;
+            if ($('input[name="rdApproved"]:checked').val() == "1") {
+                rdApproved = true;
+            }
 
+            
             var rdsSubsidyReq = false;
 
             if ($('input[name="rdsSubsidyReq"]:checked').val() == "1") {
@@ -1005,7 +1066,7 @@
             var approvedBy = $("#approvedBy").val();
             var acceptedBy = $("#acceptedBy").val();
             var dateOfEntry = $("#dateOfEntry").val();
-
+            var soId = $("#soId").val();
 
             var obj = {
                 principalCo: principalCo,
@@ -1076,7 +1137,10 @@
                 acceptedBy: acceptedBy,
                 dateOfEntry: dateOfEntry,
                 distributorsList: distributorData,
-                SubStockist: subStockistData
+                SubStockist: subStockistData,
+                replacementRDSId: replacementRDSId,
+                rdApproved: rdApproved,
+                soId: soId
             };
 
             if (!principalCo )
@@ -1095,7 +1159,7 @@
             else if (!contactNo1) {
                 alert("Please fill Contact Number");
                 $('#contactNo1').focus();
-            }
+            }            
             else
             {
                 $.ajax({
@@ -1105,6 +1169,7 @@
                     success: function (r) {
                         alert(r);
                         $('#materialForm')[0].reset();
+                        window.location.href = "RDSuperProfile";
 
                     },
                     error: function (response) {

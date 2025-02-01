@@ -78,5 +78,8 @@ namespace Biskfarm.DAL.Model
         public int acceptedBy { get; set; }
         public DateOnly dateOfEntry { get; set; }
         public string? branchAddress { get; set; }
+        public Nullable<int> replacementRDSId { get; set; }
+        public string? soId { get; set; }
+        public Nullable<bool> rdApproved { get; set; }
     }
 }

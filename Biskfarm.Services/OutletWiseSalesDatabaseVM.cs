@@ -93,7 +93,7 @@ namespace Biskfarm.Services
 
     public class SOVM
     {
-        public int SO_ID { get; set; }
+        public string SO_ID { get; set; }
         public string SO_NAME { get; set; }
     }
 

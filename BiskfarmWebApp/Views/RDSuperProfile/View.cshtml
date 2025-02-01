@@ -30,6 +30,7 @@
                                 <input type="text" required class="form-control" name="principalCo" placeholder="Principal Company" id="principalCo" value="@Model.principalCo">
                                 <input type="hidden" id="distributorsList" name="distributorsList" />
                                 <input type="hidden" id="SubStockist" name="SubStockist" />
+                                <input type="hidden" id="soId" name="soId" value="@Model.soId" />
                             </div>
                         </div>
                          <div class="col-sm-6">
@@ -288,6 +289,31 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @if (Model.reasonForAppointment == 1)
+                                    {
+                                        <div class="col-sm-6" id="rdsID">
+
+                                            <label for="hori-pass1" class="col-4 col-form-label">Select RDS </label>
+                                            <div class="col-7">
+                                                <select name="replacementRDSId" id="replacementRDSId" class="form-control" placeholder="Select">
+
+                                                    @foreach (var uts in Model.RSDVMs)
+                                                    {
+                                                        if (Model.replacementRDSId == uts.RSD_ID)
+                                                        {
+                                                            <option value=@uts.RSD_ID selected>@uts.RSD_NAME (@uts.RSD_ID)</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value=@uts.RSD_ID>@uts.RSD_NAME (@uts.RSD_ID)</option>
+                                                        }
+                                                    }
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                    }
+                                    
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body table-responsive p-0">
@@ -1137,31 +1163,53 @@
                                 </div>
 
                                 <!-- /.card-header -->
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover text-nowrap table-striped" id="tblAuthorization">
-                                        <thead>
-                                            <tr>
-                                                <th>Recommended By</th>
-                                                <th>Approved By</th>
-                                                <th>Accepted By</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <input type="text" value="@Model.recommendName" />
-
-                                                </td>
-                                                <td>
-                                                    <input type="text" value="@Model.approveName" />
-                                                </td>
-                                                <td>
-                                                    <input type="text" value="@Model.acceptedName" />
-                                                </td>
-
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="col-sm-6">
+                                    <!-- radio -->
+                                    <div class="form-group clearfix">
+                                        @if (Model.rdApproved == true)
+                                        {
+                                            <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdApproved" checked id="rdApprovedYes" value="1">
+                                                <label for="radioSuccess1">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdApproved" id="rdApprovedNo" value="0">
+                                                <label for="radioSuccess2">
+                                                    No
+                                                </label>
+                                            </div>
+                                            <div class="icheck-success d-inline">
+                                                @* <input type="radio" name="r3" disabled id="radioSuccess3"> *@
+                                                <label for="radioSuccess3">
+                                                    Accepted
+                                                </label>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdApproved" id="rdApprovedYes" value="1">
+                                                <label for="radioSuccess1">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="icheck-success d-inline">
+                                                <input type="radio" name="rdApproved" id="rdApprovedNo" value="0" checked>
+                                                <label for="radioSuccess2">
+                                                    No
+                                                </label>
+                                            </div>
+                                            <div class="icheck-success d-inline">
+                                                @* <input type="radio" name="r3" disabled id="radioSuccess3"> *@
+                                                <label for="radioSuccess3">
+                                                    Accepted
+                                                </label>
+                                            </div>
+                                        }
+                                        
+                                    </div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

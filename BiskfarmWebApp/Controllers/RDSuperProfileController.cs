@@ -10,13 +10,26 @@ namespace BiskfarmWebApp.Controllers
     {
         private readonly BiskfarmContext db;
         RDSSuperProfileServices rdsServices = new RDSSuperProfileServices();
-        public RDSuperProfileController(BiskfarmContext _db)
+        private IConfiguration configuration;
+
+        public RDSuperProfileController(BiskfarmContext _db, IConfiguration _con)
         {
             db = _db;
+            configuration = _con;   
+
         }
         public IActionResult Index()
         {
-            return View(rdsServices.GetAll(db));
+			if (HttpContext.Session.GetString("UserName") != null)
+			{
+                ViewBag.UserName = HttpContext.Session.GetString("UserName");
+                ViewBag.SO_ID = HttpContext.Session.GetString("SO_ID");
+                return View(rdsServices.GetAll(db, ViewBag.SO_ID));
+			}
+            else
+            {
+                return RedirectToAction("Index", "Account");
+            }
         }
 
         public IActionResult RDSuperProfileList()
@@ -26,14 +39,29 @@ namespace BiskfarmWebApp.Controllers
 
         public IActionResult View(int id)
         {
-            var rds= rdsServices.GetProfileById(db,id);
+            var rds= rdsServices.GetProfileById(db,id,GetConnectionString());
             return View(rds);
         }
         public IActionResult Create()
         {
-            var inputServices = rdsServices.GetRDSSuperProfileInputParameters(db);
+            if (HttpContext.Session.GetString("UserName") != null)
+            {
+                
+                ViewBag.UserName = HttpContext.Session.GetString("UserName");
+                ViewBag.SO_ID = HttpContext.Session.GetString("SO_ID");
+                var inputServices = rdsServices.GetRDSSuperProfileInputParameters(db, ViewBag.SO_ID,GetConnectionString());
 
-            return View(inputServices);
+                return View(inputServices);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Account");
+            }
+        }
+
+        private string GetConnectionString()
+        {
+            return this.configuration.GetConnectionString("dbBiskfarm");
         }
 
         [HttpPost]
@@ -43,7 +71,7 @@ namespace BiskfarmWebApp.Controllers
             //{
 
             //}
-            var inputServices = rdsServices.GetRDSSuperProfileInputParameters(db);
+            //var inputServices = rdsServices.GetRDSSuperProfileInputParameters(db);
 
             return View();
         }

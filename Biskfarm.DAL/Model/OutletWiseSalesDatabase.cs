@@ -18,9 +18,11 @@ namespace Biskfarm.DAL.Model
         public string ASM_NAME { get; set; }
         public int ASM_ID { get; set; }
         public string SO_NAME { get; set; }
-        public int SO_ID { get; set; }
+        public string SO_ID { get; set; }
         public string RDS_NAME { get; set; }
         public int RDS_ID { get; set; }
         public string ZONE_STATE { get; set; }
     }
+
+  
 }

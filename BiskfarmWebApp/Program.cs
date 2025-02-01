@@ -9,6 +9,11 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BiskfarmContext>(options =>
  options.UseSqlServer(builder.Configuration.GetConnectionString("dbBiskfarm")));
 
+builder.Services.AddSession(options =>
+{
+	options.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,12 +27,14 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
+
 app.UseRouting();
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=RDSuperProfile}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Index}/{id?}");
 
 app.Run();

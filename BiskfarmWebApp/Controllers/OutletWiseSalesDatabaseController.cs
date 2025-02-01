@@ -258,7 +258,7 @@ namespace BiskfarmWebApp.Controllers
                     foreach (var s in so)
                     {
                         SOVM objSO = new SOVM();
-                        objSO.SO_ID = s.SO_ID;
+                        //objSO.SO_ID = s.SO_ID;
                         objSO.SO_NAME = s.SO_NAME;
                         soLst.Add(objSO);
                     }
@@ -394,7 +394,7 @@ namespace BiskfarmWebApp.Controllers
                                                       BM_NAME = dr["BM_NAME"].ToString(),
                                                       ASM_ID = Convert.ToInt32(dr["ASM_ID"]),
                                                       ASM_NAME = dr["ASM_NAME"].ToString(),
-                                                      SO_ID = Convert.ToInt32(dr["SO_ID"]),
+                                                      SO_ID = (dr["SO_ID"]).ToString(),
                                                       SO_NAME = dr["SO_NAME"].ToString(),
                                                       RDS_ID = Convert.ToInt32(dr["RDS_ID"]),
                                                       RDS_NAME = dr["ASM_NAME"].ToString(),

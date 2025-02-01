@@ -79,9 +79,13 @@ namespace Biskfarm.Services
         public string recommendName { get; set; }
         public string approveName { get; set; }
         public string acceptedName { get; set; }
+        public int replacementRDSId { get; set; }
+        public Nullable<bool> rdApproved { get; set; }
+        public string soId { get; set; }
         public List<RDS_Distributors> distributorsList { get; set; }
         public List<RDS_SubStockist> SubStockist { get; set; }
         public List<SOMast> SOMasts { get; set; }
+        public List<RSDVM> RSDVMs { get; set;}
     }
 
     public class RDS_Distributors
@@ -117,8 +121,10 @@ namespace Biskfarm.Services
         public List<HierarchyVM> Hierarchy { get; set; }
         public List<TownMastVM> Towns { get; set; }
         public List<SOMast> SOMasts { get; set; }
+        public List<RSDVM> RSDVMs { get; set; }
     }
 
+    
     public class HierarchyVM
     {
         public int hierarchyId { get; set; }
